@@ -8,11 +8,9 @@ class World {
         new Pufferfish(),
     ];
     
-    
     lights = [
         new Light()
     ];
-
 
     backgroundObjects = [
         new BackgroundObject('img/3. Background/Layers/5. Water/left.png', 0),
@@ -21,14 +19,20 @@ class World {
         new BackgroundObject('img/3. Background/Layers/2. Floor/left.png', 0)
     ];
 
-
     canvas;
     ctx;
+    keyboard;
     
-    constructor(canvas) {
+    constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
+        this.keyboard = keyboard;
         this.draw();
+        this.setWorld();
+    }
+
+    setWorld() {
+        this.character.world = this;
     }
 
     draw() {

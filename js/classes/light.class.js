@@ -7,13 +7,10 @@ class Light extends MovableObject {
     constructor() {
         super().loadImage('img/3. Background/Layers/1. Light/full.png');
         this.x = Math.random() * 500;
-
         this.animate();
     }
 
     animate() {
-        setInterval(() => {
-            this.x -= 0.2;
-        }, 1000 / 60);
+        this.moveLeft();
     }
 }   
