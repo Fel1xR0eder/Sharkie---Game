@@ -4,9 +4,10 @@ class Character extends MovableObject {
     width = 250;
     speed = 8;
     world;
+    swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     IMAGES_SWIMMING = ['./img/1.Sharkie/1.IDLE/1.png',
-        './img/1.Sharkie/1.IDLE/2.png',
+    './img/1.Sharkie/1.IDLE/2.png',
         './img/1.Sharkie/1.IDLE/3.png',
         './img/1.Sharkie/1.IDLE/4.png',
         './img/1.Sharkie/1.IDLE/5.png',
@@ -37,16 +38,20 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-            if (this.world.keyboard.RIGHT) {
+            this.swimming_sound.pause();
+            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.x += this.speed;
                 this.otherDirection = false;
+                this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.LEFT) {
+            if (this.world.keyboard.LEFT && this.x > 0) {
                 this.x -= this.speed;
                 this.otherDirection = true;
+                this.swimming_sound.play();
             }
 
+            this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {
@@ -57,7 +62,7 @@ class Character extends MovableObject {
                 this.img = this.imagecache[path];
                 this.currentImage++;
             }
-        }, 25);
+        }, 100);
     }
 
 }

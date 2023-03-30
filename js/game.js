@@ -5,11 +5,6 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
-
-    console.log('My character is', world.character);
-    console.log('My Enemies are', world.enemies);
-    console.log('My Light is', world.lights);
-    console.log('My Background is', world.backgroundObjects);
 }
 
 window.addEventListener("keydown", (e) => {
