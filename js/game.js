@@ -13,47 +13,45 @@ function init() {
 }
 
 window.addEventListener("keydown", (e) => {
-    if (e.keycode == 39) {
+    if (e.key == 'ArrowRight') {
         keyboard.RIGHT = true;
     }
 
-    if (e.keycode == 37) {
+    if (e.key == 'ArrowLeft') {
         keyboard.LEFT = true;
     }
 
-    if (e.keycode == 38) {
+    if (e.key == 'ArrowUp') {
         keyboard.UP = true;
     }
 
-    if (e.keycode == 40) {
+    if (e.key == 'ArrowDown') {
         keyboard.DOWN = true;
     }
 
-    if (e.keycode == 32) {
+    if (e.key == ' ') {
         keyboard.SPACE = true;
     }
-
-    console.log(e);
 });
 
-// window.addEventListener("keyup", (e) => {
-//     if (e.keycode == 39) {
-//         keyboard.RIGHT = false;
-//     }
+window.addEventListener("keyup", (e) => {
+    if (e.key == 'ArrowRight') {
+        keyboard.RIGHT = false;
+    }
 
-//     if (e.keycode == 37) {
-//         keyboard.LEFT = false;
-//     }
+    if (e.key == 'ArrowLeft') {
+        keyboard.LEFT = false;
+    }
 
-//     if (e.keycode == 38) {
-//         keyboard.UP = false;
-//     }
+    if (e.key == 'ArrowUp') {
+        keyboard.UP = false;
+    }
 
-//     if (e.keycode == 40) {
-//         keyboard.DOWN = false;
-//     }
+    if (e.key == 'ArrowDown') {
+        keyboard.DOWN = false;
+    }
 
-//     if (e.keycode == 32) {
-//         keyboard.SPACE = false;
-//     }
-// });
+    if (e.key == ' ') {
+        keyboard.SPACE = false;
+    }
+});

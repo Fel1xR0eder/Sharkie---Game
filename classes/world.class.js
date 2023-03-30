@@ -13,10 +13,10 @@ class World {
     ];
 
     backgroundObjects = [
-        new BackgroundObject('img/3. Background/Layers/5. Water/left.png', 0),
-        new BackgroundObject('img/3. Background/Layers/4.Fondo 2/left.png', 0),
-        new BackgroundObject('img/3. Background/Layers/3.Fondo 1/left.png',0),
-        new BackgroundObject('img/3. Background/Layers/2. Floor/left.png', 0)
+        new BackgroundObject('./img/3. Background/Layers/5. Water/left.png', 0),
+        new BackgroundObject('./img/3. Background/Layers/4.Fondo 2/left.png', 0),
+        new BackgroundObject('./img/3. Background/Layers/3.Fondo 1/left.png',0),
+        new BackgroundObject('./img/3. Background/Layers/2. Floor/left.png', 0)
     ];
 
     canvas;
@@ -51,7 +51,19 @@ class World {
     
 
     addToMap(MovObj) {
+        if(MovObj.otherDirection) {
+            this.ctx.save();
+            this.ctx.translate(MovObj.width, 0);
+            this.ctx.scale(-1, 1);
+            MovObj.x = MovObj.x * -1;
+        }
+
         this.ctx.drawImage(MovObj.img, MovObj.x, MovObj.y, MovObj.width, MovObj.height);
+        
+        if(MovObj.otherDirection) {
+            MovObj.x = MovObj.x * -1;
+            this.ctx.restore();
+        }
     };
 
     
