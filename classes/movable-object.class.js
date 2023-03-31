@@ -1,6 +1,6 @@
 class MovableObject {
     x = 50;
-    y = 25;        // Pufferfish height = 175 = same height;
+    y = 25;
     img;
     height = 100;
     width = 100;
@@ -33,5 +33,12 @@ class MovableObject {
         setInterval(() => {
             this.x -= this.speed;
         }, 1000 / 60);
+    }
+
+    playAnimation(images) {
+        let i = this.currentImage % this.IMAGES_SWIMMING.length;    // Modulu(s) =  i = 0,1,2,3,4,5,0,1,2,3,4,5, ...
+        let path = images[i];
+        this.img = this.imagecache[path];
+        this.currentImage++;
     }
 }
