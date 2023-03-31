@@ -27,6 +27,7 @@ class World {
         this.addObjectsToMap(this.level.backgroundObjects);   // Element wird gerendert
         this.addObjectsToMap(this.level.lights);              // Element wird gerendert
         this.addObjectsToMap(this.level.enemies);             // Element wird gerendert
+        this.addObjectsToMap(this.level.coins);             // Element wird gerendert
         this.addToMap(this.character);                  // Element wird gerendert
 
         this.ctx.translate(-this.camera_x, 0);

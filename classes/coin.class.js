@@ -1,11 +1,10 @@
-class Coins {
+class Coin extends MovableObject {
 
     height = 50;
     width = 50;
-    y = 0;
-    x = 100;
+    y = 100;
 
-    IMAGES_COINS = [
+    IMAGES_COIN = [
         './img/4. Markers/1. Coins/1.png',
         './img/4. Markers/1. Coins/2.png',
         './img/4. Markers/1. Coins/3.png',
@@ -13,11 +12,11 @@ class Coins {
     ];
 
     constructor() {
-        this.loadImage(this.IMAGES_COINS[0]);
-        this.loadImages(this.IMAGES_COINS);
+        super().loadImage(this.IMAGES_COIN[0]);
+        this.x = 250 * 2;
+        this.loadImages(this.IMAGES_COIN);
         this.animate();
-        this.x = 500;
-        console.log('ALL IN');
+        console.log('AL COINS IN');
     }
 
     animate() {
