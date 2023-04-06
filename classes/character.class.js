@@ -2,12 +2,14 @@ class Character extends MovableObject {
 
     height = 300;
     width = 250;
+    y= -100;
     speed = 8;
     world;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
-    IMAGES_SWIMMING = ['./img/1.Sharkie/1.IDLE/1.png',
-    './img/1.Sharkie/1.IDLE/2.png',
+    IMAGES_IDLE = [
+        './img/1.Sharkie/1.IDLE/1.png',
+        './img/1.Sharkie/1.IDLE/2.png',
         './img/1.Sharkie/1.IDLE/3.png',
         './img/1.Sharkie/1.IDLE/4.png',
         './img/1.Sharkie/1.IDLE/5.png',
@@ -26,11 +28,21 @@ class Character extends MovableObject {
         './img/1.Sharkie/1.IDLE/18.png'
     ];
 
+    IMAGES_SWIMMING = [
+        'img/1.Sharkie/3.Swim/1.png',
+        'img/1.Sharkie/3.Swim/2.png',
+        'img/1.Sharkie/3.Swim/3.png',
+        'img/1.Sharkie/3.Swim/5.png',
+        'img/1.Sharkie/3.Swim/6.png'
+    ]
+
 
 
     constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
-        super().loadImage('./img/1.Sharkie/1.IDLE/1.png');
+        super().loadImage(this.IMAGES_IDLE[0]);
+        this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
+        //this.applyGravity();
         this.animate();
     }
 
@@ -51,15 +63,20 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }
 
+            if(this.world.keyboard.UP) {
+                this.speedY = 20;
+            }
+
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
         setInterval(() => {
-
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_SWIMMING);
+            } else {
+                this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 100);
+        }, 150);
     }
 
 }
