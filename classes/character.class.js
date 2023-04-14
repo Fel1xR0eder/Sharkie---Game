@@ -2,7 +2,7 @@ class Character extends MovableObject {
 
     height = 300;
     width = 250;
-    y= -100;
+    y = -100;
     speed = 8;
     world;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
@@ -34,7 +34,7 @@ class Character extends MovableObject {
         'img/1.Sharkie/3.Swim/3.png',
         'img/1.Sharkie/3.Swim/5.png',
         'img/1.Sharkie/3.Swim/6.png'
-    ]
+    ];
 
 
 
@@ -42,7 +42,7 @@ class Character extends MovableObject {
         super().loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
-        //this.applyGravity();
+        this.applyGravity();
         this.animate();
     }
 
@@ -52,23 +52,24 @@ class Character extends MovableObject {
         setInterval(() => {
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.x += this.speed;
+                this.moveRight();
                 this.otherDirection = false;
                 this.swimming_sound.play();
             }
 
             if (this.world.keyboard.LEFT && this.x > 0) {
-                this.x -= this.speed;
+                this.moveLeft();
                 this.otherDirection = true;
                 this.swimming_sound.play();
             }
 
-            if(this.world.keyboard.UP) {
-                this.speedY = 20;
+            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+                this.jump();
             }
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
+
 
         setInterval(() => {
             if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {

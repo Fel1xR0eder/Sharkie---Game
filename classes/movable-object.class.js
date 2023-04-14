@@ -15,16 +15,36 @@ class MovableObject {
 
     applyGravity() {
         setInterval(() => {
-            if (this.isAboveGround() || y > 30) {           // Richtigen Y Wert finden
+            if (this.isAboveGround() || this.speedY > 0) {           // Richtigen Y Wert finden 
                 this.y -= this.speedY;
                 this.speedY -= this.acceleration;
             }
         }, 1000 / 25);
     }
 
-
     isAboveGround() {
         return this.y < 30;
+    }
+
+
+        //isColliding (obj) {
+      //  return  (this.X + this.width) >= obj.X && this.X <= (obj.X + obj.width) && 
+      //          (this.Y + this.offsetY + this.height) >= obj.Y &&
+      //          (this.Y + this.offsetY) <= (obj.Y + obj.height) && 
+      //          obj.onCollisionCourse;
+
+    draw(ctx) {
+        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+    }
+
+    drawFrame(ctx) {
+        if (this instanceof Character || this instanceof Pufferfish) {
+            ctx.beginPath();
+            ctx.lineWidth = '3';
+            ctx.strokeStyle = 'black';
+            ctx.rect(this.x, this.y, this.width, this.height);
+            ctx.stroke();
+        }
     }
 
     loadImage(path) {
@@ -41,10 +61,12 @@ class MovableObject {
         });
     }
 
+    moveRight() {
+        this.x += this.speed;
+    }
+
     moveLeft() {
-        setInterval(() => {
-            this.x -= this.speed;
-        }, 1000 / 60);
+        this.x -= this.speed;
     }
 
     playAnimation(images) {
@@ -52,5 +74,9 @@ class MovableObject {
         let path = images[i];
         this.img = this.imagecache[path];
         this.currentImage++;
+    }
+
+    jump() {
+        this.speedY = 30;
     }
 }

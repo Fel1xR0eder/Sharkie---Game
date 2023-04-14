@@ -6,7 +6,7 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -33,27 +33,37 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
-        requestAnimationFrame(function() {
+        requestAnimationFrame(function () {
             self.draw();
         });
     }
-    
 
-    addToMap(MovObj) {
-        if(MovObj.otherDirection) {
-            this.ctx.save();
-            this.ctx.translate(MovObj.width, 0);
-            this.ctx.scale(-1, 1);
-            MovObj.x = MovObj.x * -1;
+
+    addToMap(mo) {
+        if (mo.otherDirection) {
+            this.flipImage(mo);
         }
 
-        this.ctx.drawImage(MovObj.img, MovObj.x, MovObj.y, MovObj.width, MovObj.height);
-        
-        if(MovObj.otherDirection) {
-            MovObj.x = MovObj.x * -1;
-            this.ctx.restore();
+        mo.draw(this.ctx);
+        mo.drawFrame(this.ctx);
+
+        if (mo.otherDirection) {
+            this.flipImageBack(mo);
         }
-    };
+    }
+
+    flipImage(mo) {
+        this.ctx.save();
+        this.ctx.translate(mo.width, 0);
+        this.ctx.scale(-1, 1);
+        mo.x = mo.x * -1;
+    }
+
+    flipImageBack(mo) {
+        mo.x = mo.x * -1;
+        this.ctx.restore();
+    }
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {
