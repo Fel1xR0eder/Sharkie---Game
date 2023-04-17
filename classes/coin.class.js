@@ -16,7 +16,6 @@ class Coin extends MovableObject {
         this.x = 250 * 2;
         this.loadImages(this.IMAGES_SWIMMING);
         this.animate();
-        console.log('AL COINS IN');
     }
 
     animate() {
