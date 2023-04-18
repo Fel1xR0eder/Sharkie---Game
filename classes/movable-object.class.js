@@ -1,15 +1,9 @@
-class MovableObject {
-    x = 50;
-    y = 25;
-    img;
-    height = 100;
-    width = 100;
+class MovableObject extends DrawableObject {
+
     speed = 0.15;
     otherDirection = false;
     speedY = 0;
     acceleration = 2.5;
-    imagecache = {};
-    currentImage = 0;
     energy = 100;
 
     lastHit = 0;
@@ -45,37 +39,9 @@ class MovableObject {
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;   // Difference in milliseconds
         timePassed = timePassed / 1000;                         // Difference in seconds
-        console.log(timePassed);
         return timePassed < 1;
     }
 
-    draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
-    }
-
-    drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish) {
-            ctx.beginPath();
-            ctx.lineWidth = '3';
-            ctx.strokeStyle = 'black';
-            ctx.rect(this.x, this.y, this.width, this.height);
-            ctx.stroke();
-        }
-    }
-
-    loadImage(path) {
-        this.img = new Image();
-        this.img.src = path;
-    }
-
-
-    loadImages(json) {
-        json.forEach(path => {
-            let img = new Image();
-            img.src = path;
-            this.imagecache[path] = img;
-        });
-    }
 
     moveRight() {
         this.x += this.speed;
