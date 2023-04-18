@@ -12,6 +12,8 @@ class MovableObject {
     currentImage = 0;
     energy = 100;
 
+    lastHit = 0;
+
 
     applyGravity() {
         setInterval(() => {
@@ -29,13 +31,22 @@ class MovableObject {
 
     hit() {
         this.energy -= 5;
-        if(this.energy < 0) {
+        if (this.energy < 0) {
             this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
         }
     }
 
     isDead() {
         return this.energy == 0;
+    }
+
+    isHurt() {
+        let timePassed = new Date().getTime() - this.lastHit;   // Difference in milliseconds
+        timePassed = timePassed / 1000;                         // Difference in seconds
+        console.log(timePassed);
+        return timePassed < 1;
     }
 
     draw(ctx) {
@@ -96,8 +107,4 @@ class MovableObject {
             this.x < mo.x &&
             this.y < mo.y + mo.height
     }
-
-    // (this.x + this.width) >= mo.x && this.x <= (mo.x + mo.width) &&
-    // (this.y + this.offsety + this.height) >= mo.y &&
-    // (this.y + this.offsety) <= (mo.y + mo.height);
 }

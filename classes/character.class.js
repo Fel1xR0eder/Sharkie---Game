@@ -51,12 +51,27 @@ class Character extends MovableObject {
         './img/1.Sharkie/6.dead/1.Poisoned/12.png'
     ];
 
+    IMAGES_HURT_POISON = [
+        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
+    ]
+
+    IMAGES_HURT_SHOCK= [
+        'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+    ]
+
 
     constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
         super().loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
+        this.loadImages(this.IMAGES_HURT_POISON);
+        this.loadImages(this.IMAGES_HURT_SHOCK);
         this.applyGravity();
         this.animate();
     }
@@ -90,6 +105,8 @@ class Character extends MovableObject {
             
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+            } else if(this.isHurt()) {
+                this.playAnimation(this.IMAGES_HURT_POISON);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_SWIMMING);
             } else {
