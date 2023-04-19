@@ -1,20 +1,34 @@
-class Statusbar extends DrawableObject {
+class statusBarHealth extends DrawableObject {
     IMAGES_HEALTH = [
         './img/4. Markers/green/Life/0_  copia 3.png',    // 0 % LIFE
-        './img/4. Markers/green/Life/20_ copia 4.png',   // 20% LIFE
+        './img/4. Markers/green/Life/20_ copia 4.png',    // 20% LIFE
         './img/4. Markers/green/Life/40_  copia 3.png',   // 40% LIFE   
         './img/4. Markers/green/Life/60_  copia 3.png',   // 60% LIFE
         './img/4. Markers/green/Life/80_  copia 3.png',   // 80% LIFE
         './img/4. Markers/green/Life/100_  copia 2.png'   // 100% LIFE
     ];
-    
+
+    // IMAGES_POISON = [
+    //     'img/4. Markers/green/poisoned bubbles/0_ copia 2.png',
+    //     'img/4. Markers/green/poisoned bubbles/20_ copia 3.png',
+    //     'img/4. Markers/green/poisoned bubbles/40_ copia 2.png',
+    //     'img/4. Markers/green/poisoned bubbles/60_ copia 2.png',
+    //     'img/4. Markers/green/poisoned bubbles/80_ copia 2.png',
+    //     'img/4. Markers/green/poisoned bubbles/100_ copia 3.png'
+    // ];
+
     percentage = 100;
+
+
 
     constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH);
-         this.x = 100;
-        this.y = 100;
+        //this.loadImages(this.IMAGES_POISON);
+        this.y = -10;
+        this.x = 10;
+        this.width = 200;
+        this.height = 70;
         this.setPercentage(100);
     }
 

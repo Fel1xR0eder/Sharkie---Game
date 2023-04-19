@@ -9,9 +9,7 @@ const level1 = new Level(
         new Endboss()
     ],[
         new Light()
-    ]
-    //,[new Statusbar()]
-        ,[
+    ],[
         new BackgroundObject('./img/3. Background/Layers/5. Water/D2.png', -719),
         new BackgroundObject('./img/3. Background/Layers/4.Fondo 2/D2.png', -719),
         new BackgroundObject('./img/3. Background/Layers/3.Fondo 1/D2.png', -719),
