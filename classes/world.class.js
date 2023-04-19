@@ -22,6 +22,7 @@ class World {
     };
 
     checkCollisions() {
+
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
@@ -36,7 +37,9 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
+        
         this.addToMap(this.statusBar);
+
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.lights);           
         this.addObjectsToMap(this.level.enemies);          
@@ -65,6 +68,7 @@ class World {
         }
     };
 
+    
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
