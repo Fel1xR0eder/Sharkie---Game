@@ -8,6 +8,7 @@ function init() {
 }
 
 window.addEventListener("keydown", (e) => {
+    
     if (e.key == 'ArrowRight') {
         keyboard.RIGHT = true;
     }
@@ -27,9 +28,18 @@ window.addEventListener("keydown", (e) => {
     if (e.key == ' ') {
         keyboard.SPACE = true;
     }
+
+    if (e.key == 'd') {
+        keyboard.D = true;
+    }
+
+    if (e.key == 'a') {
+        keyboard.A = true;
+    }
 });
 
 window.addEventListener("keyup", (e) => {
+
     if (e.key == 'ArrowRight') {
         keyboard.RIGHT = false;
     }
@@ -48,5 +58,13 @@ window.addEventListener("keyup", (e) => {
 
     if (e.key == ' ') {
         keyboard.SPACE = false;
+    }
+
+    if (e.key == 'd') {
+        keyboard.D = false;
+    }
+
+    if (e.key == 'a') {
+        keyboard.A = false;
     }
 });

@@ -5,23 +5,23 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
-
     lastHit = 0;
+    money = 0;
 
 
-    applyGravity() {
-        setInterval(() => {
-            if (this.isAboveGround() || this.speedY > 0) {           // Richtigen Y Wert finden 
-                this.y -= this.speedY;
-                this.speedY -= this.acceleration;
-            }
-        }, 1000 / 25);
-    }
+    // applyGravity() {
+    //     setInterval(() => {
+    //         if (this.isAboveGround() || this.speedY > 0) {           // Richtigen Y Wert finden 
+    //             this.y -= this.speedY;
+    //             this.speedY -= this.acceleration;
+    //         }
+    //     }, 1000 / 25);
+    // }
 
     
-    isAboveGround() {
-        return this.y < 30;
-    }
+    // isAboveGround() {
+    //     return this.y < 30;
+    // }
 
 
     hit() {
@@ -36,6 +36,18 @@ class MovableObject extends DrawableObject {
     isDead() {
         return this.energy == 0;
     }
+
+    collectCoin() {
+        this.money += 20;
+        if(this.money > 100) {
+            this.money = 100;
+        }
+    }
+
+    rich() {
+        return this.money == 100;
+    }
+    
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;   // Difference in milliseconds
@@ -52,6 +64,14 @@ class MovableObject extends DrawableObject {
         this.x -= this.speed;
     }
 
+    moveUp() {
+        this.y -= this.speed;
+    }
+
+    moveDown() {
+        this.y += this.speed;
+    }
+
     playAnimation(images) {
         let i = this.currentImage % images.length;    // Modulu(s) =  i = 0,1,2,3,4,5,0,1,2,3,4,5, ...
         let path = images[i];
@@ -59,9 +79,9 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-    jump() {
-        this.speedY = 30;
-    }
+    // jump() {
+    //     this.speedY = 30;
+    // }
 
     // if(character.x + character.width > chicken.x &&
     // character.y + character.height > chicken.y &&

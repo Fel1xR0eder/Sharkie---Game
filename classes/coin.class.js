@@ -4,7 +4,7 @@ class Coin extends MovableObject {
     width = 50;
     y = 100;
 
-    IMAGES_SWIMMING = [
+    IMAGES_COIN = [
         './img/4. Markers/1. Coins/1.png',
         './img/4. Markers/1. Coins/2.png',
         './img/4. Markers/1. Coins/3.png',
@@ -12,16 +12,15 @@ class Coin extends MovableObject {
     ];
 
     constructor() {
-        super().loadImage(this.IMAGES_SWIMMING[0]);
+        super().loadImage(this.IMAGES_COIN[0]);
         this.x = 250 * 2;
-        this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_COIN);
         this.animate();
-    }
+    }s
 
     animate() {
-
         setInterval(() => {
-            this.playAnimation(this.IMAGES_SWIMMING);
+            this.playAnimation(this.IMAGES_COIN);
         }, 100);
     }
 }

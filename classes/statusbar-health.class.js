@@ -1,4 +1,4 @@
-class statusBarHealth extends DrawableObject {
+class StatusBarHealth extends DrawableObject {
     IMAGES_HEALTH = [
         './img/4. Markers/green/Life/0_  copia 3.png',    // 0 % LIFE
         './img/4. Markers/green/Life/20_ copia 4.png',    // 20% LIFE
@@ -23,8 +23,7 @@ class statusBarHealth extends DrawableObject {
 
     constructor() {
         super();
-        this.loadImages(this.IMAGES_HEALTH);
-        //this.loadImages(this.IMAGES_POISON);
+        this.loadImages(this.IMAGES_HEALTH); // Bilder aus Array laden
         this.y = -10;
         this.x = 10;
         this.width = 200;

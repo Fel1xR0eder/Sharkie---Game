@@ -5,8 +5,9 @@ class DrawableObject {
     currentImage = 0;
     x = 50;
     y = 50;
-    height = 100;
+    height = 80;
     width = 100;
+
     
     
     draw(ctx) {
@@ -15,7 +16,8 @@ class DrawableObject {
 
 
     drawFrame(ctx) {
-        if (this instanceof Character || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss) {
+
+        if (this instanceof Character ||this instanceof Coin || this instanceof Pufferfish || this instanceof Jellyfish || this instanceof Endboss) {
             ctx.beginPath();
             ctx.lineWidth = '3';
             ctx.strokeStyle = 'black';
@@ -23,7 +25,7 @@ class DrawableObject {
             ctx.stroke();
         }
     }
-
+    
 
     loadImage(path) {
         this.img = new Image();

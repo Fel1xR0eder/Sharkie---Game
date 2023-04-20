@@ -6,8 +6,8 @@ class World {
     ctx;
     keyboard;
     camera_x = 0;
-    statusBarHealth = new statusBarHealth();
-    // statusBarCoins = new StatusbarCoins();
+    statusBarHealth = new StatusBarHealth();
+    statusBarCoins = new StatusBarCoins();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -24,11 +24,22 @@ class World {
 
     checkCollisions() {
 
+     // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
                     this.character.hit();
                     this.statusBarHealth.setPercentage(this.character.energy);
+                };
+            });
+        }, 500);
+
+     // #####    COLLECT A COIN    ##### //
+        setInterval(() => {
+            this.level.coins.forEach((coins) => {
+                if (this.character.isColliding(coins)) {
+                    this.statusBarCoins.setPercentageCoin(this.character.money);
+                    this.character.collectCoin();
                 };
             });
         }, 200);
@@ -44,7 +55,7 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
-        //this.addToMap(this.statusBarCoins);
+        this.addToMap(this.statusBarCoins);
         //this.addToMap(this.statusBarPoison);
         this.ctx.translate(this.camera_x, 0);  
 

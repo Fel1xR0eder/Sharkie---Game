@@ -3,5 +3,7 @@ class Keyboard {
     RIGHT = false;
     UP = false;
     DOWN = false;
-    SPACE = false;
+    SPACE = false; // JUMP
+    D = false;  // ATTACK 1
+    A = false;  // ATTACK 2
 }

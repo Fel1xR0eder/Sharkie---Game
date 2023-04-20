@@ -1,8 +1,8 @@
 class Character extends MovableObject {
 
-    height = 300;
+    height = 250;
     width = 250;
-    y = -100;
+    y = 100;
     speed = 8;
     world;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
@@ -74,7 +74,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT_POISON);
         this.loadImages(this.IMAGES_HURT_SHOCK);
-        this.applyGravity();
+        //this.applyGravity();
         this.animate();
     }
 
@@ -95,16 +95,25 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }
 
-            if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-                this.jump();
+            if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
+                this.moveUp();
+                this.swimming_sound.play();
             }
+
+            if (this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom) {
+                this.moveDown();
+                this.swimming_sound.play();
+            }
+
+            // if (this.world.keyboard.SPACE && !this.isAboveGround()) {
+            //     this.jump();
+            // }
 
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
 
 
         setInterval(() => {
-            
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
             } else if(this.isHurt()) {
@@ -114,6 +123,6 @@ class Character extends MovableObject {
             } else {
                 this.playAnimation(this.IMAGES_IDLE);
             }
-        }, 150);
+        }, 100);
     }
 }
