@@ -8,26 +8,15 @@ class StatusBarHealth extends DrawableObject {
         './img/4. Markers/green/Life/100_  copia 2.png'   // 100% LIFE
     ];
 
-    // IMAGES_POISON = [
-    //     'img/4. Markers/green/poisoned bubbles/0_ copia 2.png',
-    //     'img/4. Markers/green/poisoned bubbles/20_ copia 3.png',
-    //     'img/4. Markers/green/poisoned bubbles/40_ copia 2.png',
-    //     'img/4. Markers/green/poisoned bubbles/60_ copia 2.png',
-    //     'img/4. Markers/green/poisoned bubbles/80_ copia 2.png',
-    //     'img/4. Markers/green/poisoned bubbles/100_ copia 3.png'
-    // ];
-
     percentage = 100;
-
-
 
     constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH); // Bilder aus Array laden
         this.y = -10;
         this.x = 10;
-        this.width = 200;
-        this.height = 70;
+        this.width = 230;
+        this.height = 80;
         this.setPercentage(100);
     }
 

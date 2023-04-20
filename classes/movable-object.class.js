@@ -7,6 +7,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     money = 0;
+    poison = 0;
 
 
     // applyGravity() {
@@ -31,6 +32,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
+        console.log('Energy =', this.energy);
     }
 
     
@@ -45,6 +47,14 @@ class MovableObject extends DrawableObject {
             this.money = 100;
         }
         console.log('Money =',this.money);
+    }
+
+    collectPoison() {
+        this.poison += 5;
+        if(this.poison > 100) {
+            this.poison = 100;
+        }
+        console.log('Poison =',this.poison);
     }
 
 

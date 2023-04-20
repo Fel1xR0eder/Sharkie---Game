@@ -7,12 +7,14 @@ const level1 = new Level(
         // new Jellyfish(),
         // new Jellyfish(),
         new Endboss()
-    ],
-    [   new Light()
+    ],[   
+        new Light()
     ],[ 
         new Coin(),
         new Coin(),
         new Coin()
+    ],[
+        new Poison()
     ],[
     new BackgroundObject('./img/3. Background/Layers/5. Water/D2.png', -719),
     new BackgroundObject('./img/3. Background/Layers/4.Fondo 2/D2.png', -719),

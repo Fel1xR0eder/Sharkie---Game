@@ -8,6 +8,7 @@ class World {
     camera_x = 0;
     statusBarHealth = new StatusBarHealth();
     statusBarCoins = new StatusBarCoins();
+    statusBarPoison = new StatusBarPoison();
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -17,14 +18,15 @@ class World {
         this.setWorld();
         this.checkCollisions();
         this.checkCoinCollision();
+        this.checkPoisonCollision();
     };
+
 
     setWorld() {
         this.character.world = this;
     };
 
     checkCollisions() {
-
         // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
@@ -48,6 +50,18 @@ class World {
         }, 500);
     }
 
+    checkPoisonCollision() {
+        // #####    COLLECT POISON    ##### //
+        setInterval(() => {
+            this.level.poison.forEach((poison) => {
+                if (this.character.isColliding(poison)) {
+                    this.statusBarPoison.setPercentagePoison(this.character.poison);
+                    this.character.collectPoison();
+                };
+            });
+        }, 500);
+    }
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
@@ -59,7 +73,7 @@ class World {
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
-        //this.addToMap(this.statusBarPoison);
+        this.addToMap(this.statusBarPoison);
         this.ctx.translate(this.camera_x, 0);
 
 
