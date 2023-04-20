@@ -16,6 +16,7 @@ class World {
         this.draw();
         this.setWorld();
         this.checkCollisions();
+        this.checkCoinCollision();
     };
 
     setWorld() {
@@ -24,7 +25,7 @@ class World {
 
     checkCollisions() {
 
-     // #####    HIT BY ENEMY    ##### //
+        // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
                 if (this.character.isColliding(enemy)) {
@@ -33,8 +34,10 @@ class World {
                 };
             });
         }, 500);
+    };
 
-     // #####    COLLECT A COIN    ##### //
+    checkCoinCollision() {
+        // #####    COLLECT A COIN    ##### //
         setInterval(() => {
             this.level.coins.forEach((coins) => {
                 if (this.character.isColliding(coins)) {
@@ -42,27 +45,27 @@ class World {
                     this.character.collectCoin();
                 };
             });
-        }, 200);
-    };
+        }, 500);
+    }
 
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
-        this.addObjectsToMap(this.level.lights);           
+        this.addObjectsToMap(this.level.lights);
 
         this.ctx.translate(-this.camera_x, 0);
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         //this.addToMap(this.statusBarPoison);
-        this.ctx.translate(this.camera_x, 0);  
+        this.ctx.translate(this.camera_x, 0);
 
 
-        this.addToMap(this.character);               
-        this.addObjectsToMap(this.level.enemies);          
-        //this.addObjectsToMap(this.level.coins);          
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.coins);          
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
@@ -85,7 +88,7 @@ class World {
         }
     };
 
-    
+
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);

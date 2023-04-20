@@ -33,21 +33,20 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    
     isDead() {
         return this.energy == 0;
     }
 
+
     collectCoin() {
-        this.money += 20;
+        this.money += 5;
         if(this.money > 100) {
             this.money = 100;
         }
+        console.log('Money =',this.money);
     }
 
-    rich() {
-        return this.money == 100;
-    }
-    
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;   // Difference in milliseconds
