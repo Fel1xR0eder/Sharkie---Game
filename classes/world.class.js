@@ -56,7 +56,7 @@ class World {
             this.level.poison.forEach((poison) => {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
-                    this.character.collectPoison();
+                    this.character.collectPoison(); 
                 };
             });
         }, 500);
@@ -70,6 +70,7 @@ class World {
         this.addObjectsToMap(this.level.lights);
 
         this.ctx.translate(-this.camera_x, 0);
+
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
@@ -79,7 +80,8 @@ class World {
 
         this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.coins);          
+        this.addObjectsToMap(this.level.coins);   
+        this.addObjectsToMap(this.level.poison);          
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;

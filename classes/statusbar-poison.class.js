@@ -24,7 +24,7 @@ class StatusBarPoison extends DrawableObject {
 
 
     setPercentagePoison(percentagePoison) {
-        this.percentageCoin = percentagePoison;
+        this.percentagePoison = percentagePoison;
         let path = this.IMAGES_POISON[this.resolvePoisonImageIndex()];
         this.img = this.imagecache[path];
     }

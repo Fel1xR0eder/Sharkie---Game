@@ -25,6 +25,14 @@ class MovableObject extends DrawableObject {
     // }
 
 
+    isColliding(mo) {
+        return this.x + this.width > mo.x &&
+            this.y + this.height > mo.y &&
+            this.x < mo.x &&
+            this.y < mo.y + mo.height
+    }
+
+
     hit() {
         this.energy -= 5;
         if (this.energy < 0) {
@@ -32,7 +40,7 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        console.log('Energy =', this.energy);
+        //console.log('Energy =', this.energy);
     }
 
     
@@ -97,10 +105,5 @@ class MovableObject extends DrawableObject {
     // character.x < chicken.x && character.y < chicken.y + chicken.height
     // )
 
-    isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
-    }
+    
 }

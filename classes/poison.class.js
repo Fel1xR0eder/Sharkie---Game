@@ -1,9 +1,9 @@
 class Poison extends MovableObject {
 
-    height = 50;
-    width = 50;
+    height = 80;
+    width = 80;
     y = 300;
-    x = 300;
+    x = 400;
 
     IMAGES_POISON = [
         'img/4. Markers/Poison/Animada/1.png',
