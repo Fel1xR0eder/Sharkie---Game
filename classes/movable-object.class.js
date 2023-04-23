@@ -50,15 +50,17 @@ class MovableObject extends DrawableObject {
 
 
     collectCoin() {
-        this.money += 5;
+        this.money += 20;
         if(this.money > 100) {
             this.money = 100;
         }
         console.log('Money =',this.money);
+        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
+
     collectPoison() {
-        this.poison += 5;
+        this.poison += 20;
         if(this.poison > 100) {
             this.poison = 100;
         }

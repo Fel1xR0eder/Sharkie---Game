@@ -25,6 +25,7 @@ class World {
     setWorld() {
         this.character.world = this;
     };
+    
 
     checkCollisions() {
         // #####    HIT BY ENEMY    ##### //
@@ -38,6 +39,7 @@ class World {
         }, 500);
     };
 
+
     checkCoinCollision() {
         // #####    COLLECT A COIN    ##### //
         setInterval(() => {
@@ -50,6 +52,7 @@ class World {
         }, 500);
     }
 
+
     checkPoisonCollision() {
         // #####    COLLECT POISON    ##### //
         setInterval(() => {
@@ -57,12 +60,14 @@ class World {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
                     this.character.collectPoison(); 
+                    // this.level.poison.catch();
                 };
             });
         }, 500);
     }
 
-    draw() {
+
+    draw() {    // ##### THE LOWER LOC THE HIGHER ON CANVAS ##### //
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
@@ -78,10 +83,10 @@ class World {
         this.ctx.translate(this.camera_x, 0);
 
 
-        this.addToMap(this.character);
         this.addObjectsToMap(this.level.enemies);
-        this.addObjectsToMap(this.level.coins);   
-        this.addObjectsToMap(this.level.poison);          
+        this.addObjectsToMap(this.level.coins);
+        this.addObjectsToMap(this.level.poison);   
+        this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
 
         let self = this;
