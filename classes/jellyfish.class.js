@@ -8,11 +8,20 @@ class Jellyfish extends MovableObject {
         './img/2.Enemy/2 Jelly fish/Regular damage/Yellow 4.png'
     ];
 
+    IMAGES_DEAD = [
+        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png',
+        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
+    ]
+
     constructor() {
         super().loadImage(this.IMAGES_SWIMMING[0]);
-        this.x = 200 + Math.random() * 1000; // Zahl zwischen 200 & 700 === (0 & 1) 
+        this.x = 200 + Math.random() * 1000; 
+        this.y = 50 + Math.random() * 200;
         this.speed = 0.1 + Math.random() * 0.1;
         this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
 

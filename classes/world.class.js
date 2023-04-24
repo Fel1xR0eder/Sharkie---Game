@@ -19,21 +19,19 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
-        this.checkAllCollisions();
     };
-
-    checkAllCollisions() {
-        this.checkHealthCollision();
-        this.checkPoisonCollision();
-        this.checkCoinCollision();
-    }
 
 
     setWorld() {
         this.character.world = this;
     };
 
+
     run() {
+        this.checkHealthCollision();
+        this.checkPoisonCollision();
+        this.checkCoinCollision();
+
         setInterval(() => {
             this.checkBubbleAttack();
         }, 100);
@@ -41,10 +39,11 @@ class World {
 
     checkBubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-            let poisonBottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(poisonBottle);
+            let poison = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(poison);
             this.character.poison -= 20;
         };
+
         this.statusBarPoison.setPercentagePoison(this.character.poison);
     }
 
@@ -73,9 +72,10 @@ class World {
                 if (this.character.isColliding(coins)) {
                     this.statusBarCoins.setPercentageCoin(this.character.money);
                     this.character.collectCoin();
+                    this.level.coins.shift();
                 };
             });
-        }, 500);
+        }, 100);
     }
 
 
@@ -86,14 +86,25 @@ class World {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
                     this.character.collectPoison();
-                    this.throwableObjects.splice(0, 1);
+                    this.level.poison.shift();
                 };
             });
-        }, 500);
+        }, 100);
     }
 
+    checkBubbleCollision() {
+        setInterval(() => {
+            this.level.poison.forEach((poison) => {
+                if (this.character.isColliding(poison)) {
+                    this.statusBarPoison.setPercentagePoison(this.character.poison);
+                    this.character.collectPoison();
+                    this.throwableObjects.shift();
+                };
+            });
+        }, 100);
+ }
 
-    draw() {    // ##### THE LOWER LOC THE HIGHER ON CANVAS ##### //
+    draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);

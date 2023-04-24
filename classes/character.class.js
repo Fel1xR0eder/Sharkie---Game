@@ -65,8 +65,6 @@ class Character extends MovableObject {
     ];
 
 
-
-
     constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
         super().loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
