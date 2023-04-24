@@ -20,10 +20,25 @@ class ThrowableObject extends MovableObject {
         'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
     ];
 
-    constructor() {
-        super()
-        this.loadImages(this.IMAGES_FINSLAP);
-        this.loadImages(this.IMAGES_BUBBLES);
+    speedX = 0;
+
+
+    constructor(x, y) {
+        super().loadImage('img/1.Sharkie/4.Attack/Bubble trap/Bubble.png');
+        //this.loadImages(this.IMAGES_FINSLAP);
+        //this.loadImages(this.IMAGES_BUBBLES);
+        this.x = x;
+        this.y = y;
+        this.height = 60;
+        this.width = 60;
+        this.throw();
+    }
+
+    throw() {
+        // this.speedY = 30;
+        setInterval(() => {
+            this.x += 15;
+        }, 50);
     }
 
     animate() {

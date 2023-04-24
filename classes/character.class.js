@@ -83,8 +83,8 @@ class Character extends MovableObject {
 
         setInterval(() => {
 
-            console.log(this.x);
-            console.log(this.y);
+            //console.log(this.x);
+            //console.log(this.y);
             
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {

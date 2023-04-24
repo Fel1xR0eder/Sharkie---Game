@@ -9,6 +9,7 @@ class World {
     statusBarHealth = new StatusBarHealth();
     statusBarCoins = new StatusBarCoins();
     statusBarPoison = new StatusBarPoison();
+    throwableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -16,18 +17,33 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.checkCollisions();
-        this.checkCoinCollision();
+        this.run();
+        this.checkHealthCollision();
         this.checkPoisonCollision();
+        this.checkCoinCollision();
     };
 
 
     setWorld() {
         this.character.world = this;
     };
-    
 
-    checkCollisions() {
+    run() {
+        setInterval(() => {
+            this.checkThrowObjects();
+        }, 100);
+    }
+
+    checkThrowObjects() {
+        if (this.keyboard.D) {
+            console.log(Keyboard.D);
+            let poison = new ThrowableObject(this.character.x, this.character.y);
+            this.throwableObjects.push(poison);
+        };
+    }
+
+
+    checkHealthCollision() {
         // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
             this.level.enemies.forEach((enemy) => {
@@ -59,7 +75,7 @@ class World {
             this.level.poison.forEach((poison) => {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
-                    this.character.collectPoison(); 
+                    this.character.collectPoison();
                     // this.level.poison.catch();
                 };
             });
@@ -71,10 +87,10 @@ class World {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.lights);
-
+        this.addObjectsToMap(this.level.backgroundObjects);
         this.ctx.translate(-this.camera_x, 0);
+
 
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
@@ -85,7 +101,8 @@ class World {
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
-        this.addObjectsToMap(this.level.poison);   
+        this.addObjectsToMap(this.level.poison);
+        this.addObjectsToMap(this.throwableObjects);
         this.addToMap(this.character);
         this.ctx.translate(-this.camera_x, 0);
 
