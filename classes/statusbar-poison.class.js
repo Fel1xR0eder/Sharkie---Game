@@ -9,7 +9,8 @@ class StatusBarPoison extends DrawableObject {
         'img/4. Markers/green/poisoned bubbles/0_ copia 2.png'
     ];
 
-    percentagePoison = 0;
+    percentagePoison = [];
+    //percentagePoison = 0;
 
     constructor() {
         super();
@@ -19,7 +20,7 @@ class StatusBarPoison extends DrawableObject {
         this.x = 10;
         this.width = 230;
         this.height = 80;
-        this.setPercentagePoison(0);
+        this.setPercentagePoison();
     }
 
 

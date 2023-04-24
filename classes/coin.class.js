@@ -12,8 +12,8 @@ class Coin extends MovableObject {
 
     constructor() {
         super().loadImage(this.IMAGES_COIN[0]);
-        this.x = 200 + Math.random() * 2000; // Zahl zwischen 200 & 1200 === (0 & 1) 
-        this.y = 
+        this.x = 450 + Math.random() * 1750; 
+        this.y = -50 + Math.random() * 200;
         this.loadImages(this.IMAGES_COIN);
         this.animate();
     }

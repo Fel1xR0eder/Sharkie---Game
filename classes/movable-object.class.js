@@ -27,9 +27,9 @@ class MovableObject extends DrawableObject {
 
     isColliding(mo) {
         return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x &&
-            this.y < mo.y + mo.height
+        this.y + this.height > mo.y &&
+        this.x < mo.x &&
+        this.y < mo.y + mo.height
     }
 
 
@@ -51,20 +51,17 @@ class MovableObject extends DrawableObject {
 
     collectCoin() {
         this.money += 20;
-        if(this.money > 100) {
+        if(this.money >= 100) {
             this.money = 100;
         }
-        console.log('Money =',this.money);
-        this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
     }
 
 
     collectPoison() {
         this.poison += 20;
-        if(this.poison > 100) {
+        if(this.poison >= 100) {
             this.poison = 100;
         }
-        console.log('Poison =',this.poison);
     }
 
 

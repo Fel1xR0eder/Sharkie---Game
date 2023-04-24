@@ -10,6 +10,7 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarPoison = new StatusBarPoison();
     throwableObjects = [];
+    collectableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -18,10 +19,14 @@ class World {
         this.draw();
         this.setWorld();
         this.run();
+        this.checkAllCollisions();
+    };
+
+    checkAllCollisions() {
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
-    };
+    }
 
 
     setWorld() {
@@ -30,17 +35,22 @@ class World {
 
     run() {
         setInterval(() => {
-            this.checkThrowObjects();
+            this.checkBubbleAttack();
         }, 100);
     }
 
-    checkThrowObjects() {
-        if (this.keyboard.D) {
-            console.log(Keyboard.D);
-            let poison = new ThrowableObject(this.character.x, this.character.y);
-            this.throwableObjects.push(poison);
+    checkBubbleAttack() {
+        if (this.keyboard.D && this.character.poison > 0) {
+            let poisonBottle = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(poisonBottle);
+            this.character.poison -= 20;
         };
+        this.statusBarPoison.setPercentagePoison(this.character.poison);
     }
+
+    // checkSlapAttack() {
+    //     if(this.keyboard.A && this.character.coins )
+    // }
 
 
     checkHealthCollision() {
@@ -76,7 +86,7 @@ class World {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
                     this.character.collectPoison();
-                    // this.level.poison.catch();
+                    this.throwableObjects.splice(0, 1);
                 };
             });
         }, 500);
