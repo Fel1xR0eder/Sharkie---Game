@@ -9,6 +9,13 @@ class Character extends MovableObject {
     bubble = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
+    offset = {
+        top : 120,
+        right : 30,
+        bottom : 40,
+        left : 30
+    };
+
     IMAGES_IDLE = [
         './img/1.Sharkie/1.IDLE/1.png',
         './img/1.Sharkie/1.IDLE/2.png',
@@ -141,8 +148,6 @@ class Character extends MovableObject {
             if (this.world.keyboard.A) {
                 this.slapAttack();
             }
-
-
 
             // if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             //     this.jump();

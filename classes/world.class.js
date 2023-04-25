@@ -31,15 +31,15 @@ class World {
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
-        //this.checkEnemyCollision();
+        this.checkAttackCollision();
 
         setInterval(() => {
-            this.checkBubbleAttack();
+            this.BubbleAttack();
         }, 100);
     }
 
 
-    checkBubbleAttack() {
+    BubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bubble);
@@ -89,42 +89,32 @@ class World {
         }, 100);
     }
 
-    checkBubbleCollision() {
+
+    checkAttackCollision() { 
+        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
         setInterval(() => {
-            this.level.poison.forEach((poison) => {
-                if (this.character.isColliding(poison)) {
-                    this.statusBarPoison.setPercentagePoison(this.character.poison);
-                    this.character.collectPoison();
-                    this.throwableObjects.shift();
+            this.throwableObjects.bubble.forEach((enemy) => {
+                if (this.throwableObjects.bubble.isColliding(enemy)) {
+                    console.log('Kollision mit', enemy);
                 };
             });
-        }, 100);
+        }, 500);
     }
-
-    // checkEnemyCollision() {
-    //     this.level.enemies.forEach((enemy) => {
-    //         if(this.poison.isColliding(enemy) && enemy.energy) {
-    //             enemy.energy = false;
-    //         };
-    //     })
-    // }
 
 
     draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
         this.ctx.translate(this.camera_x, 0);
-        this.addObjectsToMap(this.level.lights);
         this.addObjectsToMap(this.level.backgroundObjects);
+        this.addObjectsToMap(this.level.lights);
         this.ctx.translate(-this.camera_x, 0);
-
 
         // ##### FIXED OBJECTS HERE ##### //
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarPoison);
         this.ctx.translate(this.camera_x, 0);
-
 
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.coins);
@@ -144,13 +134,18 @@ class World {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
-
         mo.draw(this.ctx);
         mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
+    };
+
+    addObjectsToMap(objects) {
+        objects.forEach(o => {
+            this.addToMap(o);
+        });
     };
 
 
@@ -167,10 +162,4 @@ class World {
         this.ctx.restore();
     };
 
-
-    addObjectsToMap(objects) {
-        objects.forEach(o => {
-            this.addToMap(o);
-        });
-    };
 }

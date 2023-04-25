@@ -53,6 +53,8 @@ class Pufferfish extends MovableObject {
             this.playAnimation(this.IMAGES_TRANSITION);
         }, 4000);
 
+        // Wenn Gegner nahe am character ist
+        
         // setInterval(() => {
         //     this.playAnimation(this.IMAGES_ATTACK);
         // }, 100);
