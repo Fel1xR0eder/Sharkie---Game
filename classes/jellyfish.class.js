@@ -1,5 +1,4 @@
 class Jellyfish extends MovableObject {
-    y = 175;
 
     IMAGES_SWIMMING = [
         './img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
@@ -15,6 +14,9 @@ class Jellyfish extends MovableObject {
         'img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
     ]
 
+    health = true;
+
+
     constructor() {
         super().loadImage(this.IMAGES_SWIMMING[0]);
         this.x = 200 + Math.random() * 1000; 
@@ -24,6 +26,7 @@ class Jellyfish extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
     }
+
 
     animate() {
         setInterval(() => {

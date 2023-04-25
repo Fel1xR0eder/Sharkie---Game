@@ -1,7 +1,5 @@
 class Pufferfish extends MovableObject {
 
-    y = 175;
-
     IMAGES_SWIMMING = [
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -25,6 +23,9 @@ class Pufferfish extends MovableObject {
         'img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim4.png',
         'img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.png'
     ]
+
+    health = true;
+
 
     constructor() {
         super().loadImage('./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');

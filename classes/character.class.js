@@ -5,6 +5,8 @@ class Character extends MovableObject {
     y = 100;
     speed = 8;
     world;
+    slap = false;
+    bubble = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     IMAGES_IDLE = [
@@ -64,14 +66,39 @@ class Character extends MovableObject {
         'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
     ];
 
+    IMAGES_BUBBLES = [
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+    ];
+
+    IMAGES_FINSLAP = [
+        'img/1.Sharkie/4.Attack/Fin slap/1.png',
+        'img/1.Sharkie/4.Attack/Fin slap/4.png',
+        'img/1.Sharkie/4.Attack/Fin slap/5.png',
+        'img/1.Sharkie/4.Attack/Fin slap/6.png',
+        'img/1.Sharkie/4.Attack/Fin slap/7.png',
+        'img/1.Sharkie/4.Attack/Fin slap/8.png'
+    ];
+
+
+
 
     constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
-        super().loadImage(this.IMAGES_IDLE[0]);
+        super()
+        this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
         this.loadImages(this.IMAGES_HURT_POISON);
         this.loadImages(this.IMAGES_HURT_SHOCK);
+        this.loadImages(this.IMAGES_BUBBLES);
+        this.loadImages(this.IMAGES_FINSLAP);
         //this.applyGravity();
         this.animate();
     }
@@ -83,7 +110,7 @@ class Character extends MovableObject {
 
             //console.log(this.x);
             //console.log(this.y);
-            
+
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
@@ -107,6 +134,16 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             }
 
+            if (this.world.keyboard.D) {
+                this.bubbleAttack();
+            }
+
+            if (this.world.keyboard.A) {
+                this.slapAttack();
+            }
+
+
+
             // if (this.world.keyboard.SPACE && !this.isAboveGround()) {
             //     this.jump();
             // }
@@ -122,9 +159,35 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_HURT_POISON);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_SWIMMING);
-            } else {
-                this.playAnimation(this.IMAGES_IDLE);
+            } else if (this.slap) {
+                this.playAnimation(this.IMAGES_FINSLAP);
+                if (this.currentImage >= this.IMAGES_FINSLAP.length) {
+                    this.slap = false;
+                }
             }
+            else if (this.bubble) {
+                this.playAnimation(this.IMAGES_BUBBLES);
+                if (this.currentImage >= this.IMAGES_BUBBLES.length) {
+                    this.bubble = false;
+                } 
+            } else
+                this.playAnimation(this.IMAGES_IDLE);
         }, 100);
+    }
+
+
+    slapAttack() {
+        if (!this.slap) {
+            this.slap = true;
+            this.currentImage = 0;
+        }
+    }
+
+
+    bubbleAttack() {
+        if (!this.bubble) {
+            this.bubble = true;
+            this.currentImage = 0;
+        }
     }
 }

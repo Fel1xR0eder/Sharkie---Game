@@ -31,25 +31,22 @@ class World {
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
+        //this.checkEnemyCollision();
 
         setInterval(() => {
             this.checkBubbleAttack();
         }, 100);
     }
 
+
     checkBubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-            let poison = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(poison);
+            let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+            this.throwableObjects.push(bubble);
             this.character.poison -= 20;
         };
-
         this.statusBarPoison.setPercentagePoison(this.character.poison);
     }
-
-    // checkSlapAttack() {
-    //     if(this.keyboard.A && this.character.coins )
-    // }
 
 
     checkHealthCollision() {
@@ -102,7 +99,16 @@ class World {
                 };
             });
         }, 100);
- }
+    }
+
+    // checkEnemyCollision() {
+    //     this.level.enemies.forEach((enemy) => {
+    //         if(this.poison.isColliding(enemy) && enemy.energy) {
+    //             enemy.energy = false;
+    //         };
+    //     })
+    // }
+
 
     draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);

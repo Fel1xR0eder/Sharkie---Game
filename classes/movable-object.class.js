@@ -66,8 +66,8 @@ class MovableObject extends DrawableObject {
 
 
     isHurt() {
-        let timePassed = new Date().getTime() - this.lastHit;   // Difference in milliseconds
-        timePassed = timePassed / 1000;                         // Difference in seconds
+        let timePassed = new Date().getTime() - this.lastHit;
+        timePassed = timePassed / 1000;
         return timePassed < 1;
     }
 
@@ -94,6 +94,7 @@ class MovableObject extends DrawableObject {
         this.img = this.imagecache[path];
         this.currentImage++;
     }
+    
 
     // jump() {
     //     this.speedY = 30;
@@ -103,6 +104,4 @@ class MovableObject extends DrawableObject {
     // character.y + character.height > chicken.y &&
     // character.x < chicken.x && character.y < chicken.y + chicken.height
     // )
-
-    
 }
