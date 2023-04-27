@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     lastHit = 0;
     money = 0;
     poison = 0;
+    dead = false;
 
     offset = {
         top: 0,

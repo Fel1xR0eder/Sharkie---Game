@@ -14,18 +14,39 @@ class Jellyfish extends MovableObject {
         'img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
     ]
 
+    IMAGES_SHOCK = [
+        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 1.png',
+        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 2.png',
+        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 3.png',
+        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 4.png'
+    ]
+
     health = true;
 
 
     constructor() {
         super().loadImage(this.IMAGES_SWIMMING[0]);
-        this.x = 200 + Math.random() * 1000; 
-        this.y = 50 + Math.random() * 200;
+        this.x = 200 + Math.random() * 2000;
+        this.y = 0 + Math.random() * 200;
         this.speed = 0.1 + Math.random() * 0.1;
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
+        //this.slapShock();
+        //this.enemyBubbleDead();
     }
+
+    
+    
+
+    // slapShock() {
+    //     if (this.character.isColliding(this.Jellyfish)) {
+    //         this.character.hit();
+    //         setInterval(() => {
+    //             this.playAnimation(this.IMAGES_SHOCK);
+    //         }, 500);
+    //     }
+    // }
 
 
     animate() {

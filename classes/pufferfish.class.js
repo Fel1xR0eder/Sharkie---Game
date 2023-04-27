@@ -24,18 +24,42 @@ class Pufferfish extends MovableObject {
         'img/2.Enemy/1.Puffer fish (3 color options)/3.Bubbleeswim/1.bubbleswim5.png'
     ]
 
+    IMAGES_DEAD = [
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 1 (can animate by going up).png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 2 (can animate by going up).png',
+        'img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/1.Dead 3 (can animate by going up).png'
+    ]
+
     health = true;
 
 
     constructor() {
         super().loadImage('./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
-        this.x = 200 + Math.random() * 1000; // Zahl zwischen 200 & 1200 === (0 & 1) 
+        this.x = 200 + Math.random() * 2000; // Zahl zwischen 200 & 1200 === (0 & 1) 
         this.y = 50 + Math.random() * 200;
         this.speed = 0.15 + Math.random() * 0.25;
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_ATTACK);
         this.animate();
+        this.enemyBubbleDead();
+    }
+
+    enemyBubbleDead() {
+        if (!this.health) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.speed = 0;
+            this.y = 1000;
+        };
+    }
+
+    enemySlapDead() {
+        if (!this.health) {
+            this.playAnimation(this.IMAGES_DEAD);
+            this.speed = 0;
+            this.y = 30;        // TEST COORDINATES
+            this.x = 0;
+        }
     }
 
 

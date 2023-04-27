@@ -10,10 +10,10 @@ class Character extends MovableObject {
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     offset = {
-        top : 120,
-        right : 30,
-        bottom : 40,
-        left : 30
+        top: 100,
+        right: 30,
+        bottom: 50,
+        left: 30
     };
 
     IMAGES_IDLE = [
@@ -174,11 +174,19 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_BUBBLES);
                 if (this.currentImage >= this.IMAGES_BUBBLES.length) {
                     this.bubble = false;
-                } 
+                }
             } else
                 this.playAnimation(this.IMAGES_IDLE);
         }, 100);
     }
+
+
+    // deadAnimation() {
+    //     if (!this.dead) {
+    //         this.dead = true;
+    //         this.currentImage = 0;
+    //     }
+    // }
 
 
     slapAttack() {
@@ -187,7 +195,6 @@ class Character extends MovableObject {
             this.currentImage = 0;
         }
     }
-
 
     bubbleAttack() {
         if (!this.bubble) {

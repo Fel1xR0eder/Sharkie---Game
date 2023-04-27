@@ -10,7 +10,7 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarPoison = new StatusBarPoison();
     throwableObjects = [];
-    collectableObjects = [];
+    // collectableObjects = [];
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -28,14 +28,16 @@ class World {
 
 
     run() {
-        this.checkHealthCollision();
-        this.checkPoisonCollision();
-        this.checkCoinCollision();
-        this.checkAttackCollision();
-
         setInterval(() => {
             this.BubbleAttack();
         }, 100);
+
+        this.attackJellyfish();
+        this.attackPufferfish();
+        this.attackEndboss();
+        this.checkHealthCollision();
+        this.checkPoisonCollision();
+        this.checkCoinCollision();
     }
 
 
@@ -43,8 +45,10 @@ class World {
         if (this.keyboard.D && this.character.poison > 0) {
             let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
             this.throwableObjects.push(bubble);
+            console.log('new Bubble', bubble);
             this.character.poison -= 20;
         };
+
         this.statusBarPoison.setPercentagePoison(this.character.poison);
     }
 
@@ -52,11 +56,13 @@ class World {
     checkHealthCollision() {
         // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
-            this.level.enemies.forEach((enemy) => {
-                if (this.character.isColliding(enemy)) {
-                    this.character.hit();
-                    this.statusBarHealth.setPercentage(this.character.energy);
-                };
+            this.level.pufferfish.forEach((pufferfish) => {
+                this.level.jellyfish.forEach((jellyfish) => {
+                    if (this.character.isColliding(pufferfish) || this.character.isColliding(jellyfish)) {
+                        this.character.hit();
+                        this.statusBarHealth.setPercentage(this.character.energy);
+                    };
+                });
             });
         }, 500);
     };
@@ -69,7 +75,7 @@ class World {
                 if (this.character.isColliding(coins)) {
                     this.statusBarCoins.setPercentageCoin(this.character.money);
                     this.character.collectCoin();
-                    this.level.coins.shift();
+                    this.level.coins.pop();
                 };
             });
         }, 100);
@@ -83,22 +89,65 @@ class World {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
                     this.character.collectPoison();
-                    this.level.poison.shift();
+                    this.level.poison.pop(); // reihenfolge von Poisonbottles zufällig gerendert!
                 };
             });
         }, 100);
     }
 
 
-    checkAttackCollision() { 
+    attackPufferfish() {
         // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
         setInterval(() => {
-            this.throwableObjects.bubble.forEach((enemy) => {
-                if (this.throwableObjects.bubble.isColliding(enemy)) {
-                    console.log('Kollision mit', enemy);
-                };
+            this.level.pufferfish.forEach((pufferfish) => {
+                this.throwableObjects.forEach((bubble) => {
+                    if (bubble.isColliding(pufferfish)) {
+                        console.log(' Kollision mit', bubble);
+                        pufferfish.health = false;
+                        this.enemyBubbleDead();
+                    };
+                });
             });
-        }, 500);
+        }, 200);
+    }
+
+
+    attackEndboss() {
+        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
+        setInterval(() => {
+            this.level.endboss.forEach((killerwhale) => {
+                this.throwableObjects.forEach((bubble) => {
+                    if (bubble.isColliding(killerwhale)) {
+                        console.log(' Kollision mit', bubble);
+                        //killerwhale.health -= 20;
+                        this.enemyBubbleDead();
+                    };
+                });
+            });
+        }, 200);
+    }
+
+    attackJellyfish() {
+        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
+        setInterval(() => {
+            this.level.jellyfish.forEach((jellyfish) => {
+                this.throwableObjects.forEach((bubble) => {
+                    if (bubble.isColliding(jellyfish)) {
+                        console.log(' Kollision mit', bubble);
+                        jellyfish.health = false;
+                        this.enemyBubbleDead();
+                    };
+                });
+            });
+        }, 200);
+    }
+
+    enemyBubbleDead() {
+        if (!this.health) {
+            this.playAnimation(this.level.jellyfish.IMAGES_DEAD);
+            this.speed = 0;
+            this.y = 1000;
+        };
     }
 
 
@@ -116,7 +165,9 @@ class World {
         this.addToMap(this.statusBarPoison);
         this.ctx.translate(this.camera_x, 0);
 
-        this.addObjectsToMap(this.level.enemies);
+        this.addObjectsToMap(this.level.pufferfish);
+        this.addObjectsToMap(this.level.jellyfish);
+        this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.coins);
         this.addObjectsToMap(this.level.poison);
         this.addObjectsToMap(this.throwableObjects);

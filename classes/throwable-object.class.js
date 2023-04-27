@@ -1,5 +1,6 @@
 class ThrowableObject extends MovableObject {
 
+    
     speedX = 0;
 
     constructor(x, y) {
