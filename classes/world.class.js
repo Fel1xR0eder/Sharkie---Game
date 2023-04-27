@@ -104,7 +104,6 @@ class World {
                     if (bubble.isColliding(pufferfish)) {
                         console.log(' Kollision mit', bubble);
                         pufferfish.health = false;
-                        this.enemyBubbleDead();
                     };
                 });
             });
@@ -120,7 +119,7 @@ class World {
                     if (bubble.isColliding(killerwhale)) {
                         console.log(' Kollision mit', bubble);
                         //killerwhale.health -= 20;
-                        this.enemyBubbleDead();
+                        //enemyBubbleDead();
                     };
                 });
             });
@@ -135,19 +134,10 @@ class World {
                     if (bubble.isColliding(jellyfish)) {
                         console.log(' Kollision mit', bubble);
                         jellyfish.health = false;
-                        this.enemyBubbleDead();
                     };
                 });
             });
         }, 200);
-    }
-
-    enemyBubbleDead() {
-        if (!this.health) {
-            this.playAnimation(this.level.jellyfish.IMAGES_DEAD);
-            this.speed = 0;
-            this.y = 1000;
-        };
     }
 
 

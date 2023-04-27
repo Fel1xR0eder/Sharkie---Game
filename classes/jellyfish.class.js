@@ -8,17 +8,17 @@ class Jellyfish extends MovableObject {
     ];
 
     IMAGES_DEAD = [
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png',
-        'img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
+        './img/2.Enemy/2 Jelly fish/Dead/Yellow/y1.png',
+        './img/2.Enemy/2 Jelly fish/Dead/Yellow/y2.png',
+        './img/2.Enemy/2 Jelly fish/Dead/Yellow/y3.png',
+        './img/2.Enemy/2 Jelly fish/Dead/Yellow/y4.png'
     ]
 
     IMAGES_SHOCK = [
-        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 1.png',
-        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 2.png',
-        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 3.png',
-        'img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 4.png'
+        './img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 1.png',
+        './img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 2.png',
+        './img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 3.png',
+        './img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 4.png'
     ]
 
     health = true;
@@ -32,12 +32,21 @@ class Jellyfish extends MovableObject {
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
+        this.enemyBubbleDead();
         //this.slapShock();
-        //this.enemyBubbleDead();
     }
 
-    
-    
+    enemyBubbleDead() {
+        setInterval(() => {
+            if (!this.health) {
+                this.playAnimation(this.IMAGES_DEAD);
+                this.speed = 0;
+                this.y = 1000;
+            };
+        }, 200);
+    }
+
+
 
     // slapShock() {
     //     if (this.character.isColliding(this.Jellyfish)) {

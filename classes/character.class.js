@@ -61,36 +61,36 @@ class Character extends MovableObject {
     ];
 
     IMAGES_HURT_POISON = [
-        'img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
-        'img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
-        'img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
-        'img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
+        './img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
+        './img/1.Sharkie/5.Hurt/1.Poisoned/4.png'
     ];
 
     IMAGES_HURT_SHOCK = [
-        'img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
-        'img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
-        'img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
+        './img/1.Sharkie/5.Hurt/2.Electric shock/1.png',
+        './img/1.Sharkie/5.Hurt/2.Electric shock/2.png',
+        './img/1.Sharkie/5.Hurt/2.Electric shock/3.png'
     ];
 
     IMAGES_BUBBLES = [
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
-        'img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/1.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/2.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/3.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/4.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/5.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/6.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/7.png',
+        './img/1.Sharkie/4.Attack/Bubble trap/op1 (with bubble formation)/8.png'
     ];
 
     IMAGES_FINSLAP = [
-        'img/1.Sharkie/4.Attack/Fin slap/1.png',
-        'img/1.Sharkie/4.Attack/Fin slap/4.png',
-        'img/1.Sharkie/4.Attack/Fin slap/5.png',
-        'img/1.Sharkie/4.Attack/Fin slap/6.png',
-        'img/1.Sharkie/4.Attack/Fin slap/7.png',
-        'img/1.Sharkie/4.Attack/Fin slap/8.png'
+        './img/1.Sharkie/4.Attack/Fin slap/1.png',
+        './img/1.Sharkie/4.Attack/Fin slap/4.png',
+        './img/1.Sharkie/4.Attack/Fin slap/5.png',
+        './img/1.Sharkie/4.Attack/Fin slap/6.png',
+        './img/1.Sharkie/4.Attack/Fin slap/7.png',
+        './img/1.Sharkie/4.Attack/Fin slap/8.png'
     ];
 
 

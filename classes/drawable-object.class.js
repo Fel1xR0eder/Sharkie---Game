@@ -11,7 +11,13 @@ class DrawableObject {
 
 
     draw(ctx) {
-        ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+        try {
+            ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
+            
+        } catch (e) {
+            console.warn(e);
+            console.log(this.img.src);
+        }
     }
 
 
@@ -27,7 +33,7 @@ class DrawableObject {
                 this.y + this.offset.top,
                 this.width - this.offset.left - this.offset.right,
                 this.height - this.offset.top - this.offset.bottom
-             );
+            );
             ctx.stroke();
         }
     }
