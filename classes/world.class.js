@@ -43,10 +43,12 @@ class World {
 
     BubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-            let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
-            this.throwableObjects.push(bubble);
-            console.log('new Bubble', bubble);
-            this.character.poison -= 20;
+            
+            setTimeout(() => {
+                let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
+                this.throwableObjects.push(bubble);
+                this.character.poison -= 10;
+            }, 500);
         };
 
         this.statusBarPoison.setPercentagePoison(this.character.poison);
@@ -104,6 +106,8 @@ class World {
                     if (bubble.isColliding(pufferfish)) {
                         console.log(' Kollision mit', bubble);
                         pufferfish.health = false;
+                        this.throwableObjects.pop(bubble);
+                        pufferfish.enemyBubbleDead();
                     };
                 });
             });
@@ -134,6 +138,8 @@ class World {
                     if (bubble.isColliding(jellyfish)) {
                         console.log(' Kollision mit', bubble);
                         jellyfish.health = false;
+                        this.throwableObjects.pop(bubble);
+                        jellyfish.enemyBubbleDead();
                     };
                 });
             });

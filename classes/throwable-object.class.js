@@ -1,6 +1,6 @@
 class ThrowableObject extends MovableObject {
 
-    
+
     speedX = 0;
 
     constructor(x, y) {
@@ -15,7 +15,11 @@ class ThrowableObject extends MovableObject {
 
     throw() {
         setInterval(() => {
-            this.x += 15;
+            if (!this.otherDirection) {
+                this.x += 15;
+            } else {
+                this.x -= 15;
+            }
         }, 50);
     }
 }
