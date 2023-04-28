@@ -8,7 +8,7 @@ class Level {
     backgroundObjects;
     level_end_x = 2200;
     level_end_y_top = -50;
-    level_end_y_bottom = 250;
+    level_end_y_bottom = 280;
 
     constructor(pufferfish,jellyfish, endboss, lights, coins, poison, backgroundObjects) {
         this.pufferfish = pufferfish;

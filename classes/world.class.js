@@ -43,7 +43,7 @@ class World {
 
     BubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-            
+    
             setTimeout(() => {
                 let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
                 this.throwableObjects.push(bubble);
@@ -111,7 +111,7 @@ class World {
                     };
                 });
             });
-        }, 200);
+        }, 50);
     }
 
 
@@ -127,7 +127,7 @@ class World {
                     };
                 });
             });
-        }, 200);
+        }, 50);
     }
 
     attackJellyfish() {
@@ -143,7 +143,7 @@ class World {
                     };
                 });
             });
-        }, 200);
+        }, 50);
     }
 
 
