@@ -33,7 +33,8 @@ class Pufferfish extends MovableObject {
 
     health = true;
     dead = false;
-
+    transition = this.IMAGES_SWIMMING;
+    pufferAttack = false;
 
     constructor() {
         super().loadImage('./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
@@ -46,7 +47,6 @@ class Pufferfish extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
         this.enemyBubbleDead();
-        //this.deadAnimation();
     }
 
     enemyBubbleDead() {
@@ -61,14 +61,6 @@ class Pufferfish extends MovableObject {
         }, 200);
     }
 
-    // deadAnimation() {
-    //     setInterval(() => {
-    //         if (!this.dead) {
-    //             this.dead = false;
-    //             this.currentImage = 0;
-    //         }
-    //     }, 50);
-    // }
 
     enemySlapDead() {
         if (!this.health) {
@@ -78,6 +70,14 @@ class Pufferfish extends MovableObject {
             this.speed = 0;
         }
     }
+    
+
+    bigAtCollision() {
+        this.pufferAttack = true;
+        setTimeout(() => {
+            this.pufferAttack = false;
+        }, 1500);
+    }
 
 
     animate() {
@@ -86,17 +86,16 @@ class Pufferfish extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-            this.playAnimation(this.IMAGES_SWIMMING);
-        }, 100);
-
-        // setInterval(() => {
-        //     this.playAnimation(this.IMAGES_TRANSITION);
-        // }, 4000);
-
-        // Wenn Gegner nahe am character ist    Distanz berechnen
-
-        // setInterval(() => {
-        //     this.playAnimation(this.IMAGES_ATTACK);
-        // }, 100);
+            if (this.transition == this.IMAGES_SWIMMING) {
+                this.playAnimation(this.IMAGES_TRANSITION);
+                this.transition = this.IMAGES_TRANSITION;
+            } else if (this.pufferAttack == true) {
+                console.log('Pufferfish going big');
+                this.playAnimation(this.IMAGES_ATTACK);
+            } else {
+                this.playAnimation(this.IMAGES_SWIMMING);
+                this.transition = this.IMAGES_SWIMMING;
+            }
+        }, 1000);
     }
 }

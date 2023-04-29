@@ -98,7 +98,7 @@ class Character extends MovableObject {
 
 
     constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
-        super()
+        super();
         this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
@@ -119,10 +119,12 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
+                console.log(this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
+                console.log(this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
                 this.moveUp();
@@ -131,7 +133,7 @@ class Character extends MovableObject {
                 this.moveDown();
                 this.swimming_sound.play();
             } else if (this.world.keyboard.D) {
-                this.bubbleAttack();
+                this.throwBubble();
             } else if (this.world.keyboard.A) {
                 this.slapAttack();
             }
@@ -176,7 +178,7 @@ class Character extends MovableObject {
     }
 
 
-    bubbleAttack() {
+    throwBubble() {
         if (!this.bubble) {
             this.bubble = true;
             this.currentImage = 0;

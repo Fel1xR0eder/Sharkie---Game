@@ -21,7 +21,6 @@ class World {
         this.run();
     };
 
-
     setWorld() {
         this.character.world = this;
     };
@@ -29,7 +28,7 @@ class World {
 
     run() {
         setInterval(() => {
-            this.BubbleAttack();
+            this.bubbleAttack();
         }, 100);
 
         this.attackJellyfish();
@@ -39,10 +38,11 @@ class World {
         this.checkPoisonCollision();
         this.checkCoinCollision();
         this.jellyShock();
+        this.pufferfishGoingBig();
     }
 
 
-    BubbleAttack() {
+    bubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
 
             setTimeout(() => {
@@ -51,7 +51,6 @@ class World {
                 this.character.poison -= 10;
             }, 500);
         };
-
         this.statusBarPoison.setPercentagePoison(this.character.poison);
     }
 
@@ -86,7 +85,7 @@ class World {
 
 
     checkPoisonCollision() {
-        // #####    COLLECT POISON    ##### //
+        // #####    COLLECT POISON BOTTLE    ##### //
         setInterval(() => {
             this.level.poison.forEach((poison) => {
                 if (this.character.isColliding(poison)) {
@@ -111,7 +110,7 @@ class World {
                     };
                 });
             });
-        }, 50);
+        }, 100);
     }
 
 
@@ -141,7 +140,7 @@ class World {
                     };
                 });
             });
-        }, 50);
+        }, 100);
     }
 
 
@@ -154,7 +153,19 @@ class World {
                     jellyfish.shockAtCollision();
                 };
             });
-        }, 50);
+        }, 200);
+    }
+
+    pufferfishGoingBig() {
+        setInterval(() => {
+            this.level.pufferfish.forEach(pufferfish => {
+                if (this.character.isColliding(pufferfish)) {
+                    this.character.hit();
+                    pufferfish.bigAtCollision();
+                };
+            });
+        }, 200);
+
     }
 
 

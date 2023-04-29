@@ -10,10 +10,6 @@ class MovableObject extends DrawableObject {
     poison = 0;
     dead = false;
 
-    distanceOfPufferfish;
-    distanceOfJellyfish;
-    distanceOfEndboss; 
-
     offset = {
         top: 0,
         right: 0,
@@ -86,26 +82,26 @@ class MovableObject extends DrawableObject {
         this.x += this.speed;
     }
 
+
     moveLeft() {
         this.x -= this.speed;
     }
+
 
     moveUp() {
         this.y -= this.speed;
     }
 
+
     moveDown() {
         this.y += this.speed;
     }
+    
 
     playAnimation(images) {
         let i = this.currentImage % images.length;    // Modulu(s) =  i = 0,1,2,3,4,5,0,1,2,3,4,5, ...
         let path = images[i];
         this.img = this.imagecache[path];
         this.currentImage++;
-    }
-
-    getDistanceOf() {
-        distanceOfPufferfish = world.character.x - world.level.pufferfish.x 
     }
 }

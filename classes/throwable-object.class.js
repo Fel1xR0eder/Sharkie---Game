@@ -15,7 +15,7 @@ class ThrowableObject extends MovableObject {
 
     throw() {
         setInterval(() => {
-            if (!this.otherDirection) {
+            if (this.otherDirection == false) {
                 this.x += 15;
             } else {
                 this.x -= 15;
