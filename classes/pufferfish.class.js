@@ -32,6 +32,7 @@ class Pufferfish extends MovableObject {
 
 
     health = true;
+    dead = false;
 
 
     constructor() {
@@ -45,27 +46,38 @@ class Pufferfish extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
         this.animate();
         this.enemyBubbleDead();
+        //this.deadAnimation();
     }
 
     enemyBubbleDead() {
         setInterval(() => {
             if (!this.health) {
-                this.playAnimation(this.IMAGES_DEAD);
+                this.playAnimation(this.IMAGES_DEAD)
                 this.speed = 0;
-                this.y = 1000;
+                setTimeout(() => {
+                    this.y = 1000;
+                }, 1000);
             };
         }, 200);
     }
 
+    // deadAnimation() {
+    //     setInterval(() => {
+    //         if (!this.dead) {
+    //             this.dead = false;
+    //             this.currentImage = 0;
+    //         }
+    //     }, 50);
+    // }
+
     enemySlapDead() {
-        if (this.health) {
+        if (!this.health) {
             this.playAnimation(this.IMAGES_DEAD);
             this.y = 30;        // TEST COORDINATES
             this.x = 0;
             this.speed = 0;
         }
     }
-
 
 
     animate() {
@@ -81,7 +93,7 @@ class Pufferfish extends MovableObject {
         //     this.playAnimation(this.IMAGES_TRANSITION);
         // }, 4000);
 
-        // Wenn Gegner nahe am character ist
+        // Wenn Gegner nahe am character ist    Distanz berechnen
 
         // setInterval(() => {
         //     this.playAnimation(this.IMAGES_ATTACK);

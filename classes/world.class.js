@@ -38,12 +38,13 @@ class World {
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
+        this.jellyShock();
     }
 
 
     BubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-    
+
             setTimeout(() => {
                 let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
                 this.throwableObjects.push(bubble);
@@ -104,7 +105,6 @@ class World {
             this.level.pufferfish.forEach((pufferfish) => {
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(pufferfish)) {
-                        console.log(' Kollision mit', bubble);
                         pufferfish.health = false;
                         this.throwableObjects.pop(bubble);
                         pufferfish.enemyBubbleDead();
@@ -121,7 +121,6 @@ class World {
             this.level.endboss.forEach((killerwhale) => {
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(killerwhale)) {
-                        console.log(' Kollision mit', bubble);
                         //killerwhale.health -= 20;
                         //enemyBubbleDead();
                     };
@@ -136,12 +135,24 @@ class World {
             this.level.jellyfish.forEach((jellyfish) => {
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(jellyfish)) {
-                        console.log(' Kollision mit', bubble);
                         jellyfish.health = false;
                         this.throwableObjects.pop(bubble);
                         jellyfish.enemyBubbleDead();
                     };
                 });
+            });
+        }, 50);
+    }
+
+
+    jellyShock() {
+        setInterval(() => {
+            this.level.jellyfish.forEach(jellyfish => {
+                if (this.character.isColliding(jellyfish)) {
+                    this.character.hit();
+                    this.character.shock = true;
+                    jellyfish.shockAtCollision();
+                };
             });
         }, 50);
     }

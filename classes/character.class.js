@@ -7,6 +7,7 @@ class Character extends MovableObject {
     world;
     slap = false;
     bubble = false;
+    shock = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     offset = {
@@ -60,7 +61,7 @@ class Character extends MovableObject {
         './img/1.Sharkie/6.dead/1.Poisoned/12.png'
     ];
 
-    IMAGES_HURT_POISON = [
+    IMAGES_HURT = [
         './img/1.Sharkie/5.Hurt/1.Poisoned/1.png',
         './img/1.Sharkie/5.Hurt/1.Poisoned/2.png',
         './img/1.Sharkie/5.Hurt/1.Poisoned/3.png',
@@ -102,7 +103,7 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_DEAD);
-        this.loadImages(this.IMAGES_HURT_POISON);
+        this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_HURT_SHOCK);
         this.loadImages(this.IMAGES_BUBBLES);
         this.loadImages(this.IMAGES_FINSLAP);
@@ -114,54 +115,41 @@ class Character extends MovableObject {
     animate() {
 
         setInterval(() => {
-
-            //console.log(this.x);
-            //console.log(this.y);
-
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
                 this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.LEFT && this.x > 0) {
+            } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
                 this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
+            } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
                 this.moveUp();
                 this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom) {
+            } else if (this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom) {
                 this.moveDown();
                 this.swimming_sound.play();
-            }
-
-            if (this.world.keyboard.D) {
+            } else if (this.world.keyboard.D) {
                 this.bubbleAttack();
-            }
-
-            if (this.world.keyboard.A) {
+            } else if (this.world.keyboard.A) {
                 this.slapAttack();
             }
-
-            // if (this.world.keyboard.SPACE && !this.isAboveGround()) {
-            //     this.jump();
-            // }
-
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
-
 
         setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+            } else if (this.shock) {
+                this.playAnimation(this.IMAGES_HURT_SHOCK);
+                if (this.currentImage >= this.IMAGES_HURT_SHOCK.length) {
+                    setTimeout(() => {
+                        this.shock = false;
+                    }, 1000);
+                }
             } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT_POISON);
+                this.playAnimation(this.IMAGES_HURT);
             } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
                 this.playAnimation(this.IMAGES_SWIMMING);
             } else if (this.slap) {
@@ -169,8 +157,7 @@ class Character extends MovableObject {
                 if (this.currentImage >= this.IMAGES_FINSLAP.length) {
                     this.slap = false;
                 }
-            }
-            else if (this.bubble) {
+            } else if (this.bubble) {
                 this.playAnimation(this.IMAGES_BUBBLES);
                 if (this.currentImage >= this.IMAGES_BUBBLES.length) {
                     this.bubble = false;
@@ -181,20 +168,13 @@ class Character extends MovableObject {
     }
 
 
-    // deadAnimation() {
-    //     if (!this.dead) {
-    //         this.dead = true;
-    //         this.currentImage = 0;
-    //     }
-    // }
-
-
     slapAttack() {
         if (!this.slap) {
             this.slap = true;
             this.currentImage = 0;
         }
     }
+
 
     bubbleAttack() {
         if (!this.bubble) {

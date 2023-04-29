@@ -10,6 +10,10 @@ class MovableObject extends DrawableObject {
     poison = 0;
     dead = false;
 
+    distanceOfPufferfish;
+    distanceOfJellyfish;
+    distanceOfEndboss; 
+
     offset = {
         top: 0,
         right: 0,
@@ -47,7 +51,6 @@ class MovableObject extends DrawableObject {
         } else {
             this.lastHit = new Date().getTime();
         }
-        //console.log('Energy =', this.energy);
     }
 
 
@@ -102,13 +105,7 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
-
-    // jump() {
-    //     this.speedY = 30;
-    // }
-
-    // if(character.x + character.width > chicken.x &&
-    // character.y + character.height > chicken.y &&
-    // character.x < chicken.x && character.y < chicken.y + chicken.height
-    // )
+    getDistanceOf() {
+        distanceOfPufferfish = world.character.x - world.level.pufferfish.x 
+    }
 }

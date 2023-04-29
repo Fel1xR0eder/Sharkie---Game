@@ -3,6 +3,13 @@ class Endboss extends MovableObject {
     height = 600;
     width = 500;
     y = -180;
+
+    offset = {
+        top: 250,
+        left: 0,
+        right: 50,
+        bottom: 100,
+    }
     
 
     IMAGES_ENDBOSS_FLOATING = [

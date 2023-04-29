@@ -16,7 +16,7 @@ class StatusBarPoison extends DrawableObject {
         this.loadImage(this.IMAGES_POISON[5]);
         this.loadImages(this.IMAGES_POISON);
         this.y = -10;
-        this.x = 480;
+        this.x = 460;
         this.width = 230;
         this.height = 80;
         this.setPercentagePoison(0);
@@ -30,7 +30,8 @@ class StatusBarPoison extends DrawableObject {
     }
 
 
-    resolvePoisonImageIndex() {
+    resolvePoisonImageIndex() { 
+    // Statusbar wird bei jedem zweiten Schuss geupdated, wegen Bildanzahl!
         if (this.percentagePoison == 0) {
             return 5;
         } else if (this.percentagePoison <= 20) {
