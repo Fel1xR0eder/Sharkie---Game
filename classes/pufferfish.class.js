@@ -90,7 +90,6 @@ class Pufferfish extends MovableObject {
                 this.playAnimation(this.IMAGES_TRANSITION);
                 this.transition = this.IMAGES_TRANSITION;
             } else if (this.pufferAttack == true) {
-                console.log('Pufferfish going big');
                 this.playAnimation(this.IMAGES_ATTACK);
             } else {
                 this.playAnimation(this.IMAGES_SWIMMING);

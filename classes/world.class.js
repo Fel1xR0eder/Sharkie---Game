@@ -10,13 +10,14 @@ class World {
     statusBarCoins = new StatusBarCoins();
     statusBarPoison = new StatusBarPoison();
     throwableObjects = [];
-    // collectableObjects = [];
+    slappableDistance = 20;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
+        this.getDistanceOf();
         this.setWorld();
         this.run();
     };
@@ -156,6 +157,7 @@ class World {
         }, 200);
     }
 
+
     pufferfishGoingBig() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
@@ -165,8 +167,20 @@ class World {
                 };
             });
         }, 200);
+    }
+
+
+    getDistanceOf() {
+        setInterval(() => {
+            this.level.pufferfish.forEach(pufferfish => {
+                if (pufferfish.x && this.character.x == this.slappableDistance) {    //  || distancePf2 < this.character.x || distancePf3 < this.character.x
+                    console.log('distanz passt');
+                }
+            })
+        }, 100)
 
     }
+
 
 
     draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
@@ -230,5 +244,4 @@ class World {
         mo.x = mo.x * -1;
         this.ctx.restore();
     };
-
 }
