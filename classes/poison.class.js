@@ -3,7 +3,7 @@ class Poison extends MovableObject {
     height = 80;
     width = 80;
     y = 300;
-    x = 450;
+    x = 150;
 
     IMAGES_POISON = [
         'img/4. Markers/Poison/Animada/1.png',
@@ -20,7 +20,7 @@ class Poison extends MovableObject {
     constructor() {
         super().loadImage(this.IMAGES_POISON[0]);
         this.loadImages(this.IMAGES_POISON);
-        this.x = 450 + Math.random() * 1750; 
+        this.x = 250 + Math.random() * 1750; 
         this.y = 0 + Math.random() * 200;
         this.animate();
     }

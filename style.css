@@ -7,6 +7,17 @@ body {
     height: 80vh;
 }
 
+.d-none {
+    display: none;
+}
+
+/*
+.full-div {
+    background-image: url('img/3. Background/first-screen.png');
+}
+*/
+
 canvas {
     background-color: black;
+    z-index: 999;
 }

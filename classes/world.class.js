@@ -11,6 +11,8 @@ class World {
     statusBarPoison = new StatusBarPoison();
     throwableObjects = [];
     slappableDistance = 20;
+    won = false;
+    gameOver = false;
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
@@ -74,25 +76,25 @@ class World {
     checkCoinCollision() {
         // #####    COLLECT A COIN    ##### //
         setInterval(() => {
-            this.level.coins.forEach((coins) => {
-                if (this.character.isColliding(coins)) {
+            this.level.coins.forEach((coin, i) => {
+                if (this.character.isColliding(coin)) {
                     this.statusBarCoins.setPercentageCoin(this.character.money);
                     this.character.collectCoin();
-                    this.level.coins.pop();
+                    this.level.coins.splice(i, 1);
                 };
             });
-        }, 100);
+        }, 50);
     }
 
 
     checkPoisonCollision() {
         // #####    COLLECT POISON BOTTLE    ##### //
         setInterval(() => {
-            this.level.poison.forEach((poison) => {
+            this.level.poison.forEach((poison, i) => {
                 if (this.character.isColliding(poison)) {
                     this.statusBarPoison.setPercentagePoison(this.character.poison);
                     this.character.collectPoison();
-                    this.level.poison.pop(); // reihenfolge von Poisonbottles zufällig gerendert!
+                    this.level.poison.splice(i, 1);
                 };
             });
         }, 100);
@@ -169,17 +171,43 @@ class World {
         }, 200);
     }
 
+    collisionEndboss() {
+        this.level.endboss.forEach((boss) => {
+            if (this.character.isColliding(boss)) {
+                this.character.HitByBoss = true;
+                this.character.hit();
+                this.character.hit();
+                this.statusBarHealth.setPercentage(this.character.energy);
+            }
+        });
+    }
+
 
     getDistanceOf() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
                 if (pufferfish.x && this.character.x == this.slappableDistance) {    //  || distancePf2 < this.character.x || distancePf3 < this.character.x
-                    console.log('distanz passt');
+                    console.log('slappable distance');
                 }
             })
-        }, 100)
+        console.log(this.character.x);
 
+        }, 100)
     }
+
+
+    gameOver(index) {
+        setTimeout(() => {
+            console.log("stop all intervals");
+            if (index == 1) {
+                won = true;
+            } else if (index == 2) {
+                gameOver = true;
+            }
+            clearInterval();
+        }, 1000);
+    }
+    
 
 
 

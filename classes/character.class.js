@@ -3,11 +3,13 @@ class Character extends MovableObject {
     height = 200;
     width = 200;
     y = 100;
-    speed = 8;
+    speed = 5;
     world;
     slap = false;
     bubble = false;
     shock = false;
+    dead = false;
+    HitByBoss = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     offset = {
@@ -113,7 +115,7 @@ class Character extends MovableObject {
 
 
     animate() {
-
+        // ON KEY-SOMETHING INTERVALS
         setInterval(() => {
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
@@ -124,7 +126,7 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                console.log('bubble shoot right, other direction =',this.otherDirection);
+                console.log('bubble shoot right, other direction =', this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
                 this.moveUp();
@@ -141,8 +143,13 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
+        // NO KEY INTERVALS
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
+                if (this.currentImage >= this.IMAGES_DEAD.length) {
+                    this.dead = false;
+                    this.deadAnimation();
+                }
             } else if (this.shock) {
                 this.playAnimation(this.IMAGES_HURT_SHOCK);
                 if (this.currentImage >= this.IMAGES_HURT_SHOCK.length) {
@@ -167,6 +174,22 @@ class Character extends MovableObject {
             } else
                 this.playAnimation(this.IMAGES_IDLE);
         }, 100);
+    }
+
+    deadAnimation() {
+        if (!this.dead) {
+            this.dead = true;
+            this.currentImage = 0;
+            setInterval(() => {
+                this.speed = 10;
+                this.y += this.speed;
+                if (this.y >= 280) {
+                    this.speed = 0;
+                    this.y = 280;
+                }
+            }, 100);
+            console.log('GAME OVER');
+        }
     }
 
 
