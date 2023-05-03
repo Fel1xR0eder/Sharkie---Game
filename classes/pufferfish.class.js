@@ -49,10 +49,11 @@ class Pufferfish extends MovableObject {
         this.enemyBubbleDead();
     }
 
+
     enemyBubbleDead() {
         setInterval(() => {
             if (!this.health) {
-                this.playAnimation(this.IMAGES_DEAD)
+                this.playAnimation(this.IMAGES_DEAD);
                 this.speed = 0;
                 setTimeout(() => {
                     this.y = 1000;

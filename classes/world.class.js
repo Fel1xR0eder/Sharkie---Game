@@ -22,21 +22,24 @@ class World {
         this.getDistanceOf();
         this.setWorld();
         this.run();
+        this.attackAll();
     };
 
     setWorld() {
         this.character.world = this;
     };
 
+    attackAll() {
+        this.attackJellyfish();
+        this.attackPufferfish();
+        this.attackEndboss();
+    }
+
 
     run() {
         setInterval(() => {
             this.bubbleAttack();
         }, 100);
-
-        this.attackJellyfish();
-        this.attackPufferfish();
-        this.attackEndboss();
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
@@ -47,7 +50,6 @@ class World {
 
     bubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
-
             setTimeout(() => {
                 let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
                 this.throwableObjects.push(bubble);
@@ -120,16 +122,18 @@ class World {
     attackEndboss() {
         // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
         setInterval(() => {
-            this.level.endboss.forEach((killerwhale) => {
+            this.level.endboss.forEach((boss) => {   // ARRAY NICHT NOETIG
                 this.throwableObjects.forEach((bubble) => {
-                    if (bubble.isColliding(killerwhale)) {
-                        //killerwhale.health -= 20;
-                        //enemyBubbleDead();
+                    if (bubble.isColliding(boss)) {
+                        console.log('trifft');
+                        boss.bossHealth -= 20;
+                        boss.endbossDead();
                     };
                 });
             });
         }, 50);
     }
+
 
     attackJellyfish() {
         // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
@@ -171,6 +175,7 @@ class World {
         }, 200);
     }
 
+
     collisionEndboss() {
         this.level.endboss.forEach((boss) => {
             if (this.character.isColliding(boss)) {
@@ -190,7 +195,6 @@ class World {
                     console.log('slappable distance');
                 }
             })
-        console.log(this.character.x);
 
         }, 100)
     }
@@ -207,7 +211,7 @@ class World {
             clearInterval();
         }, 1000);
     }
-    
+
 
 
 

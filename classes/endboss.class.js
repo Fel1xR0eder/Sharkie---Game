@@ -3,7 +3,7 @@ class Endboss extends MovableObject {
     height = 600;
     width = 500;
     y = -180;
-    bossHealth = false;
+    bossHealth = 100;
     bossAttack = false;
 
     offset = {
@@ -76,12 +76,41 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ENDBOSS_DEAD);
         this.loadImages(this.IMAGES_ENDBOSS_HURT);
         this.animate();
+        this.endbossAttack();
         this.x = 2400;
     }
 
 
-    animate() {
+    endbossDead() {
         setInterval(() => {
+            if (this.health >= 0) {
+                this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
+                this.speed = 0;
+                setTimeout(() => {
+                    this.y = 1000;
+                }, 1000);
+            };
+        }, 200);
+    }
+
+
+
+    endbossAttack() {
+        setInterval(() => {
+            if (world.character.x >= 2150) {
+                this.bossAttack = true;
+                
+                if (this.bossAttack == false) {
+                    this.bossAttack = true;
+                    this.currentImage = 0;
+                }
+            }
+        }, 100);
+    }
+
+
+    animate() {
+        let bossInterval = setInterval(() => {
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
             } else if (this.isHurt()) {
@@ -89,33 +118,28 @@ class Endboss extends MovableObject {
             } else if (world.character.x == 2050) {
                 setTimeout(() => {
                     this.playAnimation(this.IMAGES_ENDBOSS_INTRO);
+                    this.currentImage = 0;
                 }, 500);
+            } else if (this.bossAttack) {
+                this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
+                if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
+                    this.bossAttack = false;
+                }
             } else if (world.character.x > 2100) {
                 this.playAnimation(this.IMAGES_ENDBOSS_FLOATING);
-
-
-                // ANIMATION ATTACK EXECUTE ONCE
-                setInterval(() => {
-                    if (this.bossAttack == false) {
-                        setTimeout(() => {
-                            this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
-                            console.log('attacke');
-                            if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
-                                this.currentImage = 0;
-                                this.bossAttack = true;
-                            }
-                        }, 3000);
-                    }
-                }, 200);
-                this.bossAttack = false;
-
-                // ##############################
-
-
-
             } else {
                 this.loadImage(this.IMAGES_ENDBOSS_INTRO[0]);
             }
-        }, 100);
+        }, 150);
     }
 }
+
+// setTimeout(() => {
+        //     console.log('ATTACK');
+        //     if (this.playAnimation(this.IMAGES_ENDBOSS_ATTACK)) {
+        //         clearInterval(bossInterval);
+        //         console.log('Clear Interval');
+        //     } else {
+        //         this.animate();
+        //     }
+        // }, 5000);

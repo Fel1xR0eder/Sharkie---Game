@@ -10,6 +10,7 @@ class MovableObject extends DrawableObject {
     poison = 0;
     dead = false;
 
+    
     offset = {
         top: 0,
         right: 0,

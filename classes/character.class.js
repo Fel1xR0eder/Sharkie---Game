@@ -99,7 +99,7 @@ class Character extends MovableObject {
 
 
 
-    constructor() {     // super() = Funktion aus übergeordneter Klasse((extends)MovableObject)
+    constructor() {     // super() = Funktionen aus übergeordneter Klasse((extends)MovableObject)
         super();
         this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
@@ -115,18 +115,18 @@ class Character extends MovableObject {
 
 
     animate() {
-        // ON KEY-SOMETHING INTERVALS
+        // ON KEY INTERVALS
         setInterval(() => {
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                console.log('bubble shoot left, other direction =', this.otherDirection);
+                console.log('bubble should shoot right, other direction =', this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                console.log('bubble shoot right, other direction =', this.otherDirection);
+                console.log('bubble should shoot left, other direction =', this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
                 this.moveUp();
@@ -176,6 +176,7 @@ class Character extends MovableObject {
         }, 100);
     }
 
+
     deadAnimation() {
         if (!this.dead) {
             this.dead = true;
@@ -194,7 +195,7 @@ class Character extends MovableObject {
 
 
     slapAttack() {
-        if (!this.slap) {
+        if (this.slap == false) {
             this.slap = true;
             this.currentImage = 0;
         }
@@ -202,7 +203,7 @@ class Character extends MovableObject {
 
 
     throwBubble() {
-        if (!this.bubble) {
+        if (this.bubble == false) {
             this.bubble = true;
             this.currentImage = 0;
         }
