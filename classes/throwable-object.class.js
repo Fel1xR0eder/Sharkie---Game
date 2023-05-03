@@ -18,10 +18,12 @@ class ThrowableObject extends MovableObject {
     throw() {
         setInterval(() => {
             if (world.character.otherDirection == false) {
+                world.character.otherDirection = false;
                 this.x += 15;
             } else {
+                world.character.otherDirection = true;
                 this.x -= 15;
-            }
+            };
         }, 50);
     }
 }

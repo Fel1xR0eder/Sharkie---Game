@@ -121,12 +121,10 @@ class Character extends MovableObject {
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
                 this.otherDirection = false;
-                console.log('bubble should shoot right, other direction =', this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
                 this.otherDirection = true;
-                console.log('bubble should shoot left, other direction =', this.otherDirection);
                 this.swimming_sound.play();
             } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
                 this.moveUp();

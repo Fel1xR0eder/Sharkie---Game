@@ -15,9 +15,9 @@ class StatusBarPoison extends DrawableObject {
         super();
         this.loadImage(this.IMAGES_POISON[5]);
         this.loadImages(this.IMAGES_POISON);
-        this.y = -10;
-        this.x = 460;
-        this.width = 230;
+        this.y = 100;
+        this.x = 0;       // 460
+        this.width = 200;
         this.height = 80;
         this.setPercentagePoison(0);
     }

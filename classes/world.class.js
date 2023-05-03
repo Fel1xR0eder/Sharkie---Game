@@ -9,6 +9,7 @@ class World {
     statusBarHealth = new StatusBarHealth();
     statusBarCoins = new StatusBarCoins();
     statusBarPoison = new StatusBarPoison();
+    statusBarBoss = new StatusBarBoss();
     throwableObjects = [];
     slappableDistance = 20;
     won = false;
@@ -23,6 +24,7 @@ class World {
         this.setWorld();
         this.run();
         this.attackAll();
+        
     };
 
     setWorld() {
@@ -40,6 +42,7 @@ class World {
         setInterval(() => {
             this.bubbleAttack();
         }, 100);
+        
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
@@ -190,8 +193,7 @@ class World {
     getDistanceOf() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
-                if (pufferfish.x && this.character.x == this.slappableDistance) {    //  || distancePf2 < this.character.x || distancePf3 < this.character.x
-                    console.log('slappable distance');
+                if (pufferfish.x && this.character.x == this.slappableDistance) {
                 }
             })
 
@@ -204,25 +206,21 @@ class World {
             if (this.character.isColliding(pufferfish)) {
                 pufferfish.health = false;
                 pufferfish.enemySlapDead();
-                console.log('slapped');
             }
         });
     }
 
 
-    gameOver(index) {
-        setTimeout(() => {
-            console.log("stop all intervals");
-            if (index == 1) {
-                won = true;
-            } else if (index == 2) {
-                gameOver = true;
-            }
-            clearInterval();
-        }, 1000);
-    }
-
-
+    // gameOver(index) {
+    //     setTimeout(() => {
+    //         if (index == 1) {
+    //             won = true;
+    //         } else if (index == 2) {
+    //             gameOver = true;
+    //         }
+    //         clearInterval();
+    //     }, 1000);
+    // }
 
 
     draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
@@ -237,6 +235,7 @@ class World {
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarPoison);
+        this.addToMap(this.statusBarBoss);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.pufferfish);

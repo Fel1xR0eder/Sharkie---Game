@@ -23,6 +23,8 @@ class Jellyfish extends MovableObject {
 
     health = true;
     jellyShock = false;
+    moveTop = false;
+    moveBottom = false;
 
 
     constructor() {
@@ -36,6 +38,7 @@ class Jellyfish extends MovableObject {
         //this.shockAtCollision();
         this.animate();
         this.enemyBubbleDead();
+        this.moveToBottom();
     }
 
 
@@ -58,6 +61,33 @@ class Jellyfish extends MovableObject {
         }, 1500);
     }
 
+    moveToTop() {
+        if(this.moveTop == true) {
+            setTimeout(() => {
+                setInterval(() => {
+                    this.moveUp();
+                }, 1000 / 60);
+                this.moveBottom = false;
+                console.log('hoch');
+                this.moveTop = false;
+            }, 2000);
+        }
+        this.moveToBottom();
+    }
+
+    moveToBottom() {
+        if (this.moveBottom == false) {
+            setTimeout(() => {
+                setInterval(() => {
+                    this.moveDown();
+                }, 1000 / 60);
+                console.log('rutner');
+                this.moveBottom = true;
+                this.moveTop = true;
+            }, 2000);
+        }
+        this.moveToTop();
+    }
 
     animate() {
         setInterval(() => {
@@ -69,9 +99,6 @@ class Jellyfish extends MovableObject {
                 this.playAnimation(this.IMAGES_SWIMMING);
             }
         }, 200);
-
-        setInterval(() => {
-            this.moveLeft();
-        }, 3000 / 60);
+        
     }
 }
