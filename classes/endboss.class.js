@@ -83,7 +83,7 @@ class Endboss extends MovableObject {
 
     endbossDead() {
         setInterval(() => {
-            if (this.health >= 0) {
+            if (this.health <= 0) {
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
                 this.speed = 0;
                 setTimeout(() => {
@@ -99,7 +99,9 @@ class Endboss extends MovableObject {
         setInterval(() => {
             if (world.character.x >= 2150) {
                 this.bossAttack = true;
-                
+                this.bossHealth -= 20;
+                this.x -= 5;
+                console.log('attacke');
                 if (this.bossAttack == false) {
                     this.bossAttack = true;
                     this.currentImage = 0;

@@ -137,7 +137,7 @@ class Character extends MovableObject {
             } else if (this.world.keyboard.D) {
                 this.throwBubble();
             } else if (this.world.keyboard.A) {
-                this.slapAttack();
+                this.world.finslapAttack();
             }
             this.world.camera_x = -this.x + 100;
         }, 1000 / 60);
@@ -194,7 +194,8 @@ class Character extends MovableObject {
     }
 
 
-    slapAttack() {
+    slapAnimation() {
+
         if (this.slap == false) {
             this.slap = true;
             this.currentImage = 0;

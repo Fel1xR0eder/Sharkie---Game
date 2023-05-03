@@ -125,7 +125,6 @@ class World {
             this.level.endboss.forEach((boss) => {   // ARRAY NICHT NOETIG
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(boss)) {
-                        console.log('trifft');
                         boss.bossHealth -= 20;
                         boss.endbossDead();
                     };
@@ -197,6 +196,17 @@ class World {
             })
 
         }, 100)
+    }
+
+    finslapAttack() {
+        this.character.slapAnimation();
+        this.level.pufferfish.forEach(pufferfish => {
+            if (this.character.isColliding(pufferfish)) {
+                pufferfish.health = false;
+                pufferfish.enemySlapDead();
+                console.log('slapped');
+            }
+        });
     }
 
 

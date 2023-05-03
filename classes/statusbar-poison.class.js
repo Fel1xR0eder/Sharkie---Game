@@ -32,7 +32,7 @@ class StatusBarPoison extends DrawableObject {
 
     resolvePoisonImageIndex() { 
     // Statusbar wird bei jedem zweiten Schuss geupdated, wegen Bildanzahl!
-        if (this.percentagePoison == 0) {
+        if (this.percentagePoison <= 10) {
             return 5;
         } else if (this.percentagePoison <= 20) {
             return 4;
