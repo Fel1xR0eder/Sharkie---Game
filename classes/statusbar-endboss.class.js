@@ -24,6 +24,7 @@ class StatusBarBoss extends DrawableObject {
         this.height = 80;
         this.setPercentageBoss(100);
     }
+    
 
     setPercentageBoss(percentage) {
         this.percentage = percentage;

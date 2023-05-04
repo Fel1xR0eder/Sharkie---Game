@@ -1,5 +1,13 @@
 class Jellyfish extends MovableObject {
 
+
+    health = true;
+    jellyShock = false;
+    moveTop = false;
+    moveBottom = false;
+
+
+
     IMAGES_SWIMMING = [
         './img/2.Enemy/2 Jelly fish/Regular damage/Yellow 1.png',
         './img/2.Enemy/2 Jelly fish/Regular damage/Yellow 2.png',
@@ -21,11 +29,6 @@ class Jellyfish extends MovableObject {
         './img/2.Enemy/2 Jelly fish/S｣per dangerous/Green 4.png'
     ]
 
-    health = true;
-    jellyShock = false;
-    moveTop = false;
-    moveBottom = false;
-
 
     constructor() {
         super().loadImage(this.IMAGES_SWIMMING[0]);
@@ -35,7 +38,6 @@ class Jellyfish extends MovableObject {
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_SHOCK);
         this.loadImages(this.IMAGES_DEAD);
-        //this.shockAtCollision();
         this.animate();
         this.enemyBubbleDead();
         this.moveToBottom();
@@ -61,19 +63,20 @@ class Jellyfish extends MovableObject {
         }, 1500);
     }
 
-    moveToTop() {
+
+    moveToTop() {               // Move from Bottom to top, dann wechsel ( level_y_end )
         if(this.moveTop == true) {
             setTimeout(() => {
                 setInterval(() => {
                     this.moveUp();
                 }, 1000 / 60);
                 this.moveBottom = false;
-                console.log('hoch');
                 this.moveTop = false;
-            }, 2000);
+                this.moveToBottom();
+            }, 4000);
         }
-        this.moveToBottom();
     }
+
 
     moveToBottom() {
         if (this.moveBottom == false) {
@@ -81,13 +84,13 @@ class Jellyfish extends MovableObject {
                 setInterval(() => {
                     this.moveDown();
                 }, 1000 / 60);
-                console.log('rutner');
                 this.moveBottom = true;
                 this.moveTop = true;
+                this.moveToTop();
             }, 2000);
         }
-        this.moveToTop();
     }
+
 
     animate() {
         setInterval(() => {
@@ -99,6 +102,5 @@ class Jellyfish extends MovableObject {
                 this.playAnimation(this.IMAGES_SWIMMING);
             }
         }, 200);
-        
     }
 }

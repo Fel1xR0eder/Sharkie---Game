@@ -1,6 +1,7 @@
 class World {
 
     character = new Character();
+    endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -44,6 +45,7 @@ class World {
         }, 100);
         
         this.checkHealthCollision();
+        this.collisionEndboss();
         this.checkPoisonCollision();
         this.checkCoinCollision();
         this.jellyShock();
@@ -128,7 +130,8 @@ class World {
             this.level.endboss.forEach((boss) => {   // ARRAY NICHT NOETIG
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(boss)) {
-                        boss.bossHealth -= 20;
+                        this.endboss.hit();
+                        this.statusBarBoss.setPercentageBoss();
                         boss.endbossDead();
                     };
                 });
@@ -166,6 +169,19 @@ class World {
     }
 
 
+    collisionEndboss() {
+        setInterval(() => {
+            this.level.endboss.forEach((boss) => {
+                if (this.character.isColliding(boss)) {
+                    this.character.hit();
+                    this.statusBarHealth.setPercentage(this.character.energy);
+                }
+            });
+        }, 200);
+        
+    }
+
+
     pufferfishGoingBig() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
@@ -178,20 +194,9 @@ class World {
     }
 
 
-    collisionEndboss() {
-        this.level.endboss.forEach((boss) => {
-            if (this.character.isColliding(boss)) {
-                this.character.HitByBoss = true;
-                this.character.hit();
-                this.character.hit();
-                this.statusBarHealth.setPercentage(this.character.energy);
-            }
-        });
-    }
-
-
     getDistanceOf() {
         setInterval(() => {
+            console.log(this.character.x);
             this.level.pufferfish.forEach(pufferfish => {
                 if (pufferfish.x && this.character.x == this.slappableDistance) {
                 }

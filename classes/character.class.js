@@ -7,6 +7,7 @@ class Character extends MovableObject {
     world;
     slap = false;
     bubble = false;
+    bubbleDirection = false;
     shock = false;
     dead = false;
     HitByBoss = false;
@@ -120,10 +121,12 @@ class Character extends MovableObject {
             this.swimming_sound.pause();
             if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
                 this.moveRight();
+                this.bubbleDirection = false;
                 this.otherDirection = false;
                 this.swimming_sound.play();
             } else if (this.world.keyboard.LEFT && this.x > 0) {
                 this.moveLeft();
+                this.bubbleDirection = true;
                 this.otherDirection = true;
                 this.swimming_sound.play();
             } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
@@ -176,6 +179,7 @@ class Character extends MovableObject {
 
 
     deadAnimation() {
+
         if (!this.dead) {
             this.dead = true;
             this.currentImage = 0;
@@ -193,7 +197,6 @@ class Character extends MovableObject {
 
 
     slapAnimation() {
-
         if (this.slap == false) {
             this.slap = true;
             this.currentImage = 0;
