@@ -17,7 +17,6 @@ class ThrowableObject extends MovableObject {
 
 
     throw() {
-
         if (world.character.bubbleDirection == false) {
             setInterval(() => {
                 this.thrownBubble = true;

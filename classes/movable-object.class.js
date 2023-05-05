@@ -10,7 +10,7 @@ class MovableObject extends DrawableObject {
     poison = 0;
     dead = false;
 
-    
+
     offset = {
         top: 0,
         right: 0,
@@ -50,6 +50,15 @@ class MovableObject extends DrawableObject {
         }
     }
 
+    bossHit() {
+        this.energy -= 20;
+        if (this.energy < 0) {
+            this.energy = 0;
+        } else {
+            this.lastHit = new Date().getTime();
+        }
+    }
+
 
     isDead() {
         return this.energy == 0;
@@ -69,6 +78,17 @@ class MovableObject extends DrawableObject {
         if (this.poison >= 100) {
             this.poison = 100;
         }
+    }
+
+
+    gameOver() {
+        setTimeout(() => {
+            setInterval(() => {
+                this.loadImage(this.world.character.IMAGES_DEAD[11]);
+                console.log('geht');
+            }, 100);
+            world.clearAllIntervals();
+        }, 2000);
     }
 
 
@@ -97,7 +117,7 @@ class MovableObject extends DrawableObject {
     moveDown() {
         this.y += this.speed;
     }
-    
+
 
     playAnimation(images) {
         let i = this.currentImage % images.length;    // Modulu(s) =  i = 0,1,2,3,4,5,0,1,2,3,4,5, ...

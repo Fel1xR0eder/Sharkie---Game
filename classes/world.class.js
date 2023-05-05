@@ -13,24 +13,24 @@ class World {
     statusBarBoss = new StatusBarBoss();
     throwableObjects = [];
     slappableDistance = 20;
-    won = false;
-    gameOver = false;
+
+
 
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
         this.keyboard = keyboard;
         this.draw();
-        this.getDistanceOf();
         this.setWorld();
         this.run();
         this.attackAll();
-        
     };
+
 
     setWorld() {
         this.character.world = this;
     };
+
 
     attackAll() {
         this.attackJellyfish();
@@ -43,13 +43,18 @@ class World {
         setInterval(() => {
             this.bubbleAttack();
         }, 100);
-        
+
         this.checkHealthCollision();
-        this.collisionEndboss();
         this.checkPoisonCollision();
         this.checkCoinCollision();
         this.jellyShock();
         this.pufferfishGoingBig();
+        this.flipStatusbar();
+    }
+
+
+    flipStatusbar() {
+        this.statusBarBoss.otherDirection = true;
     }
 
 
@@ -70,10 +75,12 @@ class World {
         setInterval(() => {
             this.level.pufferfish.forEach((pufferfish) => {
                 this.level.jellyfish.forEach((jellyfish) => {
-                    if (this.character.isColliding(pufferfish) || this.character.isColliding(jellyfish)) {
-                        this.character.hit();
-                        this.statusBarHealth.setPercentage(this.character.energy);
-                    };
+                    this.level.endboss.forEach((endboss) => {
+                        if (this.character.isColliding(pufferfish) || this.character.isColliding(jellyfish) || this.character.isColliding(endboss)) {
+                            this.character.hit();
+                            this.statusBarHealth.setPercentage(this.character.energy);
+                        };
+                    });
                 });
             });
         }, 500);
@@ -125,14 +132,15 @@ class World {
 
 
     attackEndboss() {
-        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
+        // #####    BUBBLE COLLIDES WITH FINAL    ##### //
         setInterval(() => {
             this.level.endboss.forEach((boss) => {   // ARRAY NICHT NOETIG
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(boss)) {
-                        this.endboss.hit();
-                        this.statusBarBoss.setPercentageBoss();
-                        boss.endbossDead();
+                        this.endboss.bossHurt = true;
+                        this.throwableObjects.pop(bubble);
+                        this.endboss.bossHit();
+                        this.statusBarBoss.setPercentageBoss(this.endboss.energy);
                     };
                 });
             });
@@ -169,19 +177,6 @@ class World {
     }
 
 
-    collisionEndboss() {
-        setInterval(() => {
-            this.level.endboss.forEach((boss) => {
-                if (this.character.isColliding(boss)) {
-                    this.character.hit();
-                    this.statusBarHealth.setPercentage(this.character.energy);
-                }
-            });
-        }, 200);
-        
-    }
-
-
     pufferfishGoingBig() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
@@ -194,17 +189,6 @@ class World {
     }
 
 
-    getDistanceOf() {
-        setInterval(() => {
-            console.log(this.character.x);
-            this.level.pufferfish.forEach(pufferfish => {
-                if (pufferfish.x && this.character.x == this.slappableDistance) {
-                }
-            })
-
-        }, 100)
-    }
-
     finslapAttack() {
         this.character.slapAnimation();
         this.level.pufferfish.forEach(pufferfish => {
@@ -215,17 +199,9 @@ class World {
         });
     }
 
-
-    // gameOver(index) {
-    //     setTimeout(() => {
-    //         if (index == 1) {
-    //             won = true;
-    //         } else if (index == 2) {
-    //             gameOver = true;
-    //         }
-    //         clearInterval();
-    //     }, 1000);
-    // }
+    clearAllIntervals() {
+        for (let i = 1; i < 9999; i++) window.clearInterval(i);
+    }
 
 
     draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
@@ -237,10 +213,10 @@ class World {
         this.ctx.translate(-this.camera_x, 0);
 
         // ##### FIXED OBJECTS HERE ##### //
+        this.addToMap(this.statusBarBoss);
         this.addToMap(this.statusBarHealth);
         this.addToMap(this.statusBarCoins);
         this.addToMap(this.statusBarPoison);
-        this.addToMap(this.statusBarBoss);
         this.ctx.translate(this.camera_x, 0);
 
         this.addObjectsToMap(this.level.pufferfish);
@@ -270,6 +246,7 @@ class World {
             this.flipImageBack(mo);
         }
     };
+
 
     addObjectsToMap(objects) {
         objects.forEach(o => {

@@ -2,12 +2,11 @@ class StatusBarBoss extends DrawableObject {
 
     IMAGES_BOSS_HEALTH = [
         './img/4. Markers/Purple/0_ .png',
-        './img/4. Markers/Purple/20_ .png',
+        './img/4. Markers/Purple/20__1.png',
         './img/4. Markers/Purple/40_ .png',
         './img/4. Markers/Purple/60_ .png',
         './img/4. Markers/Purple/80_ .png',
         './img/4. Markers/Purple/100_ .png'
-
     ];
 
 

@@ -3,8 +3,10 @@ class Endboss extends MovableObject {
     height = 600;
     width = 500;
     y = -180;
+    distance_char_boss = 0;
     bossAttack = false;
     bossDead = false;
+    bossHurt = false;
     bossDisplayed = false;
 
     offset = {
@@ -31,62 +33,78 @@ class Endboss extends MovableObject {
     ]
 
     IMAGES_ENDBOSS_INTRO = [
-        'img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/3.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/4.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/5.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/6.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/7.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/8.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
-        'img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
+        './img/2.Enemy/3 Final Enemy/1.Introduce/1.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/2.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/3.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/4.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/5.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/6.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/7.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/8.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/9.png',
+        './img/2.Enemy/3 Final Enemy/1.Introduce/10.png'
     ]
 
     IMAGES_ENDBOSS_ATTACK = [
-        'img/2.Enemy/3 Final Enemy/Attack/1.png',
-        'img/2.Enemy/3 Final Enemy/Attack/2.png',
-        'img/2.Enemy/3 Final Enemy/Attack/3.png',
-        'img/2.Enemy/3 Final Enemy/Attack/4.png',
-        'img/2.Enemy/3 Final Enemy/Attack/5.png',
-        'img/2.Enemy/3 Final Enemy/Attack/6.png'
+        './img/2.Enemy/3 Final Enemy/Attack/1.png',
+        './img/2.Enemy/3 Final Enemy/Attack/2.png',
+        './img/2.Enemy/3 Final Enemy/Attack/3.png',
+        './img/2.Enemy/3 Final Enemy/Attack/4.png',
+        './img/2.Enemy/3 Final Enemy/Attack/5.png',
+        './img/2.Enemy/3 Final Enemy/Attack/6.png'
     ];
 
     IMAGES_ENDBOSS_DEAD = [
-        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
-        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
-        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
-        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
-        'img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
+        './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 6.png',
+        './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 7.png',
+        './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 8.png',
+        './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 9.png',
+        './img/2.Enemy/3 Final Enemy/Dead/Mesa de trabajo 2 copia 10.png'
     ];
 
     IMAGES_ENDBOSS_HURT = [
-        'img/2.Enemy/3 Final Enemy/Hurt/1.png',
-        'img/2.Enemy/3 Final Enemy/Hurt/2.png',
-        'img/2.Enemy/3 Final Enemy/Hurt/3.png',
-        'img/2.Enemy/3 Final Enemy/Hurt/4.png'
+        './img/2.Enemy/3 Final Enemy/Hurt/1.png',
+        './img/2.Enemy/3 Final Enemy/Hurt/2.png',
+        './img/2.Enemy/3 Final Enemy/Hurt/3.png',
+        './img/2.Enemy/3 Final Enemy/Hurt/4.png'
     ];
 
 
 
     constructor() {
         super().loadImage(this.IMAGES_ENDBOSS_INTRO[0]);
+        this.loadAllImages();
+        this.animate();
+        this.endbossAttack();
+        this.endbossDead();
+        this.endbossDeadAnimation();
+        this.x = 2400;
+        this.distanceOf();
+    }
+
+    loadAllImages() {
         this.loadImages(this.IMAGES_ENDBOSS_INTRO);
         this.loadImages(this.IMAGES_ENDBOSS_FLOATING);
         this.loadImages(this.IMAGES_ENDBOSS_ATTACK);
         this.loadImages(this.IMAGES_ENDBOSS_DEAD);
         this.loadImages(this.IMAGES_ENDBOSS_HURT);
-        this.animate();
-        this.endbossAttack();
-        this.x = 2400;
+    }
+
+
+    distanceOf() {
+        setInterval(() => {
+            this.distance_char_boss = this.x - world.character.x;
+            return this.distance_char_boss;
+        }, 100);
+
     }
 
 
     endbossAttack() {
+        // ENDBOSS ATTACKS SHARKIE
         setInterval(() => {
-            if (world.character.x >= 2150) {
+            if (this.distance_char_boss <= 400) {
                 this.bossAttack = true;
-                this.bossHealth -= 20;
                 this.x -= 5;
                 if (this.bossAttack == false) {
                     this.bossAttack = true;
@@ -98,59 +116,66 @@ class Endboss extends MovableObject {
 
 
     endbossDead() {
-        if (!this.bossDead) {
-            this.bossHealth = true;
-            this.currentImage = 0;
-            setInterval(() => {
+        setInterval(() => {
+            if (this.energy == 0) {
+                console.log('Boss energy =', this.energy);
+                this.bossDead = true;
+            };
+        }, 100);
+    }
+
+    endbossDeadAnimation() {
+        setInterval(() => {
+            if (this.bossDead == true) {
                 this.speed = 10;
                 this.y += this.speed;
-                if (this.y >= 280) {
+                if (this.y >= 200) {
                     this.speed = 0;
-                    this.y = 280;
+                    this.y = 200;
                 }
-            }, 100);
-        };
+            }
+        }, 200)
     }
 
 
     animate() {
         let bossInterval =
             setInterval(() => {
-                if (this.isDead()) {
+                if (this.bossDead == true) {
                     this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
                     if (this.currentImage >= this.IMAGES_ENDBOSS_DEAD.length) {
                         this.bossDead = false;
-                        this.endbossDead();
+                        this.currentImage = 0;
                     }
-                } else if (this.isHurt()) {
+                } else if (this.bossHurt == true) {
+                    console.log(this.bossHurt, 'bossshurt');
                     this.playAnimation(this.IMAGES_ENDBOSS_HURT);
-                } else if (world.character.x >= 2050 && this.bossDisplayed == false) {
+                    if (this.currentImage >= this.IMAGES_ENDBOSS_HURT.length) {
+                        this.currentImage = 0;
+                        this.bossHurt = false;
+                    }
+                } else if (this.distance_char_boss == 450 && this.bossHurt == false) {
                     setTimeout(() => {
                         this.playAnimation(this.IMAGES_ENDBOSS_INTRO);
+                        console.log('intro');
                         this.currentImage = 0;
                         this.bossDisplayed = true;
                     }, 500);
-                } else if (this.bossAttack || this.bossDisplayed) {
+                } else if (this.bossAttack && this.bossDisplayed) {
                     this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
+                    console.log('attack');
                     if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
                         this.bossAttack = false;
+                        this.currentImage = 0;
                     }
-                } else if (world.character.x > 2100 || this.bossDisplayed) {
-                    this.playAnimation(this.IMAGES_ENDBOSS_FLOATING);
-                } else {
+                } else if (this.distance_char_boss >= 700) {
+                    console.log('nothing');
                     this.loadImage(this.IMAGES_ENDBOSS_INTRO[0]);
+                } else {
+                    this.playAnimation(this.IMAGES_ENDBOSS_FLOATING);
+                    console.log('else');
                 }
             }, 150);
         ;
     }
 }
-
-// setTimeout(() => {
-        //     console.log('ATTACK');
-        //     if (this.playAnimation(this.IMAGES_ENDBOSS_ATTACK)) {
-        //         clearInterval(bossInterval);
-        //         console.log('Clear Interval');
-        //     } else {
-        //         this.animate();
-        //     }
-        // }, 5000);

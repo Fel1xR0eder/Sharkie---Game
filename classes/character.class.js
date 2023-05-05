@@ -10,7 +10,6 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
-    HitByBoss = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
 
     offset = {
@@ -102,6 +101,12 @@ class Character extends MovableObject {
 
     constructor() {     // super() = Funktionen aus übergeordneter Klasse((extends)MovableObject)
         super();
+        this.loadAllImages();
+        //this.applyGravity();
+        this.animate();
+    }
+
+    loadAllImages() {
         this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
         this.loadImages(this.IMAGES_SWIMMING);
@@ -110,8 +115,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCK);
         this.loadImages(this.IMAGES_BUBBLES);
         this.loadImages(this.IMAGES_FINSLAP);
-        //this.applyGravity();
-        this.animate();
     }
 
 
@@ -144,7 +147,7 @@ class Character extends MovableObject {
         }, 1000 / 60);
 
         setInterval(() => {
-        // NO KEY INTERVALS
+            // NO KEY INTERVALS
             if (this.isDead()) {
                 this.playAnimation(this.IMAGES_DEAD);
                 if (this.currentImage >= this.IMAGES_DEAD.length) {
@@ -179,19 +182,18 @@ class Character extends MovableObject {
 
 
     deadAnimation() {
-
         if (!this.dead) {
             this.dead = true;
             this.currentImage = 0;
             setInterval(() => {
                 this.speed = 10;
                 this.y += this.speed;
-                if (this.y >= 280) {
+                if (this.y >= 290) {
                     this.speed = 0;
-                    this.y = 280;
+                    this.y = 290;
                 }
             }, 100);
-            console.log('GAME OVER');
+            this.gameOver();
         }
     }
 
