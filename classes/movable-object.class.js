@@ -7,7 +7,6 @@ class MovableObject extends DrawableObject {
     energy = 100;
     bossEnergy = 100;
     lastHit = 0;
-    lastBossHit = 0;
     money = 0;
     poison = 0;
     dead = false;
@@ -54,12 +53,10 @@ class MovableObject extends DrawableObject {
 
 
     bossHit() {
-        this.bossEnergy -= 30;  // nur zum testen
-        console.log(this.bossEnergy, '= bossHit = energy')
-        if (this.bossEnergy < 0) {
+        this.bossEnergy -= 20;  // nur zum testen
+        if (this.bossEnergy <= 0) {
             this.bossEnergy = 0;
-            //this.bossDead = true;
-            //console.log(bossDead,'= bossdead');
+            world.level.endboss[0].bossDead = true;
         }
         
         //else {

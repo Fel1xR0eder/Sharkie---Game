@@ -137,8 +137,7 @@ class World {
             this.level.endboss.forEach((boss) => {
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(boss)) {
-                        this.level.endboss.bossHurt = true;
-                        console.log(this.level.endboss.bossHurt, 'bosshurt');
+                        boss.bossHurt = true;
                         this.throwableObjects.pop(bubble);
                         this.character.bossHit();
                         this.statusBarBoss.setPercentageBoss(this.character.bossEnergy);
@@ -241,7 +240,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        //mo.drawFrame(this.ctx);
 
         if (mo.otherDirection) {
             this.flipImageBack(mo);

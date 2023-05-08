@@ -77,7 +77,7 @@ class Endboss extends MovableObject {
         this.animate();
         this.endbossAttack();
         //this.endbossDead();
-        this.endbossDeadAnimation();
+        //this.endbossDeadAnimation();
         this.x = 2400;
         this.distanceOf();
     }
@@ -96,7 +96,6 @@ class Endboss extends MovableObject {
             this.distance_char_boss = this.x - world.character.x;
             return this.distance_char_boss;
         }, 100);
-
     }
 
 
@@ -115,24 +114,17 @@ class Endboss extends MovableObject {
     }
 
 
-    // endbossDead() {
-    //     setInterval(() => {
-    //         if (this.bossEnergy == 0) {
-    //             this.bossDead = true;
-    //             console.log('boss is dead ()');
-    //         };
-    //     }, 100);
-    // }
-
-
     endbossDeadAnimation() {
         setInterval(() => {
-            if (this.bossDead == true) {
-                this.speed = 10;
-                this.y += this.speed;
-                if (this.y >= 200) {
+            if (this.bossDead) {
+                this.speed = 0;
+                this.y += 20;
+
+                if (this.y >= 100) {
+                    this.y = 100;
                     this.speed = 0;
-                    this.y = 200;
+                    this.x = this.x;
+                    clearInterval(19); // Bossinterval = 19;
                 }
             }
         }, 200)
@@ -141,52 +133,41 @@ class Endboss extends MovableObject {
 
     animate() {
         let i = 0;
-        setInterval(() => {
-            if( i < 10 && this.distance_char_boss == 450 ) {
+        let bossinterval = setInterval(() => {
+            // ######### INTRO #########
+            if (i < 4 && this.distance_char_boss <= 700) {
                 this.playAnimation(this.IMAGES_ENDBOSS_INTRO);
             }
+
             // ##### IF DEAD #####
-            else if (this.bossIsDead()) {
+            else if (this.bossDead) {
+                clearInterval(19);
                 this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
-                this.endbossDeadAnimation()
+                this.endbossDeadAnimation();
 
-                // if (this.currentImage >= this.IMAGES_ENDBOSS_DEAD.length) {
-                //     this.dead = false;
-                //     this.endbossDeadAnimation();
-                // }
-
+                //     ######### IF HURT #########
             } else if (this.bossHurt) {
-                console.log('bosss is hurt');
                 this.playAnimation(this.IMAGES_ENDBOSS_HURT);
+                setTimeout(() => {
+                    this.bossHurt = false;
+                }, 800);
 
-                // setTimeout(() => {
-                //     this.bossHurt = false;
-                // }, 1500);
-
-                // if (this.currentImage >= this.IMAGES_ENDBOSS_HURT.length) {
-                //     this.currentImage = 0;
-                //     this.bossHurt = false;
-                // }
-
-                // ##### IF ATTACK #####
-            } else if (this.bossAttack && this.bossDisplayed == true) {
+                //     ######### IF ATTACK #########
+            } else if (this.bossAttack && this.bossDisplayed) {
                 this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
-                console.log('attack sharkie');
                 if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
                     this.bossAttack = false;
                     this.currentImage = 0;
                 }
 
-            } else if (this.distance_char_boss > 700 && !this.bossDisplayed) {
-                console.log('do nothing');
-            } else {
-                this.playAnimation(this.IMAGES_ENDBOSS_FLOATING);
-                console.log('else = floating');
+            //} else if (this.distance_char_boss > 700 && !this.bossDisplayed) {
             }
-            
-            if(this.distance_char_boss == 450 && !this.bossDisplayed) {
-                i = 0;
-                this.bossDisplayed = true;
+            // ######### INTRO IF #########
+            if (this.distance_char_boss <= 600 && !this.bossDisplayed) {
+                setTimeout(() => {
+                    i = 0;
+                    this.bossDisplayed = true;
+                }, 1000);
             }
 
             i++;

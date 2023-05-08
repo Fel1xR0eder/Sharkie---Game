@@ -3,7 +3,6 @@ body {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
     height: 80vh;
     background-image: url('../img/3. Background/background.jpg');
     font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
