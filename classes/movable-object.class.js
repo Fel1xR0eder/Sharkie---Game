@@ -5,7 +5,9 @@ class MovableObject extends DrawableObject {
     speedY = 0;
     acceleration = 2.5;
     energy = 100;
+    bossEnergy = 100;
     lastHit = 0;
+    lastBossHit = 0;
     money = 0;
     poison = 0;
     dead = false;
@@ -50,18 +52,29 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
     bossHit() {
-        this.energy -= 20;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        this.bossEnergy -= 30;  // nur zum testen
+        console.log(this.bossEnergy, '= bossHit = energy')
+        if (this.bossEnergy < 0) {
+            this.bossEnergy = 0;
+            //this.bossDead = true;
+            //console.log(bossDead,'= bossdead');
         }
+        
+        //else {
+         //   this.lastBossHit = new Date().getTime();
+        //}
     }
 
 
     isDead() {
         return this.energy == 0;
+    }
+
+
+    bossIsDead() {
+        return this.bossEnergy == 0;
     }
 
 
@@ -85,7 +98,6 @@ class MovableObject extends DrawableObject {
         setTimeout(() => {
             setInterval(() => {
                 this.loadImage(this.world.character.IMAGES_DEAD[11]);
-                console.log('geht');
             }, 100);
             world.clearAllIntervals();
         }, 2000);

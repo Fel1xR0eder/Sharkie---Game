@@ -1,7 +1,6 @@
 class World {
 
     character = new Character();
-    endboss = new Endboss();
     level = level1;
     canvas;
     ctx;
@@ -133,14 +132,16 @@ class World {
 
     attackEndboss() {
         // #####    BUBBLE COLLIDES WITH FINAL    ##### //
+
         setInterval(() => {
-            this.level.endboss.forEach((boss) => {   // ARRAY NICHT NOETIG
+            this.level.endboss.forEach((boss) => {
                 this.throwableObjects.forEach((bubble) => {
                     if (bubble.isColliding(boss)) {
-                        this.endboss.bossHurt = true;
+                        this.level.endboss.bossHurt = true;
+                        console.log(this.level.endboss.bossHurt, 'bosshurt');
                         this.throwableObjects.pop(bubble);
-                        this.endboss.bossHit();
-                        this.statusBarBoss.setPercentageBoss(this.endboss.energy);
+                        this.character.bossHit();
+                        this.statusBarBoss.setPercentageBoss(this.character.bossEnergy);
                     };
                 });
             });

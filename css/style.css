@@ -1,0 +1,36 @@
+body {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100vw;
+    height: 80vh;
+    background-image: url('../img/3. Background/background.jpg');
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+}
+
+
+h1 {
+    color: rgb(150, 35, 223);
+    font-size: 60px;
+    text-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+}
+
+
+.d-none {
+    display: none;
+}
+
+
+.full-div {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+
+canvas {
+    background-color: black;
+    z-index: 999;
+}

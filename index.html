@@ -1,13 +1,15 @@
 <!DOCTYPE html>
-<html lang="en">
+<html translate="no" lang="en">
+
 <head>
-    
+
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="./img/favicon/shark.png">
     <title>Sharkie</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/fonts.css">
     <script src="./classes/drawable-object.class.js"></script>
     <script src="./classes/statusbar-health.class.js"></script>
     <script src="./classes/statusbar-poison.class.js"></script>
@@ -16,8 +18,8 @@
     <script src="./classes/movable-object.class.js"></script>
     <script src="./classes/throwable-object.class.js"></script>
     <script src="./classes/world.class.js"></script>
-    <script src="./classes/character.class.js"></script> 
-    <script src="./classes/poison.class.js"></script> 
+    <script src="./classes/character.class.js"></script>
+    <script src="./classes/poison.class.js"></script>
     <script src="./classes/pufferfish.class.js"></script>
     <script src="./classes/background-object.class.js"></script>
     <script src="./classes/light.class.js"></script>
@@ -29,17 +31,59 @@
     <script src="./levels/level1.js"></script>
     <script src="./js/game.js"></script>
 
+
+    <script>
+        function fullscreen() {
+            let fullscreen = document.getElementById('full-div');
+            enterFullscreen(fullscreen);
+
+        }
+
+        function enterFullscreen(element) {
+            if (element.requestFullscreen) {
+                element.requestFullscreen();
+            } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
+                element.msRequestFullscreen();
+            } else if (element.webkitRequestFullscreen) {  // iOS Safari
+                element.webkitRequestFullscreen();
+            }
+            changeFullscreenBtn();
+        }
+
+        function changeFullscreenBtn() {
+            document.getElementById('full-div').innerHTML = 'Exit Fullscreen';
+        }
+
+
+        function exitFullscreen() {
+            if (document.exitFullscreen) {
+                document.exitFullscreen();
+            } else if (document.webkitExitFullscreen) {
+                document.webkitExitFullscreen();
+            }
+        }
+    </script>
+
 </head>
-<body onload="init()">
 
-<div class="full-div">
+<body onload="">
 
-    <h1>Sharkie</h1>
+    <div class="full-div">
 
-    <canvas id="canvas" width="720" height="480">
+        <h1>Sharkie</h1>
 
-    </canvas>
-</div>
-    
+        <div class="play-bar">
+            <button onclick="init()" id="levelInit()">START GAME</button>
+            <button>MUSIC ON</button>
+            <button>HOW TO PLAY</button>
+            <button id="fullscreen" onclick="fullscreen()">FULLSCREEN</button>
+        </div>
+
+        <canvas id="canvas" width="720" height="480">
+
+        </canvas>
+    </div>
+
 </body>
+
 </html>

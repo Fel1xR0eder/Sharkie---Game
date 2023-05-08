@@ -4,6 +4,7 @@ let keyboard = new Keyboard();
 
 
 function init() {
+    initLevel();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
@@ -11,7 +12,7 @@ function init() {
 
 
 window.addEventListener("keydown", (e) => {
-    
+
     if (e.key == 'ArrowRight') {
         keyboard.RIGHT = true;
     }
