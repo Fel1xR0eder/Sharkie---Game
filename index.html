@@ -33,10 +33,11 @@
 
 
     <script>
+        let switchMusic = true;
+
         function fullscreen() {
             let fullscreen = document.getElementById('full-div');
             enterFullscreen(fullscreen);
-
         }
 
         function enterFullscreen(element) {
@@ -62,24 +63,48 @@
                 document.webkitExitFullscreen();
             }
         }
+
+        function OpenCanvas() {
+            let canvas = document.getElementById('canvas');
+            let buttons = document.getElementById('play-bar');
+            let body = document.getElementById('body');
+            canvas.style.display = 'block';
+            buttons.style.display = 'none';
+            body.style.backgroundImage = `url('../img/3. Background/background.jpg')`;
+        }
+
+        function toggleMusic() {
+            let musicButton = document.getElementById('music-switch')
+
+            if (switchMusic == true) {
+                musicButton.innerHTML = 'MUSIC OFF';
+                switchMusic = false;
+                // turn music on
+            } else {
+                musicButton.innerHTML = 'MUSIC ON';
+                switchMusic = true;
+                // turn music off
+            }
+
+        }
     </script>
 
 </head>
 
-<body onload="">
+<body id="body">
+
+    <h1 id="h1" class="floating">Sharkie</h1>
 
     <div class="full-div">
 
-        <h1>Sharkie</h1>
-
-        <div class="play-bar">
-            <button onclick="init()" id="levelInit()">START GAME</button>
-            <button>MUSIC ON</button>
+        <div id="play-bar" class="play-bar floating">
+            <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
+            <button id="music-switch" onclick="toggleMusic()">MUSIC ON</button>
             <button>HOW TO PLAY</button>
             <button id="fullscreen" onclick="fullscreen()">FULLSCREEN</button>
         </div>
 
-        <canvas id="canvas" width="720" height="480">
+        <canvas id="canvas" style="display: none;" width="720" height="480">
 
         </canvas>
     </div>

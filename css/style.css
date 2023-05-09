@@ -4,20 +4,74 @@ body {
     justify-content: center;
     align-items: center;
     height: 80vh;
-    background-image: url('../img/3. Background/background.jpg');
+    background-image: url('../img/3. Background/first-screen.png');
     font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
 }
 
 
 h1 {
     color: rgb(150, 35, 223);
-    font-size: 60px;
-    text-shadow: 3px 3px 7px rgba(0,0,0,0.5);
+    font-size: 80px;
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
+    position: absolute;
+    top: 150px;
+}
+
+.floating { 
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    margin-left: 30px;
+    margin-top: 5px;
+}
+ 
+@keyframes floating {
+    0% { transform: translate(0,  0px); }
+    50%  { transform: translate(0, 15px); }
+    100%   { transform: translate(0, -0px); }   
 }
 
 
 .d-none {
     display: none;
+}
+
+
+canvas {
+    background-color: black;
+    z-index: 999;
+}
+
+
+button {
+    cursor: pointer;
+    padding: 17px 40px;
+    border-radius: 50px;
+    border: 0;
+    background-color: white;
+    box-shadow: rgba(3, 41, 255, 0.05) 0 0 8px;
+    letter-spacing: 1.5px;
+    text-transform: uppercase;
+    font-size: 15px;
+    transition: all .5s ease;
+}
+
+
+button:hover {
+    letter-spacing: 3px;
+    background-color: rgb(150, 35, 223);
+    color: rgb(255, 255, 255);
+    box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+}
+
+button:active {
+    letter-spacing: 3px;
+    background-color: rgb(150, 35, 223);
+    color: rgb(255, 255, 255);
+    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    transform: translateY(10px);
+    transition: 100ms;
 }
 
 
@@ -28,8 +82,7 @@ h1 {
     flex-direction: column;
 }
 
-
-canvas {
-    background-color: black;
-    z-index: 999;
+.play-bar {
+    display: flex;
+    gap: 10px;
 }
