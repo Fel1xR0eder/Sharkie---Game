@@ -159,15 +159,13 @@ class Endboss extends MovableObject {
                     this.bossAttack = false;
                     this.currentImage = 0;
                 }
-
-            //} else if (this.distance_char_boss > 700 && !this.bossDisplayed) {
             }
-            // ######### INTRO IF #########
+            // ######### INTRO IF DISTANCE CORRECT #########
             if (this.distance_char_boss <= 600 && !this.bossDisplayed) {
                 setTimeout(() => {
                     i = 0;
                     this.bossDisplayed = true;
-                }, 1000);
+                }, 500);
             }
 
             i++;

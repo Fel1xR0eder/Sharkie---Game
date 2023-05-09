@@ -40,6 +40,7 @@
             enterFullscreen(fullscreen);
         }
 
+
         function enterFullscreen(element) {
             if (element.requestFullscreen) {
                 element.requestFullscreen();
@@ -50,6 +51,7 @@
             }
             changeFullscreenBtn();
         }
+    
 
         function changeFullscreenBtn() {
             document.getElementById('full-div').innerHTML = 'Exit Fullscreen';
@@ -68,10 +70,12 @@
             let canvas = document.getElementById('canvas');
             let buttons = document.getElementById('play-bar');
             let body = document.getElementById('body');
+            
             canvas.style.display = 'block';
             buttons.style.display = 'none';
             body.style.backgroundImage = `url('../img/3. Background/background.jpg')`;
         }
+
 
         function toggleMusic() {
             let musicButton = document.getElementById('music-switch')
@@ -85,8 +89,19 @@
                 switchMusic = true;
                 // turn music off
             }
-
         }
+
+
+        function help() {
+            document.getElementById('help-div').style.display = 'flex';
+            document.getElementById('play-bar').style.display = 'none';
+        }
+
+        function backToMenu() {
+            document.getElementById('help-div').style.display = 'none';
+            document.getElementById('play-bar').style.display = 'flex';
+        }
+
     </script>
 
 </head>
@@ -100,12 +115,24 @@
         <div id="play-bar" class="play-bar floating">
             <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
             <button id="music-switch" onclick="toggleMusic()">MUSIC ON</button>
-            <button>HOW TO PLAY</button>
+            <button id="help" onclick="help()">HOW TO PLAY</button>
             <button id="fullscreen" onclick="fullscreen()">FULLSCREEN</button>
         </div>
 
-        <canvas id="canvas" style="display: none;" width="720" height="480">
+        <div class="help" id="help-div" style="display: none">
+            <span class="floating">
+                Herzlich Willkommen bei Sharkie.<br>
+                Du spielst einen kleinen Hai namens Sharkie. <br>
+                Nutze die Pfeiltasten zum steuern von Sharkie.<br>
+                Mit der Taste "D" kannst du Blubberblasen abschießen, um Feinde zu besiegen.<br>
+                Viel Spaß!
+            </span>
+            <button onclick="backToMenu()" class="floating back-button">
+                BACK
+            </button>
+        </div>
 
+        <canvas id="canvas" style="display: none;" width="720" height="480">
         </canvas>
     </div>
 

@@ -43,11 +43,13 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        this.energy -= 5;
-        if (this.energy < 0) {
-            this.energy = 0;
-        } else {
-            this.lastHit = new Date().getTime();
+        if (this.bossEnergy > 0) {
+            this.energy -= 5;
+            if (this.energy < 0) {
+                this.energy = 0;
+            } else {
+                this.lastHit = new Date().getTime();
+            }
         }
     }
 
@@ -58,9 +60,9 @@ class MovableObject extends DrawableObject {
             this.bossEnergy = 0;
             world.level.endboss[0].bossDead = true;
         }
-        
+
         //else {
-         //   this.lastBossHit = new Date().getTime();
+        //   this.lastBossHit = new Date().getTime();
         //}
     }
 

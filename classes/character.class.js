@@ -11,6 +11,7 @@ class Character extends MovableObject {
     shock = false;
     dead = false;
     swimming_sound = new Audio('./audio/underwater_normal.mp3');
+    blow_sound = new Audio('./audio/blub.mp3');
 
     offset = {
         top: 100,
@@ -106,6 +107,7 @@ class Character extends MovableObject {
         this.animate();
     }
 
+
     loadAllImages() {
         this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
@@ -140,6 +142,9 @@ class Character extends MovableObject {
                 this.swimming_sound.play();
             } else if (this.world.keyboard.D) {
                 this.throwBubble();
+                setTimeout(() => {
+                    this.blow_sound.play();
+                }, 500);
             } else if (this.world.keyboard.A) {
                 this.world.finslapAttack();
             }

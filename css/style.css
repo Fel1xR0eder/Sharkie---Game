@@ -5,7 +5,7 @@ body {
     align-items: center;
     height: 80vh;
     background-image: url('../img/3. Background/first-screen.png');
-    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
+    font-family: 'Luckiest Guy',Arial, Helvetica, sans-serif;
 }
 
 
@@ -14,7 +14,7 @@ h1 {
     font-size: 80px;
     text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
     position: absolute;
-    top: 150px;
+    top: 100px;
 }
 
 .floating { 
@@ -25,6 +25,30 @@ h1 {
     margin-left: 30px;
     margin-top: 5px;
 }
+
+.help {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    position: relative;
+    top: 30px;
+    color: white;
+    font-size: 20px;
+    width: 500px;
+}
+
+.back-button {
+    margin-top: 50px;
+}
+
+
+.help span {
+    padding: 10px;
+    margin-bottom: 100px;
+    background: rgba(47, 50, 63, 0.8);
+}
+
  
 @keyframes floating {
     0% { transform: translate(0,  0px); }
@@ -52,9 +76,9 @@ button {
     background-color: white;
     box-shadow: rgba(3, 41, 255, 0.05) 0 0 8px;
     letter-spacing: 1.5px;
-    text-transform: uppercase;
     font-size: 15px;
-    transition: all .5s ease;
+    transition: all 0.5s ease;
+    opacity: 0.8;
 }
 
 
@@ -63,13 +87,14 @@ button:hover {
     background-color: rgb(150, 35, 223);
     color: rgb(255, 255, 255);
     box-shadow: rgb(93 24 220) 0px 7px 29px 0px;
+    opacity: 1;
 }
 
 button:active {
     letter-spacing: 3px;
     background-color: rgb(150, 35, 223);
     color: rgb(255, 255, 255);
-    box-shadow: rgb(93 24 220) 0px 0px 0px 0px;
+    box-shadow: rgb(93, 24, 220) 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
 }
