@@ -36,20 +36,19 @@
         let switchMusic = true;
         let fullscreenBoo = false;
 
-        function fullscreenInterval() {
-            setInterval(() => {
-                if(!fullscreenBoo) {
-                    document.getElementById('exit-fullscreen').style.display = 'none';
-                } else {
-                    document.getElementById('exit-fullscreen').style.display = 'flex';
-                }
-            }, 100);
-        }
+        // function fullscreenInterval() {
+        //     setInterval(() => {
+        //         if(!fullscreenBoo) {
+        //             document.getElementById('exit-fullscreen').style.display = 'none';
+        //         } else {
+        //             document.getElementById('exit-fullscreen').style.display = 'flex';
+        //         }
+        //     }, 100);
+        // }
 
-
-        function fullscreen() {
-            let fullscreen = document.getElementById('full-div');
-            enterFullscreen(fullscreen);
+        function doFullscreen() {
+            let fullCanvas = document.getElementById('full-div');
+            enterFullscreen(fullCanvas);
         }
 
 
@@ -62,25 +61,29 @@
                 element.webkitRequestFullscreen();
             }
             changeFullscreenBtn();
-            fullscreenInterval();
         }
 
 
         function changeFullscreenBtn() {
-            document.getElementById('body').innerHTML += 
-            `<img class="exit-fullscreen" src="./img/6.Buttons/Full Screen/fullscreen.png" onclick="exitFullscreen()">`;
-            fullscreenBoo = true;
+            if (!fullscreenBoo) {
+                document.getElementById('full-div').innerHTML +=
+                    `<div class="exit-div">
+                        <img class="exit-fullscreen" src="./img/6.Buttons/Full Screen/fullscreen.png" onclick="exitFullscreen()">
+                    </div>`;
+                fullscreenBoo = true;
+            }
+
         }
 
 
         function exitFullscreen() {
-            fullscreenBoo = false;
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             } else if (document.webkitExitFullscreen) {
                 document.webkitExitFullscreen();
             }
-            fullscreenInterval();
+
+            // div display: none;
         }
 
         function OpenCanvas() {
@@ -134,7 +137,7 @@
             <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
             <button id="music-switch" onclick="toggleMusic()">MUSIC ON</button>
             <button id="help" onclick="help()">HOW TO PLAY</button>
-            <button id="fullscreen" onclick="fullscreen()">FULLSCREEN</button>
+            <button id="fullscreen" onclick="doFullscreen()">FULLSCREEN</button>
         </div>
 
         <div class="help" id="help-div" style="display: none">
