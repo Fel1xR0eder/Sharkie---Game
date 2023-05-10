@@ -121,68 +121,111 @@ class Character extends MovableObject {
 
 
     animate() {
-        // ON KEY INTERVALS
-        setInterval(() => {
-            this.swimming_sound.pause();
-            if (this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x) {
-                this.moveRight();
-                this.bubbleDirection = false;
-                this.otherDirection = false;
-                this.swimming_sound.play();
-            } else if (this.world.keyboard.LEFT && this.x > 0) {
-                this.moveLeft();
-                this.bubbleDirection = true;
-                this.otherDirection = true;
-                this.swimming_sound.play();
-            } else if (this.world.keyboard.UP && this.y > this.world.level.level_end_y_top) {
-                this.moveUp();
-                this.swimming_sound.play();
-            } else if (this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom) {
-                this.moveDown();
-                this.swimming_sound.play();
-            } else if (this.world.keyboard.D) {
-                this.throwBubble();
-                setTimeout(() => {
-                    this.blow_sound.play();
-                }, 500);
-            } else if (this.world.keyboard.A) {
-                this.world.finslapAttack();
-            }
-            this.world.camera_x = -this.x + 100;
-        }, 1000 / 60);
+        setInterval(() => this.moveCharacter(), 1000 / 60);
+        setInterval(() => this.playCharacter(), 100);
+    }
 
-        setInterval(() => {
-            // NO KEY INTERVALS
-            if (this.isDead()) {
-                this.playAnimation(this.IMAGES_DEAD);
-                if (this.currentImage >= this.IMAGES_DEAD.length) {
-                    this.dead = false;
-                    this.deadAnimation();
-                }
-            } else if (this.shock) {
-                this.playAnimation(this.IMAGES_HURT_SHOCK);
-                if (this.currentImage >= this.IMAGES_HURT_SHOCK.length) {
-                    setTimeout(() => {
-                        this.shock = false;
-                    }, 1000);
-                }
-            } else if (this.isHurt()) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_SWIMMING);
-            } else if (this.slap) {
-                this.playAnimation(this.IMAGES_FINSLAP);
-                if (this.currentImage >= this.IMAGES_FINSLAP.length) {
-                    this.slap = false;
-                }
-            } else if (this.bubble) {
-                this.playAnimation(this.IMAGES_BUBBLES);
-                if (this.currentImage >= this.IMAGES_BUBBLES.length) {
-                    this.bubble = false;
-                }
-            } else
-                this.playAnimation(this.IMAGES_IDLE);
-        }, 100);
+
+    moveCharacter() {
+        if (this.canMoveRight()) { this.moveRight(); }
+        else if (this.canMoveLeft()) { this.moveLeft(); }
+        else if (this.canMoveUp()) { this.moveUp(); }
+        else if (this.canMoveDown()) { this.moveDown(); }
+        else if (this.world.keyboard.D) { this.throwBubble(); }
+        else if (this.world.keyboard.A) { this.world.finslapAttack(); }
+        this.world.camera_x = -this.x + 100;
+    }
+
+    canMoveRight() {
+        return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
+    }
+
+    moveRight() {
+        super.moveRight();
+        this.bubbleDirection = false;
+        this.otherDirection = false;
+        this.swimming_sound.play();
+    }
+
+    canMoveLeft() {
+        return this.world.keyboard.LEFT && this.x > 0;
+    }
+
+    moveLeft() {
+        super.moveLeft();
+        this.bubbleDirection = true;
+        this.otherDirection = true;
+        this.swimming_sound.play();
+    }
+
+    canMoveUp() {
+        return this.world.keyboard.UP && this.y > this.world.level.level_end_y_top;
+    }
+
+    moveUp() {
+        super.moveUp();
+        this.swimming_sound.play();
+    }
+
+    canMoveDown() {
+        return this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom;
+    }
+
+    moveDown() {
+        super.moveDown();
+        this.swimming_sound.play();
+    }
+
+    throwBubble() {
+        super.throwBubble();
+        setTimeout(() => {
+            this.blow_sound.play();
+        }, 500);
+    }
+
+    playCharacter() {
+        if (this.isDead()) { this.playDeadAnimation(); }
+        else if (this.shock) { this.playShockAnimation(); }
+        else if (this.isHurt()) { this.playAnimation(this.IMAGES_HURT); }
+        else if (this.canSwimming()) { this.playAnimation(this.IMAGES_SWIMMING); }
+        else if (this.slap) { this.playSlapAnimation(); }
+        else if (this.bubble) { this.playBubbleAnimation(); }
+        else { this.playAnimation(this.IMAGES_IDLE); }
+    }
+
+    playDeadAnimation() {
+        this.playAnimation(this.IMAGES_DEAD);
+        if (this.currentImage >= this.IMAGES_DEAD.length) {
+            this.dead = false;
+            this.deadAnimation();
+        }
+    }
+
+    playShockAnimation() {
+        this.playAnimation(this.IMAGES_HURT_SHOCK);
+        if (this.currentImage >= this.IMAGES_HURT_SHOCK.length) {
+            setTimeout(() => {
+                this.shock = false;
+            }, 1000);
+        }
+    }
+
+    canSwimming() {
+        return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
+    }
+
+    playSlapAnimation() {
+        this.playAnimation(this.IMAGES_FINSLAP);
+        if (this.currentImage >= this.IMAGES_FINSLAP.length) {
+            this.slap = false;
+        }
+    }
+
+    playBubbleAnimation() {
+        this.playAnimation(this.IMAGES_BUBBLES);
+        if (this.currentImage >= this.IMAGES_BUBBLES.length) {
+            this.bubble = false;
+        }
     }
 
 
@@ -195,7 +238,6 @@ class Character extends MovableObject {
                 this.y += this.speed;
                 if (this.y >= 290) {
                     this.speed = 0;
-                    this.y = 290;
                 }
             }, 100);
             this.gameOver();

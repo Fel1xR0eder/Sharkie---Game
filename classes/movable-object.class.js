@@ -28,7 +28,6 @@ class MovableObject extends DrawableObject {
     //     }, 1000 / 25);
     // }
 
-
     // isAboveGround() {
     //     return this.y < 30;
     // }
@@ -60,10 +59,6 @@ class MovableObject extends DrawableObject {
             this.bossEnergy = 0;
             world.level.endboss[0].bossDead = true;
         }
-
-        //else {
-        //   this.lastBossHit = new Date().getTime();
-        //}
     }
 
 
