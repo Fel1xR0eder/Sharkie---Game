@@ -95,8 +95,15 @@ class MovableObject extends DrawableObject {
             }, 100);
             world.clearAllIntervals();
         }, 2000);
+        this.showEndScreen();
     }
 
+    showEndScreen() {
+        document.getElementById('full-div').innerHTML =
+        `
+        
+        `;     
+    }
 
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;

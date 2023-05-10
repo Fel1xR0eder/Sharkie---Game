@@ -76,8 +76,6 @@ class Endboss extends MovableObject {
         this.loadAllImages();
         this.animate();
         this.endbossAttack();
-        //this.endbossDead();
-        //this.endbossDeadAnimation();
         this.x = 2400;
         this.distanceOf();
     }
@@ -100,7 +98,6 @@ class Endboss extends MovableObject {
 
 
     endbossAttack() {
-        // ENDBOSS ATTACKS SHARKIE
         setInterval(() => {
             if (this.distance_char_boss <= 400) {
                 this.bossAttack = true;
@@ -141,15 +138,15 @@ class Endboss extends MovableObject {
             else if (this.bossDead) { this.playBossDeadAnimation(); }
             else if (this.bossHurt) { this.playBossHurtAnimation(); }
             else if (this.bossAttack && this.bossDisplayed) { this.playBossAttackAnimation(); }
-            else if (this.bossDisplayed) { this.playBossFloatingAnimation(); }
-            if (this.distance_char_boss <= 600 && !this.bossDisplayed) { this.BossIntro(i); }
-            i++;
+            else if (this.bossDisplayed) {this.playBossFloatingAnimation(); }
+            if (this.distance_char_boss <= 600 && !this.bossDisplayed) {i++, this.BossIntro(i); }
+            console.log(i);
         }, 150);
     }
 
 
     characterNearBoss(i) {
-        return i < 4 && this.distance_char_boss <= 700;
+        return i < 7 && this.distance_char_boss <= 700;
     }
 
 

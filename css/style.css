@@ -46,7 +46,21 @@ h1 {
 .help span {
     padding: 10px;
     margin-bottom: 100px;
-    background: rgba(47, 50, 63, 0.8);
+    /* background: rgba(47, 50, 63, 0.8); */
+}
+
+.instructions {
+    position: relative;
+    top: 120px;
+    width: 600px;
+    height: 400px;
+}
+
+.exit-fullscreen {
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-end;
+    filter: invert(180);
 }
 
  

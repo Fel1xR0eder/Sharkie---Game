@@ -34,6 +34,18 @@
 
     <script>
         let switchMusic = true;
+        let fullscreenBoo = false;
+
+        function fullscreenInterval() {
+            setInterval(() => {
+                if(!fullscreenBoo) {
+                    document.getElementById('exit-fullscreen').style.display = 'none';
+                } else {
+                    document.getElementById('exit-fullscreen').style.display = 'flex';
+                }
+            }, 100);
+        }
+
 
         function fullscreen() {
             let fullscreen = document.getElementById('full-div');
@@ -50,27 +62,32 @@
                 element.webkitRequestFullscreen();
             }
             changeFullscreenBtn();
+            fullscreenInterval();
         }
-    
+
 
         function changeFullscreenBtn() {
-            document.getElementById('full-div').innerHTML = 'Exit Fullscreen';
+            document.getElementById('body').innerHTML += 
+            `<img class="exit-fullscreen" src="./img/6.Buttons/Full Screen/fullscreen.png" onclick="exitFullscreen()">`;
+            fullscreenBoo = true;
         }
 
 
         function exitFullscreen() {
+            fullscreenBoo = false;
             if (document.exitFullscreen) {
                 document.exitFullscreen();
             } else if (document.webkitExitFullscreen) {
                 document.webkitExitFullscreen();
             }
+            fullscreenInterval();
         }
 
         function OpenCanvas() {
             let canvas = document.getElementById('canvas');
             let buttons = document.getElementById('play-bar');
             let body = document.getElementById('body');
-            
+
             canvas.style.display = 'block';
             buttons.style.display = 'none';
             body.style.backgroundImage = `url('../img/3. Background/background.jpg')`;
@@ -97,6 +114,7 @@
             document.getElementById('play-bar').style.display = 'none';
         }
 
+
         function backToMenu() {
             document.getElementById('help-div').style.display = 'none';
             document.getElementById('play-bar').style.display = 'flex';
@@ -110,7 +128,7 @@
 
     <h1 id="h1" class="floating">Sharkie</h1>
 
-    <div class="full-div">
+    <div id="full-div" class="full-div">
 
         <div id="play-bar" class="play-bar floating">
             <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
@@ -121,11 +139,7 @@
 
         <div class="help" id="help-div" style="display: none">
             <span class="floating">
-                Herzlich Willkommen bei Sharkie.<br>
-                Du spielst einen kleinen Hai namens Sharkie. <br>
-                Nutze die Pfeiltasten zum steuern von Sharkie.<br>
-                Mit der Taste "D" kannst du Blubberblasen abschießen, um Feinde zu besiegen.<br>
-                Viel Spaß!
+                <img class="instructions" src="./img/6.Buttons/Instructions 1.png">
             </span>
             <button onclick="backToMenu()" class="floating back-button">
                 BACK
