@@ -35,6 +35,10 @@ h1 {
     height: 100vh;
 }
 
+:fullscreen, ::backdrop {
+    background-image: url('../img/3. Background/first-screen.png');
+}
+
 .play-bar {
     display: flex;
     align-items: center;
@@ -65,7 +69,7 @@ h1 {
 
 .instructions {
     position: relative;
-    top: 50px;
+    top: -50px;
     width: 600px;
     height: 400px;
 }
@@ -84,6 +88,30 @@ h1 {
     align-items: flex-end;
     z-index: 9;
 }
+
+.credits {
+    color: white;
+    font-size: 14px;
+}
+
+.back-button {
+    position: relative;
+    top: -50px;
+}
+
+.endscreen-div {
+    height: 300px;
+    width: 1000px;
+    position: absolute;
+    top: 40%;
+}
+
+
+
+
+
+
+
 
  
 @keyframes floating {

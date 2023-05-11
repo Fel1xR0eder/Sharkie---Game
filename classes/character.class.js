@@ -10,8 +10,8 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
-    swimming_sound = new Audio('./audio/underwater_normal.mp3');
-    blow_sound = new Audio('./audio/blub.mp3');
+    swimming_sound = new Audio('./audio/swimming.mp3');
+    bubble_sound = new Audio('./audio/blub.mp3');
 
     offset = {
         top: 100,
@@ -141,10 +141,15 @@ class Character extends MovableObject {
     }
 
     moveRight() {
-        super.moveRight();
+        this.swimming_sound.play();
         this.bubbleDirection = false;
         this.otherDirection = false;
-        this.swimming_sound.play();
+        super.moveRight();
+        this.swimming_sound.pause();
+        // this.world.audioPlayer.pause();
+        // setTimeout(() => {
+        // this.world.audioPlayer.play();
+        // }, 500);
     }
 
     canMoveLeft() {
@@ -152,10 +157,11 @@ class Character extends MovableObject {
     }
 
     moveLeft() {
+        this.swimming_sound.play();
         super.moveLeft();
         this.bubbleDirection = true;
         this.otherDirection = true;
-        this.swimming_sound.play();
+        this.swimming_sound.pause();
     }
 
     canMoveUp() {
@@ -163,8 +169,9 @@ class Character extends MovableObject {
     }
 
     moveUp() {
-        super.moveUp();
         this.swimming_sound.play();
+        super.moveUp();
+        this.swimming_sound.pause();
     }
 
     canMoveDown() {
@@ -172,16 +179,11 @@ class Character extends MovableObject {
     }
 
     moveDown() {
-        super.moveDown();
         this.swimming_sound.play();
+        super.moveDown();
+        this.swimming_sound.pause();
     }
-
-    throwBubble() {
-        super.throwBubble();
-        setTimeout(() => {
-            this.blow_sound.play();
-        }, 500);
-    }
+    
 
     playCharacter() {
         if (this.isDead()) { this.playDeadAnimation(); }
@@ -258,5 +260,8 @@ class Character extends MovableObject {
             this.bubble = true;
             this.currentImage = 0;
         }
+        setTimeout(() => {
+            this.bubble_sound.play();
+        }, 500);
     }
 }

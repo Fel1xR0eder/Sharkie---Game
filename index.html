@@ -35,6 +35,8 @@
     <script>
         let switchMusic = true;
         let fullscreenBoo = false;
+        let ambience_sound = new Audio('./audio/gamesound.mp3');
+        let audioPlayer;
 
         // function fullscreenInterval() {
         //     setInterval(() => {
@@ -46,11 +48,6 @@
         //     }, 100);
         // }
 
-        function doFullscreen() {
-            let fullCanvas = document.getElementById('full-div');
-            enterFullscreen(fullCanvas);
-        }
-
 
         function enterFullscreen(element) {
             if (element.requestFullscreen) {
@@ -60,19 +57,6 @@
             } else if (element.webkitRequestFullscreen) {  // iOS Safari
                 element.webkitRequestFullscreen();
             }
-            changeFullscreenBtn();
-        }
-
-
-        function changeFullscreenBtn() {
-            if (!fullscreenBoo) {
-                document.getElementById('full-div').innerHTML +=
-                    `<div class="exit-div">
-                        <img class="exit-fullscreen" src="./img/6.Buttons/Full Screen/fullscreen.png" onclick="exitFullscreen()">
-                    </div>`;
-                fullscreenBoo = true;
-            }
-
         }
 
 
@@ -82,18 +66,32 @@
             } else if (document.webkitExitFullscreen) {
                 document.webkitExitFullscreen();
             }
+        }
 
-            // div display: none;
+
+
+        function changeFullscreen() {
+            if (!fullscreenBoo) {
+                let fullCanvas = document.getElementById('full-div');
+                document.getElementById('fullscreen').innerHTML = 'Exit Fullscreen'
+                enterFullscreen(fullCanvas);
+                fullscreenBoo = true;
+            } else {
+                document.getElementById('fullscreen').innerHTML = 'Fullscreen'
+                exitFullscreen();
+            }
         }
 
         function OpenCanvas() {
             let canvas = document.getElementById('canvas');
             let buttons = document.getElementById('play-bar');
             let body = document.getElementById('body');
+            let credits = document.getElementById('canvas');
 
             canvas.style.display = 'block';
             buttons.style.display = 'none';
             body.style.backgroundImage = `url('../img/3. Background/background.jpg')`;
+            credits.style.display = 'none'
         }
 
 
@@ -103,24 +101,35 @@
             if (switchMusic == true) {
                 musicButton.innerHTML = 'MUSIC OFF';
                 switchMusic = false;
-                // turn music on
+                playAudio();
             } else {
                 musicButton.innerHTML = 'MUSIC ON';
                 switchMusic = true;
-                // turn music off
+                pauseAudio();
             }
+        }
+
+        function pauseAudio() {
+            audioPlayer.pause();
         }
 
 
         function help() {
             document.getElementById('help-div').style.display = 'flex';
             document.getElementById('play-bar').style.display = 'none';
+            document.getElementById('credits').style.display = 'none';
         }
 
 
         function backToMenu() {
             document.getElementById('help-div').style.display = 'none';
             document.getElementById('play-bar').style.display = 'flex';
+        }
+
+
+        function playAudio() {
+            audioPlayer = ambience_sound;
+            audioPlayer.play();
         }
 
     </script>
@@ -133,24 +142,33 @@
 
     <div id="full-div" class="full-div">
 
+        <div class="endscreen-div">
+            <img id="img-element">
+        </div>
+
         <div id="play-bar" class="play-bar floating">
             <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
             <button id="music-switch" onclick="toggleMusic()">MUSIC ON</button>
             <button id="help" onclick="help()">HOW TO PLAY</button>
-            <button id="fullscreen" onclick="doFullscreen()">FULLSCREEN</button>
+            <button id="fullscreen" onclick="changeFullscreen()">FULLSCREEN</button>
         </div>
 
         <div class="help" id="help-div" style="display: none">
             <span class="floating">
                 <img class="instructions" src="./img/6.Buttons/Instructions 1.png">
             </span>
+
             <button onclick="backToMenu()" class="floating back-button">
                 BACK
             </button>
         </div>
 
-        <canvas id="canvas" style="display: none;" width="720" height="480">
-        </canvas>
+        <canvas id="canvas" style="display: none;" width="720" height="480"></canvas>
+
+        <div id="credits" class="credits">
+            <span>sounds from zapsplat.com</span>
+        </div>
+
     </div>
 
 </body>

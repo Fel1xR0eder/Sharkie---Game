@@ -11,6 +11,23 @@ class MovableObject extends DrawableObject {
     poison = 0;
     dead = false;
 
+    IMAGES_ENDSCREEN_FAIL = [
+        './img/6.Buttons/Tittles/Game Over/Recurso 9.png',
+        './img/6.Buttons/Tittles/Game Over/Recurso 10.png',
+        './img/6.Buttons/Tittles/Game Over/Recurso 11.png',
+        './img/6.Buttons/Tittles/Game Over/Recurso 12.png',
+        './img/6.Buttons/Tittles/Game Over/Recurso 13.png'
+    ]
+
+
+    IMAGES_ENDSCREEN_WIN = [
+        './img/6.Buttons/Tittles/You win/Recurso 19.png',
+        './img/6.Buttons/Tittles/You win/Recurso 20.png',
+        './img/6.Buttons/Tittles/You win/Recurso 21.png',
+        './img/6.Buttons/Tittles/You win/Recurso 22.png'
+    ]
+
+
 
     offset = {
         top: 0,
@@ -93,16 +110,21 @@ class MovableObject extends DrawableObject {
             setInterval(() => {
                 this.loadImage(this.world.character.IMAGES_DEAD[11]);
             }, 100);
-            world.clearAllIntervals();
+            //world.clearAllIntervals();
         }, 2000);
         this.showEndScreen();
     }
 
+
     showEndScreen() {
-        document.getElementById('full-div').innerHTML =
-        `
-        
-        `;     
+        let i = 0;
+        const imgElement = document.getElementById('img-element');
+        setInterval(() => {
+            imgElement.src = this.IMAGES_ENDSCREEN_FAIL[i];
+            i = (i+1) % this.IMAGES_ENDSCREEN_FAIL.length;
+        },700);
+        document.getElementById('canvas').style.display = 'none';
+        document.getElementById('credits').style.display = 'none';
     }
 
     isHurt() {

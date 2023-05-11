@@ -140,7 +140,6 @@ class Endboss extends MovableObject {
             else if (this.bossAttack && this.bossDisplayed) { this.playBossAttackAnimation(); }
             else if (this.bossDisplayed) {this.playBossFloatingAnimation(); }
             if (this.distance_char_boss <= 600 && !this.bossDisplayed) {i++, this.BossIntro(i); }
-            console.log(i);
         }, 150);
     }
 
