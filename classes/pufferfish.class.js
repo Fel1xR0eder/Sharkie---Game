@@ -38,7 +38,7 @@ class Pufferfish extends MovableObject {
 
     constructor() {
         super().loadImage('./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
-        this.x = 200 + Math.random() * 2000; // Zahl zwischen 200 & 1200 == (0 & 1) 
+        this.x = 400 + Math.random() * 2000; // Zahl zwischen 200 & 1200 == (0 & 1) 
         this.y = 50 + Math.random() * 200;
         this.speed = 0.15 + Math.random() * 0.25;
         this.loadImages(this.IMAGES_SWIMMING);

@@ -242,7 +242,9 @@ class Character extends MovableObject {
                     this.speed = 0;
                 }
             }, 100);
-            this.gameOver();
+            setTimeout(() => {
+                this.gameOver();
+            }, 2000);
         }
     }
 

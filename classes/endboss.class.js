@@ -76,7 +76,7 @@ class Endboss extends MovableObject {
         this.loadAllImages();
         this.animate();
         this.endbossAttack();
-        this.x = 2400;
+        this.x = 2900;
         this.distanceOf();
     }
 

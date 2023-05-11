@@ -106,12 +106,9 @@ class MovableObject extends DrawableObject {
 
 
     gameOver() {
-        setTimeout(() => {
-            setInterval(() => {
-                this.loadImage(this.world.character.IMAGES_DEAD[11]);
-            }, 100);
-            //world.clearAllIntervals();
-        }, 2000);
+        // setTimeout(() => {
+        //     world.clearAllIntervals();
+        // }, 3000);
         this.showEndScreen();
     }
 
@@ -121,10 +118,24 @@ class MovableObject extends DrawableObject {
         const imgElement = document.getElementById('img-element');
         setInterval(() => {
             imgElement.src = this.IMAGES_ENDSCREEN_FAIL[i];
-            i = (i+1) % this.IMAGES_ENDSCREEN_FAIL.length;
-        },700);
+            i = (i + 1) % this.IMAGES_ENDSCREEN_FAIL.length;
+        }, 700);
+        this.restartGame();
+    }
+
+    restartGame() {
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('credits').style.display = 'none';
+        document.getElementById('play-bar').style.display = 'flex';
+        //document.getElementById('play-bar').style.alignItems = 'flex-end';
+        //document.getElementById('start-game').innerHTML = 'RESTART';
+
+        document.getElementById('restart').classList.remove('d-none');
+
+        document.getElementById("start-game").style.display = 'none';
+        document.getElementById("music-switch").style.display = 'none';
+        document.getElementById("help").style.display = 'none';
+        document.getElementById("fullscreen").style.display = 'none';
     }
 
     isHurt() {

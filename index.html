@@ -32,108 +32,6 @@
     <script src="./js/game.js"></script>
 
 
-    <script>
-        let switchMusic = true;
-        let fullscreenBoo = false;
-        let ambience_sound = new Audio('./audio/gamesound.mp3');
-        let audioPlayer;
-
-        // function fullscreenInterval() {
-        //     setInterval(() => {
-        //         if(!fullscreenBoo) {
-        //             document.getElementById('exit-fullscreen').style.display = 'none';
-        //         } else {
-        //             document.getElementById('exit-fullscreen').style.display = 'flex';
-        //         }
-        //     }, 100);
-        // }
-
-
-        function enterFullscreen(element) {
-            if (element.requestFullscreen) {
-                element.requestFullscreen();
-            } else if (element.msRequestFullscreen) {      // for IE11 (remove June 15, 2022)
-                element.msRequestFullscreen();
-            } else if (element.webkitRequestFullscreen) {  // iOS Safari
-                element.webkitRequestFullscreen();
-            }
-        }
-
-
-        function exitFullscreen() {
-            if (document.exitFullscreen) {
-                document.exitFullscreen();
-            } else if (document.webkitExitFullscreen) {
-                document.webkitExitFullscreen();
-            }
-        }
-
-
-
-        function changeFullscreen() {
-            if (!fullscreenBoo) {
-                let fullCanvas = document.getElementById('full-div');
-                document.getElementById('fullscreen').innerHTML = 'Exit Fullscreen'
-                enterFullscreen(fullCanvas);
-                fullscreenBoo = true;
-            } else {
-                document.getElementById('fullscreen').innerHTML = 'Fullscreen'
-                exitFullscreen();
-            }
-        }
-
-        function OpenCanvas() {
-            let canvas = document.getElementById('canvas');
-            let buttons = document.getElementById('play-bar');
-            let body = document.getElementById('body');
-            let credits = document.getElementById('canvas');
-
-            canvas.style.display = 'block';
-            buttons.style.display = 'none';
-            body.style.backgroundImage = `url('../img/3. Background/background.jpg')`;
-            credits.style.display = 'none'
-        }
-
-
-        function toggleMusic() {
-            let musicButton = document.getElementById('music-switch')
-
-            if (switchMusic == true) {
-                musicButton.innerHTML = 'MUSIC OFF';
-                switchMusic = false;
-                playAudio();
-            } else {
-                musicButton.innerHTML = 'MUSIC ON';
-                switchMusic = true;
-                pauseAudio();
-            }
-        }
-
-        function pauseAudio() {
-            audioPlayer.pause();
-        }
-
-
-        function help() {
-            document.getElementById('help-div').style.display = 'flex';
-            document.getElementById('play-bar').style.display = 'none';
-            document.getElementById('credits').style.display = 'none';
-        }
-
-
-        function backToMenu() {
-            document.getElementById('help-div').style.display = 'none';
-            document.getElementById('play-bar').style.display = 'flex';
-        }
-
-
-        function playAudio() {
-            audioPlayer = ambience_sound;
-            audioPlayer.play();
-        }
-
-    </script>
-
 </head>
 
 <body id="body">
@@ -147,10 +45,11 @@
         </div>
 
         <div id="play-bar" class="play-bar floating">
-            <button onclick="init(), OpenCanvas()" id="levelInit()">START GAME</button>
+            <button onclick="init()" id="start-game">START GAME</button>
             <button id="music-switch" onclick="toggleMusic()">MUSIC ON</button>
             <button id="help" onclick="help()">HOW TO PLAY</button>
             <button id="fullscreen" onclick="changeFullscreen()">FULLSCREEN</button>
+            <button id="restart" class="d-none restart" onclick="init()">PLAY AGAIN</button> <!--location.reload()-->
         </div>
 
         <div class="help" id="help-div" style="display: none">
