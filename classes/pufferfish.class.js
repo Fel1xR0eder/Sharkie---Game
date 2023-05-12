@@ -1,5 +1,13 @@
 class Pufferfish extends MovableObject {
 
+    health = true;
+    dead = false;
+    transition = this.IMAGES_SWIMMING;
+    pufferAttack = false;
+    hurt_sound = new Audio ('./audio/hurt.mp3');
+
+
+
     IMAGES_SWIMMING = [
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png',
         './img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim2.png',
@@ -29,12 +37,6 @@ class Pufferfish extends MovableObject {
         './img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/Dead2.png',
         './img/2.Enemy/1.Puffer fish (3 color options)/4.DIE/Dead3.png'
     ]
-
-
-    health = true;
-    dead = false;
-    transition = this.IMAGES_SWIMMING;
-    pufferAttack = false;
 
     constructor() {
         super().loadImage('./img/2.Enemy/1.Puffer fish (3 color options)/1.Swim/1.swim1.png');
@@ -78,6 +80,7 @@ class Pufferfish extends MovableObject {
         setTimeout(() => {
             this.pufferAttack = false;
         }, 1500);
+        this.hurt_sound.play();
     }
 
 

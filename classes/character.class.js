@@ -12,6 +12,8 @@ class Character extends MovableObject {
     dead = false;
     swimming_sound = new Audio('./audio/swimming.mp3');
     bubble_sound = new Audio('./audio/blub.mp3');
+    earn_coin_sound = new Audio ('./audio/collect-coin.wav');
+    collect_poison_sound = new Audio ('./audio/collect-poison.wav');
 
     offset = {
         top: 100,
@@ -146,10 +148,6 @@ class Character extends MovableObject {
         this.otherDirection = false;
         super.moveRight();
         this.swimming_sound.pause();
-        // this.world.audioPlayer.pause();
-        // setTimeout(() => {
-        // this.world.audioPlayer.play();
-        // }, 500);
     }
 
     canMoveLeft() {

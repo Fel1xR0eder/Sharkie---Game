@@ -70,7 +70,7 @@ function OpenCanvas() {
     document.getElementById('body').style.backgroundImage = `url('../img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
     introSound.pause();
-    ambience_sound.play();
+    playGameSound();
 }
 
 function stopGameOverScreen() {
@@ -106,6 +106,12 @@ function pauseAudio() {
 
 function playIntroSound() {
     introSound.play();
+}
+
+function playGameSound() {
+    if (switchMusic) {
+        ambience_sound.play();
+    }
 }
 
 

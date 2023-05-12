@@ -59,7 +59,7 @@ class MovableObject extends DrawableObject {
 
 
     hit() {
-        if (this.bossEnergy > 0) {
+        if (this.energy > 0) {
             this.energy -= 5;
             if (this.energy < 0) {
                 this.energy = 0;
@@ -71,7 +71,7 @@ class MovableObject extends DrawableObject {
 
 
     bossHit() {
-        this.bossEnergy -= 20;  // nur zum testen
+        this.bossEnergy -= 20;
         if (this.bossEnergy <= 0) {
             this.bossEnergy = 0;
             world.level.endboss[0].bossDead = true;
@@ -94,6 +94,7 @@ class MovableObject extends DrawableObject {
         if (this.money >= 100) {
             this.money = 100;
         }
+        this.earn_coin_sound.play();
     }
 
 
@@ -102,13 +103,12 @@ class MovableObject extends DrawableObject {
         if (this.poison >= 100) {
             this.poison = 100;
         }
+        this.collect_poison_sound.play();
     }
 
 
     gameOver() {
-        // setTimeout(() => {
-        //     world.clearAllIntervals();
-        // }, 3000);
+        ambience_sound.pause();
         this.showEndScreen();
     }
 
@@ -124,14 +124,13 @@ class MovableObject extends DrawableObject {
     }
 
     restartGame() {
+        debugger;
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('credits').style.display = 'none';
         document.getElementById('play-bar').style.display = 'flex';
         //document.getElementById('play-bar').style.alignItems = 'flex-end';
         //document.getElementById('start-game').innerHTML = 'RESTART';
-
         document.getElementById('restart').classList.remove('d-none');
-
         document.getElementById("start-game").style.display = 'none';
         document.getElementById("music-switch").style.display = 'none';
         document.getElementById("help").style.display = 'none';
