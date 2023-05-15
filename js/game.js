@@ -11,19 +11,24 @@ let showGameOver = 0;
 const allAudios = [];
 
 function init() {
+    initLevel();
+    //pushAllAudios();
     OpenCanvas();
     stopGameOverScreen();
-    initLevel();
-    pushAllAudios();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
-
-function pushAllAudios() {
-    allAudios.push(ambience_sound);
-    allAudios.push(intro_sound);
+function initial() {
+    console.log('pushen');
+    Audio.pushAllAudios();
 }
+
+
+// function pushAllAudios() {
+//     allAudios.push(ambience_sound);
+//     allAudios.push(intro_sound);
+// }
 
 
 function enterFullscreen(element) {

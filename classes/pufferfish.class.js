@@ -4,7 +4,7 @@ class Pufferfish extends MovableObject {
     dead = false;
     transition = this.IMAGES_SWIMMING;
     pufferAttack = false;
-    hurt_sound = new Audio ('./audio/hurt.mp3');
+   // hurt_sound = new Audio ('./audio/hurt.mp3');
 
 
 
@@ -46,7 +46,7 @@ class Pufferfish extends MovableObject {
         this.loadAllImages();
         this.animate();
         this.enemyBubbleDead();
-        this.pushPufferfishAudio();
+        //this.pushPufferfishAudio();
     }
 
     loadAllImages() {
@@ -57,9 +57,9 @@ class Pufferfish extends MovableObject {
     }
 
 
-    pushPufferfishAudio() {
-        allAudios.push(this.hurt_sound);
-    }
+    // pushPufferfishAudio() {
+    //     allAudios.push(this.hurt_sound);
+    // }
 
     enemyBubbleDead() {
         setInterval(() => {

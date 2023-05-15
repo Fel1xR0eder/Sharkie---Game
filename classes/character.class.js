@@ -10,11 +10,11 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
-    swimming_sound = new Audio('./audio/swimming.mp3');
-    bubble_sound = new Audio('./audio/blub.mp3');
-    earn_coin_sound = new Audio('./audio/collect-coin.wav');
-    collect_poison_sound = new Audio('./audio/collect-poison.wav');
-    gameover_sound = new Audio('./audio/gameover.wav');
+    //swimming_sound = new Audio('./audio/swimming.mp3');
+    //bubble_sound = new Audio('./audio/blub.mp3');
+    //earn_coin_sound = new Audio('./audio/collect-coin.wav');
+    //collect_poison_sound = new Audio('./audio/collect-poison.wav');
+    //gameover_sound = new Audio('./audio/gameover.wav');
 
 
     offset = {
@@ -107,17 +107,17 @@ class Character extends MovableObject {
         super();
         this.loadAllImages();
         this.animate();
-        this.pushCharacterAudios();
+        //this.pushCharacterAudios();
     }
 
     
-    pushCharacterAudios() {
-        allAudios.push(this.swimming_sound);
-        allAudios.push(this.bubble_sound);
-        allAudios.push(this.earn_coin_sound);
-        allAudios.push(this.collect_poison_sound);
-        allAudios.push(this.gameover_sound);
-    }
+    // pushCharacterAudios() {
+    //     allAudios.push(this.swimming_sound);
+    //     allAudios.push(this.bubble_sound);
+    //     allAudios.push(this.earn_coin_sound);
+    //     allAudios.push(this.collect_poison_sound);
+    //     allAudios.push(this.gameover_sound);
+    // }
 
 
     loadAllImages() {
