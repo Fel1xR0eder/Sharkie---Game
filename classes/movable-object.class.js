@@ -107,9 +107,14 @@ class MovableObject extends DrawableObject {
     }
 
 
-    gameOver() {
-        ambience_sound.pause();
-        this.showEndScreen();
+    winScreen() {
+        let i = 0;
+        const imgElement = document.getElementById('img-element');
+        setInterval(() => {
+            imgElement.src = this.IMAGES_ENDSCREEN_WIN[i];
+            i = (i + 1) % this.IMAGES_ENDSCREEN_WIN.length;
+        }, 700);
+        this.restartGame();
     }
 
 
@@ -124,7 +129,6 @@ class MovableObject extends DrawableObject {
     }
 
     restartGame() {
-        debugger;
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('credits').style.display = 'none';
         document.getElementById('play-bar').style.display = 'flex';

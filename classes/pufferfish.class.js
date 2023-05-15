@@ -43,14 +43,23 @@ class Pufferfish extends MovableObject {
         this.x = 400 + Math.random() * 2000; // Zahl zwischen 200 & 1200 == (0 & 1) 
         this.y = 50 + Math.random() * 200;
         this.speed = 0.15 + Math.random() * 0.25;
+        this.loadAllImages();
+        this.animate();
+        this.enemyBubbleDead();
+        this.pushPufferfishAudio();
+    }
+
+    loadAllImages() {
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_TRANSITION);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_DEAD);
-        this.animate();
-        this.enemyBubbleDead();
     }
 
+
+    pushPufferfishAudio() {
+        allAudios.push(this.hurt_sound);
+    }
 
     enemyBubbleDead() {
         setInterval(() => {

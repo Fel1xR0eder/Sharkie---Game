@@ -12,8 +12,10 @@ class Character extends MovableObject {
     dead = false;
     swimming_sound = new Audio('./audio/swimming.mp3');
     bubble_sound = new Audio('./audio/blub.mp3');
-    earn_coin_sound = new Audio ('./audio/collect-coin.wav');
-    collect_poison_sound = new Audio ('./audio/collect-poison.wav');
+    earn_coin_sound = new Audio('./audio/collect-coin.wav');
+    collect_poison_sound = new Audio('./audio/collect-poison.wav');
+    gameover_sound = new Audio('./audio/gameover.wav');
+
 
     offset = {
         top: 100,
@@ -101,12 +103,20 @@ class Character extends MovableObject {
 
 
 
-
-    constructor() {     // super() = Funktionen aus übergeordneter Klasse((extends)MovableObject)
+    constructor() {
         super();
         this.loadAllImages();
-        //this.applyGravity();
         this.animate();
+        this.pushCharacterAudios();
+    }
+
+    
+    pushCharacterAudios() {
+        allAudios.push(this.swimming_sound);
+        allAudios.push(this.bubble_sound);
+        allAudios.push(this.earn_coin_sound);
+        allAudios.push(this.collect_poison_sound);
+        allAudios.push(this.gameover_sound);
     }
 
 
@@ -181,7 +191,7 @@ class Character extends MovableObject {
         super.moveDown();
         this.swimming_sound.pause();
     }
-    
+
 
     playCharacter() {
         if (this.isDead()) { this.playDeadAnimation(); }
@@ -193,12 +203,10 @@ class Character extends MovableObject {
         else { this.playAnimation(this.IMAGES_IDLE); }
     }
 
+
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
-        if (this.currentImage >= this.IMAGES_DEAD.length) {
-            this.dead = false;
-            this.deadAnimation();
-        }
+        this.deadAnimation();
     }
 
     playShockAnimation() {
@@ -231,19 +239,23 @@ class Character extends MovableObject {
 
     deadAnimation() {
         if (!this.dead) {
-            this.dead = true;
-            this.currentImage = 0;
-            setInterval(() => {
-                this.speed = 10;
-                this.y += this.speed;
-                if (this.y >= 290) {
-                    this.speed = 0;
-                }
-            }, 100);
-            setTimeout(() => {
-                this.gameOver();
-            }, 2000);
+            this.characterIsDead();
+            setTimeout(() => { this.showEndScreen(); }, 2000);
+            ambience_sound.pause();
+            this.gameover_sound.play();
         }
+    }
+
+    characterIsDead() {
+        this.dead = true;
+        this.currentImage = 0;
+        setInterval(() => {
+            this.speed = 10;
+            this.y += this.speed;
+            if (this.y >= 290) {
+                this.speed = 0;
+            }
+        }, 100);
     }
 
 

@@ -41,6 +41,12 @@ class Jellyfish extends MovableObject {
         this.animate();
         this.enemyBubbleDead();
         this.moveToBottom();
+        this.pushJellyfishAudios();
+    }
+
+
+    pushJellyfishAudios() {
+        allAudios.push(this.buzz_sound);
     }
 
 

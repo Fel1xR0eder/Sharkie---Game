@@ -9,7 +9,8 @@ class Endboss extends MovableObject {
     bossHurt = false;
     bossDisplayed = false;
     bossHurt_sound = new Audio('./audio/bosshurt.wav');
-    gameover_sound = new Audio('./audio/gameover.wav');
+    win_sound = new Audio ('./audio/you_win.mp3');
+    attack_sound = new Audio ('./audio/bite.wav');
 
 
     offset = {
@@ -81,6 +82,7 @@ class Endboss extends MovableObject {
         this.endbossAttack();
         this.x = 2900;
         this.distanceOf();
+        this.pushEndbossAudios();
     }
 
     loadAllImages() {
@@ -89,6 +91,12 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_ENDBOSS_ATTACK);
         this.loadImages(this.IMAGES_ENDBOSS_DEAD);
         this.loadImages(this.IMAGES_ENDBOSS_HURT);
+    }
+
+    pushEndbossAudios() {
+        allAudios.push(this.bossHurt_sound);
+        allAudios.push(this.win_sound);
+        allAudios.push(this.attack_sound);
     }
 
 
@@ -127,11 +135,14 @@ class Endboss extends MovableObject {
                 }
             }
             setTimeout(() => {
-                this.gameOver();
+                this.winScreen();
             }, 1200);
         }, 200)
-        this.gameover_sound.play();
+        this.win_sound.play();
+        ambience_sound.pause();
     }
+
+    //this.gameover_sound.play();
 
 
     animate() {
@@ -156,8 +167,6 @@ class Endboss extends MovableObject {
         clearInterval(19);
         this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
         this.endbossDeadAnimation();
-        this.gameover_sound.play();
-        console.log('boss dead');
     }
 
 
@@ -167,7 +176,6 @@ class Endboss extends MovableObject {
             this.bossHurt = false;
         }, 700);
         this.bossHurt_sound.play();
-        console.log('boss sound');
     }
 
 
@@ -179,6 +187,7 @@ class Endboss extends MovableObject {
                 this.currentImage = 0;
             }, 2000);
         }
+        this.attack_sound.play();
     }
 
 
