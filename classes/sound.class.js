@@ -1,33 +1,33 @@
-class Audio {
+class Sound {
 
-    //Character Sounds
+    //from Character class
     swimming_sound = new Audio('./audio/swimming.mp3');
     bubble_sound = new Audio('./audio/blub.mp3');
     earn_coin_sound = new Audio('./audio/collect-coin.wav');
     collect_poison_sound = new Audio('./audio/collect-poison.wav');
     gameover_sound = new Audio('./audio/gameover.wav');
 
-    // Endboss Sounds
+    //from Endboss class
     bossHurt_sound = new Audio('./audio/bosshurt.wav');
     win_sound = new Audio ('./audio/you_win.mp3');
     attack_sound = new Audio ('./audio/bite.wav');
 
-    //Jellyfish Sounds
+    //from Jellyfish class
     buzz_sound = new Audio ('./audio/buzz.wav');
 
 
-    //Pufferfish Sounds
+    //from Pufferfish class
     hurt_sound = new Audio ('./audio/hurt.mp3');
 
 
-    // Game Sounds
+    //from Game class
     ambience_sound = new Audio('./audio/gamesound.mp3');
     intro_sound = new Audio('./audio/underwater_normal.mp3');
 
 
     pushAllAudios() {
-        allAudios.push(ambience_sound);
-        allAudios.push(intro_sound);
+        allAudios.push(this.intro_sound);
+        allAudios.push(this.ambience_sound);
         allAudios.push(this.buzz_sound);
         allAudios.push(this.hurt_sound);
         allAudios.push(this.bossHurt_sound);
@@ -40,3 +40,5 @@ class Audio {
         allAudios.push(this.gameover_sound);
     }
 }
+
+

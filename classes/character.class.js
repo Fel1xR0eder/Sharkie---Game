@@ -10,11 +10,7 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
-    //swimming_sound = new Audio('./audio/swimming.mp3');
-    //bubble_sound = new Audio('./audio/blub.mp3');
-    //earn_coin_sound = new Audio('./audio/collect-coin.wav');
-    //collect_poison_sound = new Audio('./audio/collect-poison.wav');
-    //gameover_sound = new Audio('./audio/gameover.wav');
+
 
 
     offset = {
@@ -107,17 +103,8 @@ class Character extends MovableObject {
         super();
         this.loadAllImages();
         this.animate();
-        //this.pushCharacterAudios();
+        this.playSound();
     }
-
-    
-    // pushCharacterAudios() {
-    //     allAudios.push(this.swimming_sound);
-    //     allAudios.push(this.bubble_sound);
-    //     allAudios.push(this.earn_coin_sound);
-    //     allAudios.push(this.collect_poison_sound);
-    //     allAudios.push(this.gameover_sound);
-    // }
 
 
     loadAllImages() {
@@ -152,12 +139,23 @@ class Character extends MovableObject {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+    playSound() {
+        allAudios.forEach(sound => {
+            if (!playMusic) {
+                sound.volume = 1;
+                audio.ambience_sound.volume = 0; // wieder laut stellen => .5
+            } else {
+                sound.volume = 0.0;
+            }
+            console.log(sound.volume);
+        });
+    }
+
+
     moveRight() {
-        this.swimming_sound.play();
         this.bubbleDirection = false;
         this.otherDirection = false;
         super.moveRight();
-        this.swimming_sound.pause();
     }
 
     canMoveLeft() {
@@ -165,11 +163,11 @@ class Character extends MovableObject {
     }
 
     moveLeft() {
-        this.swimming_sound.play();
+        audio.swimming_sound.volume = 1;
         super.moveLeft();
         this.bubbleDirection = true;
         this.otherDirection = true;
-        this.swimming_sound.pause();
+        audio.swimming_sound.volume = 0;
     }
 
     canMoveUp() {
@@ -177,9 +175,9 @@ class Character extends MovableObject {
     }
 
     moveUp() {
-        this.swimming_sound.play();
+        audio.swimming_sound.volume = 1;
         super.moveUp();
-        this.swimming_sound.pause();
+        audio.swimming_sound.volume = 0;
     }
 
     canMoveDown() {
@@ -187,9 +185,9 @@ class Character extends MovableObject {
     }
 
     moveDown() {
-        this.swimming_sound.play();
+        audio.swimming_sound.volume = 1;
         super.moveDown();
-        this.swimming_sound.pause();
+        audio.swimming_sound.volume = 0;
     }
 
 
@@ -241,8 +239,8 @@ class Character extends MovableObject {
         if (!this.dead) {
             this.characterIsDead();
             setTimeout(() => { this.showEndScreen(); }, 2000);
-            ambience_sound.pause();
-            this.gameover_sound.play();
+            //Sound.ambience_sound.pause();
+            //Sound.gameover_sound.play();
         }
     }
 
@@ -272,8 +270,8 @@ class Character extends MovableObject {
             this.bubble = true;
             this.currentImage = 0;
         }
-        setTimeout(() => {
-            this.bubble_sound.play();
-        }, 500);
+        // setTimeout(() => {
+        //     Sound.bubble_sound.play();
+        // }, 500);
     }
 }

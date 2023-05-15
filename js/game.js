@@ -1,34 +1,26 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let switchMusic = true;
+let playMusic = false;
 let fullscreenBoo = false;
-let ambience_sound = new Audio('./audio/gamesound.mp3');
-let intro_sound = new Audio('./audio/underwater_normal.mp3');
 let audioPlayer;
 let showGameOver = 0;
+let audio = new Sound;
 
 const allAudios = [];
 
 function init() {
     initLevel();
-    //pushAllAudios();
     OpenCanvas();
     stopGameOverScreen();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
-function initial() {
-    console.log('pushen');
-    Audio.pushAllAudios();
+
+function initAudio() {
+    audio.pushAllAudios();
 }
-
-
-// function pushAllAudios() {
-//     allAudios.push(ambience_sound);
-//     allAudios.push(intro_sound);
-// }
 
 
 function enterFullscreen(element) {
@@ -70,7 +62,7 @@ function OpenCanvas() {
     document.getElementById('play-bar').style.display = 'none';
     document.getElementById('body').style.backgroundImage = `url('../img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
-    intro_sound.pause();
+    audio.intro_sound.pause();
     playGameSound();
 }
 
@@ -87,34 +79,37 @@ function stopGameOverScreen() {
 function toggleMusic() {
     let musicButton = document.getElementById('music-switch');
 
-    if (switchMusic == true) {
-        musicButton.innerHTML = 'TURN MUSIC ON';
-        switchMusic = false;
-    } else {
+    if (playMusic == true) {
         musicButton.innerHTML = 'TURN MUSIC OFF';
-        switchMusic = true;
-        pauseAllAudio();
+        playMusic = false;
+    } else {
+        musicButton.innerHTML = 'TURN MUSIC ON';
+        playMusic = true;
+        muteAllAudios();
     }
 }
 
 
-function pauseAllAudio() {
-    console.log('geht');
+function muteAllAudios() {
     allAudios.forEach((audio) => {
-        console.log(audio);
-        audio.pause();
+        setInterval(() => {
+            audio.volume = 0.0;
+        }, 500);
     })
+    console.log('MUTE ALL SOUNDS', audio);
 }
 
 
 function playIntroSound() {
-    intro_sound.play();
+    if (!playMusic) {
+        audio.intro_sound.play();
+    }
 }
 
 
 function playGameSound() {
-    if (switchMusic) {
-        ambience_sound.play();
+    if (!playMusic) {
+        audio.ambience_sound.play();
     }
 }
 

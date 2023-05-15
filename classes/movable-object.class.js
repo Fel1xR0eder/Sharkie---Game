@@ -150,6 +150,7 @@ class MovableObject extends DrawableObject {
 
     moveRight() {
         this.x += this.speed;
+        audio.swimming_sound.play();
     }
 
 
