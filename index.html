@@ -35,11 +35,16 @@
 
 </head>
 
-<body onload="initAudio()" id="body">
+<body onload="initOnload()" id="body">
 
     <h1 id="h1" class="floating">Sharkie</h1>
 
+    <div id="mobile-screen-rotate">
+        <h2>Please rotate your device</h2>
+    </div>
+
     <div id="full-div" class="full-div">
+
 
         <div class="endscreen-div">
             <img id="img-element">
@@ -50,7 +55,7 @@
             <button id="music-switch" onclick="toggleMusic()">TURN MUSIC OFF</button>
             <button id="help" onclick="help()">HOW TO PLAY</button>
             <button id="fullscreen" onclick="changeFullscreen()">FULLSCREEN</button>
-            <button id="restart" class="d-none restart" onclick= "playAgain()">PLAY AGAIN</button> <!--location.reload()-->
+            <button id="restart" class="d-none restart" onclick="playAgain()">PLAY AGAIN</button>
         </div>
 
         <div class="help" id="help-div" style="display: none">
@@ -69,6 +74,23 @@
             <span>sounds from zapsplat.com</span>
         </div>
 
+        <div id="touch-section-left-over">
+            <img id="touch-buttons-left" src="./img/6.Buttons/Key/arrow keys.png">
+            <div class="left-touch-section">
+                <div class="touchbtn-row touchbtn-second-row">
+                    <div id="touchbtn-up" class="touchBtn"></div>
+                    <div id="touchbtn-left" class="touchBtn"></div>
+                    <div id="touchbtn-down" class="touchBtn"></div>
+                    <div id="touchbtn-right" class="touchBtn"></div>
+                </div>
+            </div>
+        </div>
+
+        <div id="touch-section-right">
+            <div id="bubble-attack-touch">
+                <img src="./img/1.Sharkie/4.Attack/Bubble trap/Bubble.png">
+            </div>
+        </div>
     </div>
 
 </body>

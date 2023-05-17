@@ -11,6 +11,13 @@ class Character extends MovableObject {
     shock = false;
     dead = false;
 
+    
+    game_sound = new Audio('./audio/gamesound.mp3');
+    swimming_sound = new Audio('./audio/swimming.mp3');
+    bubble_sound = new Audio('./audio/blub.mp3');
+    earn_coin_sound = new Audio('./audio/collect-coin.wav');
+    collect_poison_sound = new Audio('./audio/collect-poison.wav');
+    gameover_sound = new Audio('./audio/gameover.wav');
 
 
     offset = {
@@ -142,52 +149,57 @@ class Character extends MovableObject {
     playSound() {
         allAudios.forEach(sound => {
             if (!playMusic) {
-                sound.volume = 1;
-                audio.ambience_sound.volume = 0; // wieder laut stellen => .5
+                sound.volume = 0.5;
             } else {
                 sound.volume = 0.0;
+                this.swimming_sound.volume = 0.0;
+                this.bubble_sound.volume = 0.0;
+                this.earn_coin_sound.volume = 0.0;
+                this.collect_poison_sound.volume = 0.0;
+                this.gameover_sound.volume = 0.0;
             }
-            console.log(sound.volume);
         });
     }
 
 
     moveRight() {
+        super.moveRight();
+        this.swimming_sound.play();
         this.bubbleDirection = false;
         this.otherDirection = false;
-        super.moveRight();
     }
+
 
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
     moveLeft() {
-        audio.swimming_sound.volume = 1;
         super.moveLeft();
+        this.swimming_sound.play();
         this.bubbleDirection = true;
         this.otherDirection = true;
-        audio.swimming_sound.volume = 0;
     }
 
     canMoveUp() {
         return this.world.keyboard.UP && this.y > this.world.level.level_end_y_top;
     }
 
+
     moveUp() {
-        audio.swimming_sound.volume = 1;
         super.moveUp();
-        audio.swimming_sound.volume = 0;
+        this.swimming_sound.play();
     }
+
 
     canMoveDown() {
         return this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom;
     }
 
+
     moveDown() {
-        audio.swimming_sound.volume = 1;
         super.moveDown();
-        audio.swimming_sound.volume = 0;
+        this.swimming_sound.play();
     }
 
 
@@ -239,8 +251,9 @@ class Character extends MovableObject {
         if (!this.dead) {
             this.characterIsDead();
             setTimeout(() => { this.showEndScreen(); }, 2000);
-            //Sound.ambience_sound.pause();
-            //Sound.gameover_sound.play();
+            Endboss.ambience_sound.pause(); // geht nicht
+            this.gameover_sound.play();
+            Endboss.attack_sound.pause(); // geht nicht
         }
     }
 
@@ -270,8 +283,8 @@ class Character extends MovableObject {
             this.bubble = true;
             this.currentImage = 0;
         }
-        // setTimeout(() => {
-        //     Sound.bubble_sound.play();
-        // }, 500);
+        setTimeout(() => {
+            this.bubble_sound.play();
+        }, 500);
     }
 }

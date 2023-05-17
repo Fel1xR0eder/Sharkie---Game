@@ -5,24 +5,29 @@ body {
     align-items: center;
     margin: 0;
     background-image: url('../img/3. Background/first-screen.png');
-    font-family: 'Luckiest Guy',Arial, Helvetica, sans-serif;
+    font-family: 'Luckiest Guy', Arial, Helvetica, sans-serif;
 }
 
 
 h1 {
     color: rgb(150, 35, 223);
-    font-size: 80px;
+    font-size:80px;
     text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 50px;
 }
 
-.floating { 
+h2 {
+    color: rgb(150, 35, 223);
+    font-size: 60px;
+    text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
+}
+
+.floating {
     animation-name: floating;
     animation-duration: 3s;
     animation-iteration-count: infinite;
     animation-timing-function: ease-in-out;
-    margin-left: 30px;
     margin-top: 5px;
 }
 
@@ -111,15 +116,8 @@ h1 {
     margin-bottom: -300px;
 }
 
-
-
-
-
- 
-@keyframes floating {
-    0% { transform: translate(0,  0px); }
-    50%  { transform: translate(0, 15px); }
-    100%   { transform: translate(0, -0px); }   
+#mobile-screen-rotate {
+    display: none;
 }
 
 
@@ -130,7 +128,19 @@ h1 {
 
 canvas {
     background-color: black;
-    z-index: 999;
+    display: block;
+}
+
+
+.touch-section {
+    display: flex;
+}
+
+
+#touch-buttons-left-over, #touch-buttons-left img,
+#touch-buttons-right, #bubble-attack-touch {
+    display: none;
+    opacity: 0.8;
 }
 
 
@@ -163,4 +173,114 @@ button:active {
     box-shadow: rgb(93, 24, 220) 0px 0px 0px 0px;
     transform: translateY(10px);
     transition: 100ms;
+}
+
+
+@keyframes floating {
+    0% {
+        transform: translate(0, 0px);
+    }
+
+    50% {
+        transform: translate(0, 15px);
+    }
+
+    100% {
+        transform: translate(0, -0px);
+    }
+}
+
+/*                              
+###                                         ###
+##### // ##### RESPONSIVE DESIGN ##### // #####
+###                                         ###
+*/                              
+
+@media only screen and (max-width: 720px) {
+    canvas {
+        width: 100%
+    }
+}
+
+@media only screen and (max-height: 480px) {
+    canvas {
+        height: 100vh
+    }
+}
+
+@media only screen and (max-height: 480px),
+(max-width: 720px) {
+
+    #mobile-screen-rotate {
+        display: none;
+    }
+
+    #touch-section-right {
+        align-items: center;
+        bottom: 0;
+        display: block;
+        display: flex;
+        flex-direction: column;
+        height: 250px;
+        justify-content: center;
+        position: fixed;
+        right: 0;
+        width: 250px
+    }
+
+    #bubble-attack-touch {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 115px;
+        width: 115px
+    }
+
+    #touch-buttons-left img {
+        display: block;
+        height: 140px;
+        width: 220px
+    }
+
+    .touchbutton-row {
+        display: flex;
+        flex-direction: row;
+        height: 70px; 
+        justify-content: space-around;
+        width: 225px;
+    }
+
+    #left-touch-section,
+    #touch-buttons-left img,
+    #touch-buttons-left-over
+    .touchbtn-left {
+        bottom: 5%;
+        display: flex;
+        flex-direction: column;
+        height: 140px;
+        left: 2%;
+        position: fixed;
+        width: 220px;
+    }
+}
+
+
+@media (max-width: 820px) and (orientation: portrait) {
+    #mobile-screen-rotate {
+        align-items: center;
+        display: flex !important;
+        height: 100vh;
+        justify-content: center;
+        z-index: 999
+    }
+
+    #left-touch-section,
+    #h1,
+    #play-bar, 
+    #full-div,
+    #credits,
+    #touch-section-right,
+    #bubble-attack-touch {
+        display: none !important
+    }
 }
