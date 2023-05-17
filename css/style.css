@@ -11,7 +11,7 @@ body {
 
 h1 {
     color: rgb(150, 35, 223);
-    font-size:80px;
+    font-size: 80px;
     text-shadow: 3px 3px 7px rgba(0, 0, 0, 0.5);
     position: absolute;
     top: 50px;
@@ -49,9 +49,7 @@ h2 {
     display: flex;
     align-items: center;
     justify-content: center;
-    /* height: 80vh; */
     gap: 10px;
-    margin-bottom: 100px;
 }
 
 .help {
@@ -98,35 +96,79 @@ h2 {
     color: white;
     font-size: 14px;
     position: absolute;
-    bottom: 100px;
+    bottom: 30px;
 }
 
 #hud {
-    position: absolute;
-    bottom: 50px;
-    left: 30px;
+    position: fixed;
+    bottom: 5px;
     display: block;
-    width: 100vw;
     width: 90vw;
     justify-content: space-between;
+    align-items: flex-end;
 }
 
 .left-touch-section {
     position: relative;
-    width: 350px;
-    left: -568px;
-}
-
-.touch-button-top {
-    height: 105px;
-    width: 110px;
-    position: relative;
-    left: 36%;
+    width: 200px;
+    height: 130px;
+    left: -27px;
 }
 
 #touch-buttons-left {
     opacity: 0.6;
-    width: 350px;
+    width: 200px;
+    position: fixed;
+    bottom: 5px;
+    left: 15px;
+}
+
+.touch-btns {
+    position: relative;
+    opacity: 0.6;
+    height: 50px;
+    width: 50px;
+}
+
+#touch-event-up {
+    left: 77px;
+    bottom: -5px;
+}
+
+#touch-event-left {
+    left: 4px;
+    bottom: -23px;
+}
+
+#touch-event-down {
+    left: 75px;
+    bottom: 26px;
+}
+
+#touch-event-right {
+    left: 145px;
+    bottom: 76px;
+}
+
+#touch-section-right {
+    width: 200px;
+    height: 130px;
+    position: fixed;
+    bottom: 0;
+    right: 15px;
+}
+
+#bubble-attack-touch {
+    width: 60px;
+    height: 60px;
+    position: relative;
+    top: 10px;
+    left: 15px;
+}
+
+#bubble-attack-touch img {
+    width: 60px;
+    height: 60px;
 }
 
 .back-button {
@@ -217,7 +259,7 @@ button:active {
 ###                                         ###
 ##### // ##### RESPONSIVE DESIGN ##### // #####
 ###                                         ###
-*/                              
+*/
 
 @media only screen and (max-width: 720px) {
     canvas {
@@ -238,52 +280,25 @@ button:active {
         display: none;
     }
 
+
     #touch-section-right {
-        align-items: center;
-        bottom: 0;
-        display: block;
-        display: flex;
-        flex-direction: column;
-        height: 250px;
-        justify-content: center;
-        position: fixed;
-        right: 0;
-        width: 250px
+        opacity: 0.6;
     }
 
-    #bubble-attack-touch {
+
+    /* #bubble-attack-touch {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 115px;
-        width: 115px
-    }
+        height: 50px;
+        width: 50px;
+    } */
 
-    #touch-buttons-left img {
+
+    /* #touch-buttons-left {
         display: block;
         height: 140px;
         width: 220px
-    }
-
-    /* .touchbutton-row {
-        display: flex;
-        flex-direction: row;
-        height: 70px; 
-        justify-content: space-around;
-        width: 225px;
-    } */
-
-    /* #left-touch-section,
-    #touch-buttons-left img,
-    #touch-buttons-left-over
-    .touchbtn-left {
-        bottom: 5%;
-        display: flex;
-        flex-direction: column;
-        height: 140px;
-        left: 2%;
-        position: fixed;
-        width: 220px;
     } */
 }
 
@@ -299,7 +314,7 @@ button:active {
 
     #left-touch-section,
     #h1,
-    #play-bar, 
+    #play-bar,
     #full-div,
     #credits,
     #touch-section-right,

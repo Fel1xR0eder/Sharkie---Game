@@ -201,19 +201,19 @@ function touchEvents() {
     const keyboardButtons = {
         arrowUp: {
             key: 'UP',
-            element: document.getElementById('touchbtn-up'),
+            element: document.getElementById('touch-event-up'),
         },
         arrowLeft: {
             key: 'LEFT',
-            element: document.getElementById('touchbtn-left'),
+            element: document.getElementById('touch-event-left'),
         },
         arrowDown: {
             key: 'DOWN',
-            element: document.getElementById('touchbtn-down'),
+            element: document.getElementById('touch-event-down'),
         },
         arrowRight: {
             key: 'RIGHT',
-            element: document.getElementById('touchbtn-right'),
+            element: document.getElementById('touch-event-right'),
         },
         attackTouch: {
             key: 'D',
@@ -235,9 +235,9 @@ function touchEvents() {
 
 function initResponsive() {
     setInterval(() => {
-        if (!gameStart) { hideTouchField(); }
-        else if (gameStart && landscape) { showTouchField(); }
-        else if (gameStart) { showTouchField(); }
+        if (!gameStart) { hideTouchElements(); }
+        else if (gameStart && landscape) { showTouchField(), hideHeadline(); }
+        else if (gameStart) { showTouchField(), hideHeadline(); }
     }, 100);
 }
 
@@ -262,8 +262,12 @@ function checkDeviceRotation() {
 }
 
 
-function hideTouchField() {
+function hideTouchElements() {
     document.getElementById('hud').style.display = 'none';
+}
+
+function hideHeadline() {
+    document.getElementById('h1').style.display = 'none';
 }
 
 
