@@ -94,7 +94,7 @@ class MovableObject extends DrawableObject {
         if (this.money >= 100) {
             this.money = 100;
         }
-        this.earn_coin_sound.play();
+        allAudios[9].play();
     }
 
 
@@ -103,7 +103,7 @@ class MovableObject extends DrawableObject {
         if (this.poison >= 100) {
             this.poison = 100;
         }
-        this.collect_poison_sound.play();
+        allAudios[10].play();
     }
 
 

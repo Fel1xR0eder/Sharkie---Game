@@ -9,10 +9,10 @@ class Endboss extends MovableObject {
     bossHurt = false;
     bossDisplayed = false;
     
-    ambience_sound = new Audio('./audio/gamesound.mp3');
-    bossHurt_sound = new Audio('./audio/bosshurt.wav');
-    win_sound = new Audio ('./audio/you_win.mp3');
-    attack_sound = new Audio ('./audio/bite.wav');
+    // ambience_sound = new Audio('./audio/gamesound.mp3');
+    // bossHurt_sound = new Audio('./audio/bosshurt.wav');
+    // win_sound = new Audio ('./audio/you_win.mp3');
+    // attack_sound = new Audio ('./audio/bite.wav');
 
 
     offset = {
@@ -133,8 +133,7 @@ class Endboss extends MovableObject {
                 this.winScreen();
             }, 1200);
         }, 200)
-        this.win_sound.play();
-        //ambience_sound.pause();
+        allAudios[5].play(); // Win
     }
 
 
@@ -169,7 +168,7 @@ class Endboss extends MovableObject {
         setTimeout(() => {
             this.bossHurt = false;
         }, 700);
-        this.bossHurt_sound.play();
+        allAudios[4].play(); // Boss hurt
     }
 
 
@@ -181,7 +180,7 @@ class Endboss extends MovableObject {
                 this.currentImage = 0;
             }, 2000);
         }
-        this.attack_sound.play();
+        allAudios[6].play(); // Boss attack
     }
 
 

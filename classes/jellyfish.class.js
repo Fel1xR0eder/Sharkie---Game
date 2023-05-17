@@ -5,7 +5,7 @@ class Jellyfish extends MovableObject {
     jellyShock = false;
     moveTop = false;
     moveBottom = false;
-    buzz_sound = new Audio ('./audio/buzz.wav');
+    // buzz_sound = new Audio ('./audio/buzz.wav');
 
 
     IMAGES_SWIMMING = [
@@ -65,7 +65,7 @@ class Jellyfish extends MovableObject {
     }
 
     playBuzzHurt() {
-        this.buzz_sound.play();
+        allAudios[2].play();
         setTimeout(() => {
             this.buzz_sound.pause();
         }, 1000);

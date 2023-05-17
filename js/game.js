@@ -16,6 +16,7 @@ function init() {
     OpenCanvas();
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+    gameStart = true;
 }
 
 
@@ -67,8 +68,8 @@ function OpenCanvas() {
     document.getElementById('play-bar').style.display = 'none';
     document.getElementById('body').style.backgroundImage = `url('../img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
-    audio.intro_sound.pause();
-    //playGameSound();
+    allAudios[0].pause();
+    allAudios[1].play();
 }
 
 function stopGameOverScreen() {
@@ -107,7 +108,7 @@ function muteAllAudios() {
 
 function playIntroSound() {
     if (!playMusic) {
-        audio.intro_sound.play();
+        allAudios[0].play();
     }
 }
 
@@ -233,13 +234,10 @@ function touchEvents() {
 }
 
 function initResponsive() {
-    showTouchField();
-    hideTouchField();
-
     setInterval(() => {
         if (!gameStart) { hideTouchField(); }
-        else if (gameStart && landscape) { showTouchField(), hideElements(); }
-        else if (gameStart) { showTouchField(), hideGameTitle(), showElements(); }
+        else if (gameStart && landscape) { showTouchField(); }
+        else if (gameStart) { showTouchField(); }
     }, 100);
 }
 
@@ -263,12 +261,12 @@ function checkDeviceRotation() {
     }, 500);
 }
 
+
 function hideTouchField() {
-    document.getElementById('touch-section-left-over').style.display = 'none';
-    document.getElementById('touch-section-right').style.display = 'none';
+    document.getElementById('hud').style.display = 'none';
 }
 
+
 function showTouchField() {
-    document.getElementById('touch-section-left-over').style.display = 'flex';
-    document.getElementById('touch-section-right').style.display = 'flex';
+    document.getElementById('hud').style.display = 'flex';
 }

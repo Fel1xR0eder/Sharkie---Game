@@ -4,7 +4,7 @@ class Pufferfish extends MovableObject {
     dead = false;
     transition = this.IMAGES_SWIMMING;
     pufferAttack = false;
-    hurt_sound = new Audio ('./audio/hurt.mp3');
+    // hurt_sound = new Audio ('./audio/hurt.mp3');
 
 
 
@@ -83,7 +83,7 @@ class Pufferfish extends MovableObject {
         setTimeout(() => {
             this.pufferAttack = false;
         }, 1500);
-        this.hurt_sound.play();
+        allAudios[3].play();
     }
 
 
