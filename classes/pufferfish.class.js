@@ -4,7 +4,6 @@ class Pufferfish extends MovableObject {
     dead = false;
     transition = this.IMAGES_SWIMMING;
     pufferAttack = false;
-    // hurt_sound = new Audio ('./audio/hurt.mp3');
 
 
 
@@ -71,7 +70,7 @@ class Pufferfish extends MovableObject {
     enemySlapDead() {
         if (!this.health) {
             this.playAnimation(this.IMAGES_DEAD);
-            this.y = 30;        // TEST COORDINATES
+            this.y = 30;
             this.x = 0;
             this.speed = 0;
         }

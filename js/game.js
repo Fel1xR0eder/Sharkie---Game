@@ -66,7 +66,7 @@ function changeFullscreen() {
 function OpenCanvas() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('play-bar').style.display = 'none';
-    document.getElementById('body').style.backgroundImage = `url('../img/3. Background/background.jpg')`;
+    document.getElementById('body').style.backgroundImage = `url('./img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
     allAudios[0].pause();
     allAudios[1].play();
@@ -220,6 +220,7 @@ function touchEvents() {
             element: document.getElementById('bubble-attack-touch'),
         },
     };
+    
 
     function handleTouchEvent(e, button) {
         e.preventDefault();
@@ -235,9 +236,9 @@ function touchEvents() {
 
 function initResponsive() {
     setInterval(() => {
-        if (!gameStart) { hideTouchElements(); }
-        else if (gameStart && landscape) { showTouchField(), hideHeadline(); }
-        else if (gameStart) { showTouchField(), hideHeadline(); }
+        if (!gameStart) { hideTouchElements();}    // No start
+        else if (gameStart && landscape) { showTouchElements(), hideHeadline(); }  // Phone start no headline
+        else if (gameStart) { hideTouchElements(); } // Normal start
     }, 100);
 }
 
@@ -271,6 +272,6 @@ function hideHeadline() {
 }
 
 
-function showTouchField() {
+function showTouchElements() {
     document.getElementById('hud').style.display = 'flex';
 }

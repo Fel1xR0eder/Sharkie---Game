@@ -8,11 +8,6 @@ class Endboss extends MovableObject {
     bossDead = false;
     bossHurt = false;
     bossDisplayed = false;
-    
-    // ambience_sound = new Audio('./audio/gamesound.mp3');
-    // bossHurt_sound = new Audio('./audio/bosshurt.wav');
-    // win_sound = new Audio ('./audio/you_win.mp3');
-    // attack_sound = new Audio ('./audio/bite.wav');
 
 
     offset = {
@@ -176,6 +171,7 @@ class Endboss extends MovableObject {
         this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
         if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
             setTimeout(() => {
+                this.x -= 10;
                 this.bossAttack = false;
                 this.currentImage = 0;
             }, 2000);
