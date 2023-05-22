@@ -63,13 +63,14 @@ function changeFullscreen() {
     }
 }
 
+
 function OpenCanvas() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('play-bar').style.display = 'none';
     document.getElementById('body').style.backgroundImage = `url('./img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
-    allAudios[0].pause();
-    allAudios[1].play();
+    allAudios[0].pause(); // normal sound
+    allAudios[1].play();    // gamesound 
 }
 
 function stopGameOverScreen() {
@@ -128,7 +129,6 @@ function backToMenu() {
 
 function playAgain() {
     location.reload();
-
 }
 
 

@@ -104,13 +104,13 @@ h2 {
     bottom: 5px;
     justify-content: space-between;
     align-items: flex-end;
+    width: 69vw;
 }
 
 .left-touch-section {
     position: relative;
     width: 200px;
     height: 130px;
-    left: -27px;
 }
 
 #touch-buttons-left {
@@ -118,7 +118,6 @@ h2 {
     width: 200px;
     position: fixed;
     bottom: 5px;
-    left: 15px;
 }
 
 .touch-btns {
@@ -184,7 +183,7 @@ h2 {
 }
 
 .restart {
-    margin-bottom: -300px;
+    margin-bottom: -250px;
 }
 
 #mobile-screen-rotate {
@@ -281,6 +280,27 @@ button:active {
 
     #touch-section-right {
         opacity: 0.6;
+    }
+
+    .help {
+        top: 10px !important;
+        flex-direction: unset;
+        width: unset;
+    }
+
+    .help span {
+        margin-bottom: 0 !important;
+    }
+
+    .instructions {
+        width: 500px !important;
+        height: unset !important;
+        top: 30px !important; 
+        left: -120px !important;
+    }
+
+    .back-button {
+        top: unset !important;
     }
 
 

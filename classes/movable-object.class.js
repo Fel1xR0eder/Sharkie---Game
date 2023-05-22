@@ -94,6 +94,7 @@ class MovableObject extends DrawableObject {
         if (this.money >= 100) {
             this.money = 100;
         }
+        allAudios[9].volume = 0.3;
         allAudios[9].play();
     }
 
@@ -132,13 +133,13 @@ class MovableObject extends DrawableObject {
         document.getElementById('canvas').style.display = 'none';
         document.getElementById('credits').style.display = 'none';
         document.getElementById('play-bar').style.display = 'flex';
-        //document.getElementById('play-bar').style.alignItems = 'flex-end';
-        //document.getElementById('start-game').innerHTML = 'RESTART';
         document.getElementById('restart').classList.remove('d-none');
         document.getElementById("start-game").style.display = 'none';
         document.getElementById("music-switch").style.display = 'none';
         document.getElementById("help").style.display = 'none';
-        document.getElementById("fullscreen").style.display = 'none';
+        document.getElementById("fullscreen").style.display = 'none';   
+        document.getElementById("left-touch-section").style.display = 'none';
+        document.getElementById("touch-section-right").style.display = 'none';
     }
 
     isHurt() {

@@ -11,15 +11,6 @@ class Character extends MovableObject {
     shock = false;
     dead = false;
 
-    
-    // game_sound = new Audio('./audio/gamesound.mp3');
-    // swimming_sound = new Audio('./audio/swimming.mp3');
-    // bubble_sound = new Audio('./audio/blub.mp3');
-    // earn_coin_sound = new Audio('./audio/collect-coin.wav');
-    // collect_poison_sound = new Audio('./audio/collect-poison.wav');
-    // gameover_sound = new Audio('./audio/gameover.wav');
-
-
     offset = {
         top: 100,
         right: 30,
@@ -146,17 +137,13 @@ class Character extends MovableObject {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
+
     playSound() {
         allAudios.forEach(sound => {
             if (!playMusic) {
                 sound.volume = 0.5;
             } else {
                 sound.volume = 0.0;
-                // this.swimming_sound.volume = 0.0;
-                // this.bubble_sound.volume = 0.0;
-                // this.earn_coin_sound.volume = 0.0;
-                // this.collect_poison_sound.volume = 0.0;
-                // this.gameover_sound.volume = 0.0;
             }
         });
     }
@@ -164,7 +151,7 @@ class Character extends MovableObject {
 
     moveRight() {
         super.moveRight();
-        allAudios[7].play();
+        allAudios[7].play(); // swimming sound
         this.bubbleDirection = false;
         this.otherDirection = false;
     }
@@ -176,7 +163,7 @@ class Character extends MovableObject {
 
     moveLeft() {
         super.moveLeft();
-        allAudios[7].play();
+        allAudios[7].play(); // swimming sound
         this.bubbleDirection = true;
         this.otherDirection = true;
     }
@@ -188,7 +175,7 @@ class Character extends MovableObject {
 
     moveUp() {
         super.moveUp();
-        allAudios[7].play();
+        allAudios[7].play(); // swimming sound
     }
 
 
@@ -199,7 +186,7 @@ class Character extends MovableObject {
 
     moveDown() {
         super.moveDown();
-        allAudios[7].play();
+        allAudios[7].play(); // swimming sound
     }
 
 
@@ -251,9 +238,9 @@ class Character extends MovableObject {
         if (!this.dead) {
             this.characterIsDead();
             setTimeout(() => { this.showEndScreen(); }, 2000);
-            allAudios[2].pause();   // Gamesound
-            allAudios[11].play();   // Gameover
+            allAudios[1].pause();   // Gamesound
             allAudios[6].pause(); // Boss attack
+            allAudios[11].play();   // Gameover
         }
     }
 

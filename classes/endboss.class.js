@@ -8,6 +8,7 @@ class Endboss extends MovableObject {
     bossDead = false;
     bossHurt = false;
     bossDisplayed = false;
+    won = false;
 
 
     offset = {
@@ -120,15 +121,25 @@ class Endboss extends MovableObject {
                 if (this.y >= 100) {
                     this.y = 100;
                     this.speed = 0;
-                    this.x = this.x;
+                    this.x -= this.x;
                     clearInterval(19); // Bossinterval = 19;
                 }
             }
+        }, 200)
+        this.WinAnimation();
+    }
+
+
+    WinAnimation() {
+        if (!this.won) {
             setTimeout(() => {
                 this.winScreen();
             }, 1200);
-        }, 200)
-        allAudios[5].play(); // Win
+            allAudios[1].pause(); // gamesound
+            allAudios[5].play(); // Win
+            setTimeout(() => allAudios[5].pause(), 4000);
+            this.won = true;
+        }
     }
 
 
