@@ -23,6 +23,10 @@ class StatusBarCoins extends DrawableObject {
     }
 
 
+    /**
+     * updates the statusbar by collecting coins
+     * @param {number} percentageCoin - the percentage display of the collected coins
+     */
     setPercentageCoin(percentageCoin) {
         this.percentageCoin = percentageCoin;
         let path = this.IMAGES_COINS[this.resolveCoinImageIndex()];
@@ -30,6 +34,10 @@ class StatusBarCoins extends DrawableObject {
     }
 
 
+    /**
+     * 
+     * @returns the number of the actual image to display the correct statusbar percent
+     */
     resolveCoinImageIndex() {
         if (this.percentageCoin == 0) {
             return 5;

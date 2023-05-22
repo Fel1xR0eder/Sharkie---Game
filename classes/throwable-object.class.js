@@ -16,6 +16,10 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * throw a bubble
+     * bubble moves in the direction of the character
+     */
     throw() {
         if (world.character.bubbleDirection == false) {
             setInterval(() => {
@@ -23,11 +27,7 @@ class ThrowableObject extends MovableObject {
                 this.x += 15;
             }, 50);
         } else {
-            setInterval(() => {
-                this.x -= 15;
-            }, 50);
+            setInterval(() => this.x -= 15, 50);
         }
-
-
     }
 }

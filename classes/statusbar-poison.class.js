@@ -23,6 +23,10 @@ class StatusBarPoison extends DrawableObject {
     }
 
 
+    /**
+     * updates the statusbar by collecting poison bottles
+     * @param {number} percentage - the percentage displays of the collected poison bottles
+     */
     setPercentagePoison(percentagePoison) {
         this.percentagePoison = percentagePoison;
         let path = this.IMAGES_POISON[this.resolvePoisonImageIndex()];
@@ -30,6 +34,10 @@ class StatusBarPoison extends DrawableObject {
     }
 
 
+    /**
+     * 
+     * @returns the number of the actual image to display the correct statusbar percent
+     */
     resolvePoisonImageIndex() { 
     // Statusbar wird bei jedem zweiten Schuss geupdated, wegen Bildanzahl!
         if (this.percentagePoison <= 10) {

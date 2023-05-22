@@ -96,7 +96,9 @@ class Character extends MovableObject {
     ];
 
 
-
+    /**
+     * creates the main character of the game
+     */
     constructor() {
         super();
         this.loadAllImages();
@@ -104,7 +106,9 @@ class Character extends MovableObject {
         this.playSound();
     }
 
-
+    /**
+     * loads all images the character uses
+     */
     loadAllImages() {
         this.loadImage(this.IMAGES_IDLE[0]);
         this.loadImages(this.IMAGES_IDLE);
@@ -114,30 +118,44 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_HURT_SHOCK);
         this.loadImages(this.IMAGES_BUBBLES);
         this.loadImages(this.IMAGES_FINSLAP);
-        }
+    }
 
 
+    /**
+     * animates the images of the character
+     */
     animate() {
         setInterval(() => this.moveCharacter(), 1000 / 60);
         setInterval(() => this.playCharacter(), 100);
     }
 
 
+    /**
+     * moving the character in the right direction when if-statements are true
+     * play attack animation when if-statements are true
+     */
     moveCharacter() {
         if (this.canMoveRight()) { this.moveRight(); }
         else if (this.canMoveLeft()) { this.moveLeft(); }
         else if (this.canMoveUp()) { this.moveUp(); }
         else if (this.canMoveDown()) { this.moveDown(); }
         else if (this.world.keyboard.D) { this.throwBubble(); }
-        else if (this.world.keyboard.A) { this.world.finslapAttack(); }
         this.world.camera_x = -this.x + 100;
     }
 
+
+    /**
+     * 
+     * @returns the condition to move the character right
+     */
     canMoveRight() {
         return this.world.keyboard.RIGHT && this.x < this.world.level.level_end_x;
     }
 
 
+    /**
+     * plays gamesounds when enabled
+     */
     playSound() {
         allAudios.forEach(sound => {
             if (!playMusic) {
@@ -149,6 +167,10 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * character moves right &
+     * plays the swimming sound
+     */
     moveRight() {
         super.moveRight();
         allAudios[7].play(); // swimming sound
@@ -157,10 +179,19 @@ class Character extends MovableObject {
     }
 
 
+    /**
+         * 
+         * @returns the condition to move the character left
+         */
     canMoveLeft() {
         return this.world.keyboard.LEFT && this.x > 0;
     }
 
+
+    /**
+     * character moves left &
+     * plays the swimming sound
+     */
     moveLeft() {
         super.moveLeft();
         allAudios[7].play(); // swimming sound
@@ -168,28 +199,47 @@ class Character extends MovableObject {
         this.otherDirection = true;
     }
 
+    /**
+     * 
+     * @returns the condition to move the character up
+     */
     canMoveUp() {
         return this.world.keyboard.UP && this.y > this.world.level.level_end_y_top;
     }
 
 
+    /**
+    * character moves up &
+    * plays the swimming sound
+    */
     moveUp() {
         super.moveUp();
         allAudios[7].play(); // swimming sound
     }
 
 
+    /**
+    * 
+    * @returns the condition to move the character down
+    */
     canMoveDown() {
         return this.world.keyboard.DOWN && this.y < this.world.level.level_end_y_bottom;
     }
 
 
+    /**
+    * character moves down &
+    * plays the swimming sound
+    */
     moveDown() {
         super.moveDown();
         allAudios[7].play(); // swimming sound
     }
 
 
+    /**
+     * plays the animations depending on the condition
+     */
     playCharacter() {
         if (this.isDead()) { this.playDeadAnimation(); }
         else if (this.shock) { this.playShockAnimation(); }
@@ -201,11 +251,18 @@ class Character extends MovableObject {
     }
 
 
+    /**
+    * plays the dead animation when character is dead
+    */
     playDeadAnimation() {
         this.playAnimation(this.IMAGES_DEAD);
         this.deadAnimation();
     }
 
+
+    /**
+    * plays the shock animation when character got hit by jellyfish
+    */
     playShockAnimation() {
         this.playAnimation(this.IMAGES_HURT_SHOCK);
         if (this.currentImage >= this.IMAGES_HURT_SHOCK.length) {
@@ -215,17 +272,19 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+     * 
+     * @returns the condition to animate the swimming images from the character
+     */
     canSwimming() {
         return this.world.keyboard.RIGHT || this.world.keyboard.LEFT;
     }
 
-    playSlapAnimation() {
-        this.playAnimation(this.IMAGES_FINSLAP);
-        if (this.currentImage >= this.IMAGES_FINSLAP.length) {
-            this.slap = false;
-        }
-    }
 
+    /**
+     * plays the bubble attack animation when character do the attack
+     */
     playBubbleAnimation() {
         this.playAnimation(this.IMAGES_BUBBLES);
         if (this.currentImage >= this.IMAGES_BUBBLES.length) {
@@ -234,6 +293,9 @@ class Character extends MovableObject {
     }
 
 
+    /**
+     * plays the dead animation and changes the sounds
+     */
     deadAnimation() {
         if (!this.dead) {
             this.characterIsDead();
@@ -244,6 +306,10 @@ class Character extends MovableObject {
         }
     }
 
+
+    /**
+     * character falls down when he's dead
+     */
     characterIsDead() {
         this.dead = true;
         this.currentImage = 0;
@@ -257,14 +323,9 @@ class Character extends MovableObject {
     }
 
 
-    slapAnimation() {
-        if (this.slap == false) {
-            this.slap = true;
-            this.currentImage = 0;
-        }
-    }
-
-
+    /**
+     * throws the bubble and makes the bubble sound
+     */
     throwBubble() {
         if (this.bubble == false) {
             this.bubble = true;

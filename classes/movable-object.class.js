@@ -96,6 +96,7 @@ class MovableObject extends DrawableObject {
         }
         allAudios[9].volume = 0.3;
         allAudios[9].play();
+        setTimeout(() => allAudios[9].pause(), 500);
     }
 
 
@@ -130,16 +131,10 @@ class MovableObject extends DrawableObject {
     }
 
     restartGame() {
-        document.getElementById('canvas').style.display = 'none';
-        document.getElementById('credits').style.display = 'none';
+        document.getElementById('canvas', 'credits', 'start-game', 'music-switch', 'help',
+        'fullscreen', 'left-touch-section', 'touch-section-right').style.display = 'none';
         document.getElementById('play-bar').style.display = 'flex';
         document.getElementById('restart').classList.remove('d-none');
-        document.getElementById("start-game").style.display = 'none';
-        document.getElementById("music-switch").style.display = 'none';
-        document.getElementById("help").style.display = 'none';
-        document.getElementById("fullscreen").style.display = 'none';   
-        document.getElementById("left-touch-section").style.display = 'none';
-        document.getElementById("touch-section-right").style.display = 'none';
     }
 
     isHurt() {

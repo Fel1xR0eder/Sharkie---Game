@@ -21,6 +21,10 @@ class StatusBarHealth extends DrawableObject {
     }
 
 
+    /**
+     * updates the statusbar by colliding with enemies 
+     * @param {number} percentage - the percentage displays of the energy of the character
+     */
     setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
@@ -28,6 +32,10 @@ class StatusBarHealth extends DrawableObject {
     }
 
 
+    /**
+     * 
+     * @returns the number of the actual image to display the correct statusbar percent
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

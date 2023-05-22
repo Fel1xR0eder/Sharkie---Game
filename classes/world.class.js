@@ -14,6 +14,7 @@ class World {
     slappableDistance = 20;
 
 
+
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -25,11 +26,16 @@ class World {
     };
 
 
+    /**
+     * simplifies variable
+     */
     setWorld() {
         this.character.world = this;
     };
 
-
+    /**
+     * summary multiple functions
+     */
     attackAll() {
         this.attackJellyfish();
         this.attackPufferfish();
@@ -37,11 +43,13 @@ class World {
     }
 
 
+    /**
+     * Summary multiple functions
+     */
     run() {
         setInterval(() => {
             this.bubbleAttack();
         }, 100);
-
         this.checkHealthCollision();
         this.checkPoisonCollision();
         this.checkCoinCollision();
@@ -51,11 +59,18 @@ class World {
     }
 
 
+    /**
+     * flips the statusbar of the endboss in the other direction
+     */
     flipStatusbar() {
         this.statusBarBoss.otherDirection = true;
     }
 
 
+    /**
+     * does a bubble attack when the user presses 'D' on keyboard
+     *  statusbar poison becomes less
+     */
     bubbleAttack() {
         if (this.keyboard.D && this.character.poison > 0) {
             setTimeout(() => {
@@ -68,8 +83,12 @@ class World {
     }
 
 
+    /**
+     * check the collision of character and enemies
+     * when collided character health becomes less
+     * statusbar health become less
+     */
     checkHealthCollision() {
-        // #####    HIT BY ENEMY    ##### //
         setInterval(() => {
             this.level.pufferfish.forEach((pufferfish) => {
                 this.level.jellyfish.forEach((jellyfish) => {
@@ -85,8 +104,12 @@ class World {
     };
 
 
+    /**
+     * check the collision of character and coins
+     * when collided statusbar coins will be updated
+     * deletes the coin
+     */
     checkCoinCollision() {
-        // #####    COLLECT A COIN    ##### //
         setInterval(() => {
             this.level.coins.forEach((coin, i) => {
                 if (this.character.isColliding(coin)) {
@@ -99,8 +122,12 @@ class World {
     }
 
 
+    /**
+     * check the collision of character and poison bottles
+     * when collided statusbar poison will be updated
+     * deletes the poison bottle
+     */
     checkPoisonCollision() {
-        // #####    COLLECT POISON BOTTLE    ##### //
         setInterval(() => {
             this.level.poison.forEach((poison, i) => {
                 if (this.character.isColliding(poison)) {
@@ -113,8 +140,12 @@ class World {
     }
 
 
+    /**
+     * check the collision of bubble and pufferfish
+     * deletes the bubble
+     * deletes the enemy
+     */
     attackPufferfish() {
-        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
         setInterval(() => {
             this.level.pufferfish.forEach((pufferfish) => {
                 this.throwableObjects.forEach((bubble) => {
@@ -129,9 +160,12 @@ class World {
     }
 
 
+    /**
+    * check bubble collides with endboss
+    * health bar will be updated.
+    * deletes the bubble
+    */
     attackEndboss() {
-        // #####    BUBBLE COLLIDES WITH FINAL    ##### //
-
         setInterval(() => {
             this.level.endboss.forEach((boss) => {
                 this.throwableObjects.forEach((bubble) => {
@@ -147,8 +181,12 @@ class World {
     }
 
 
+    /**
+     * check the collision of bubble and jellyfish
+     * deletes the bubble
+     * deletes the enemy
+     */
     attackJellyfish() {
-        // #####    BUBBLE COLLIDES WITH ENEMY    ##### //
         setInterval(() => {
             this.level.jellyfish.forEach((jellyfish) => {
                 this.throwableObjects.forEach((bubble) => {
@@ -163,6 +201,10 @@ class World {
     }
 
 
+    /**
+     * checks if character collides with jellyfish
+     * when they collide, character loses health 
+     */
     jellyShock() {
         setInterval(() => {
             this.level.jellyfish.forEach(jellyfish => {
@@ -176,6 +218,10 @@ class World {
     }
 
 
+    /**
+     * checks if character collides with pufferfish
+     * when they collide, character loses health 
+     */
     pufferfishGoingBig() {
         setInterval(() => {
             this.level.pufferfish.forEach(pufferfish => {
@@ -188,24 +234,20 @@ class World {
     }
 
 
-    finslapAttack() {
-        this.character.slapAnimation();
-        this.level.pufferfish.forEach(pufferfish => {
-            if (this.character.isColliding(pufferfish)) {
-                pufferfish.health = false;
-                pufferfish.enemySlapDead();
-            }
-        });
-    }
 
+    /**
+     * clears all intervals
+     */
     clearAllIntervals() {
         for (let i = 1; i < 9999; i++) window.clearInterval(i);
     }
 
 
-    draw() {    // ##### THE LOWER THE LINE, THE LOWER ON CANVAS ##### //
+    /**
+    * draws all objects and status bars on the canvas.
+    */
+    draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-
         this.ctx.translate(this.camera_x, 0);
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.lights);
@@ -234,19 +276,25 @@ class World {
     };
 
 
+    /**
+    * adds the moving object to the map.
+    * @param {MovingObject} mo - The moving object to add to the map.
+    */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        //mo.drawFrame(this.ctx);
-
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }
     };
 
 
+    /**
+     * adds a list of objects to the map and draw them on the canvas.
+     * @param {Objects} objects - The list of game objects to add and draw.
+     */
     addObjectsToMap(objects) {
         objects.forEach(o => {
             this.addToMap(o);
@@ -254,6 +302,10 @@ class World {
     };
 
 
+    /**
+    * flips the image of the moving object.
+    * @param {MovingObject} mo - object to flip the image.
+    */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -262,6 +314,10 @@ class World {
     };
 
 
+    /**
+    * flips the image of the moving object back to the original state after flipping it.
+    * @param {MovingObject} mo - object to flip the image back to its original.
+    */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

@@ -34,15 +34,26 @@ class Jellyfish extends MovableObject {
         this.x = 400 + Math.random() * 2000;
         this.y = 0 + Math.random() * 200;
         this.speed = 0.1 + Math.random() * 0.1;
-        this.loadImages(this.IMAGES_SWIMMING);
-        this.loadImages(this.IMAGES_SHOCK);
-        this.loadImages(this.IMAGES_DEAD);
+        this.loadAllImages();
         this.animate();
         this.enemyBubbleDead();
         this.moveToBottom();
     }
 
 
+    /**
+     * load all images of the jellyfish
+     */
+    loadAllImages() {
+        this.loadImages(this.IMAGES_SWIMMING);
+        this.loadImages(this.IMAGES_SHOCK);
+        this.loadImages(this.IMAGES_DEAD);
+    }
+
+
+    /**
+     * when jellyfish is dead moves out of canvas
+     */
     enemyBubbleDead() {
         setInterval(() => {
             if (!this.health) {
@@ -55,6 +66,9 @@ class Jellyfish extends MovableObject {
     }
 
 
+    /**
+     * jellyfish animates shock when character collides
+     */
     shockAtCollision() {
         this.jellyShock = true;
         setTimeout(() => {
@@ -63,6 +77,10 @@ class Jellyfish extends MovableObject {
         this.playBuzzHurt();
     }
 
+
+    /**
+     * play electric shock music and stop it after one second
+     */
     playBuzzHurt() {
         allAudios[2].play();    // buzz sound
         setTimeout(() => {
@@ -71,7 +89,10 @@ class Jellyfish extends MovableObject {
     }
 
 
-    moveToTop() {               // Move from Bottom to top, dann wechsel ( level_y_end )
+    /**
+     * jellyfish moves up in an interval
+     */
+    moveToTop() {
         if(this.moveTop == true) {
             setTimeout(() => {
                 setInterval(() => {
@@ -85,6 +106,9 @@ class Jellyfish extends MovableObject {
     }
 
 
+    /**
+     * jellyfish moves down in an interval
+     */
     moveToBottom() {
         if (this.moveBottom == false) {
             setTimeout(() => {
@@ -99,6 +123,9 @@ class Jellyfish extends MovableObject {
     }
 
 
+    /**
+     * plays the animations depending on the condition
+     */
     animate() {
         setInterval(() => {
             if (this.jellyShock == true) {

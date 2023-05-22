@@ -2,15 +2,19 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 let playMusic = false;
-let fullscreenBoo = false;
+let fullscreen = false;
 let audioPlayer;
 let showGameOver = 0;
 let audio = new Sound;
 let landscape = false;
 let gameStart = false;
-
 const allAudios = [];
 
+
+/**
+ * Initalizes everything in the game
+ * character, world 
+ */
 function init() {
     initLevel();
     OpenCanvas();
@@ -20,6 +24,9 @@ function init() {
 }
 
 
+/**
+ * Preloads the game
+ */
 function initOnload() {
     audio.pushAllAudios();
     initResponsive();
@@ -29,10 +36,14 @@ function initOnload() {
 }
 
 
+/**
+ * toggles fullscreen on
+ * @param {div} element - div container
+ */
 function enterFullscreen(element) {
-    if (element.requestFullscreen) {
+    if (element.requestFullscreen) {               // most browser
         element.requestFullscreen();
-    } else if (element.msRequestFullscreen) {      // for IE11
+    } else if (element.msRequestFullscreen) {      // IE11
         element.msRequestFullscreen();
     } else if (element.webkitRequestFullscreen) {  // iOS Safari
         element.webkitRequestFullscreen();
@@ -40,6 +51,9 @@ function enterFullscreen(element) {
 }
 
 
+/**
+ * toggles fullscreen off
+ */
 function exitFullscreen() {
     if (document.exitFullscreen) {
         document.exitFullscreen();
@@ -49,13 +63,15 @@ function exitFullscreen() {
 }
 
 
-
+/**
+ * toggles fullscreen on or off
+ */
 function changeFullscreen() {
-    if (!fullscreenBoo) {
+    if (!fullscreen) {
         let fullCanvas = document.getElementById('full-div');
         document.getElementById('fullscreen').innerHTML = 'Exit Fullscreen'
         enterFullscreen(fullCanvas);
-        fullscreenBoo = true;
+        fullscreen = true;
     } else {
         document.getElementById('fullscreen').innerHTML = 'Fullscreen'
         exitFullscreen();
@@ -64,15 +80,22 @@ function changeFullscreen() {
 }
 
 
+/**
+ * starts the game and open the canvas
+ */
 function OpenCanvas() {
     document.getElementById('canvas').style.display = 'block';
     document.getElementById('play-bar').style.display = 'none';
     document.getElementById('body').style.backgroundImage = `url('./img/3. Background/background.jpg')`;
     document.getElementById('credits').style.display = 'none';
-    allAudios[0].pause(); // normal sound
+    allAudios[0].pause();   // normal sound
     allAudios[1].play();    // gamesound 
 }
 
+
+/**
+ * shows the endscreen
+ */
 function stopGameOverScreen() {
     showGameOver++;
     if (showGameOver > 1) {
@@ -83,9 +106,11 @@ function stopGameOverScreen() {
 }
 
 
+/**
+ * toggle music on or off
+ */
 function toggleMusic() {
     let musicButton = document.getElementById('music-switch');
-
     if (playMusic == true) {
         musicButton.innerHTML = 'TURN MUSIC OFF';
         playMusic = false;
@@ -97,6 +122,9 @@ function toggleMusic() {
 }
 
 
+/**
+ * mute all sounds during the game
+ */
 function muteAllAudios() {
     allAudios.forEach((audio) => {
         setInterval(() => {
@@ -107,6 +135,9 @@ function muteAllAudios() {
 }
 
 
+/**
+ * plays the intro sound before starting the game
+ */
 function playIntroSound() {
     if (!playMusic) {
         allAudios[0].play();
@@ -114,6 +145,9 @@ function playIntroSound() {
 }
 
 
+/**
+ * shows the help container
+ */
 function help() {
     document.getElementById('help-div').style.display = 'flex';
     document.getElementById('play-bar').style.display = 'none';
@@ -121,17 +155,26 @@ function help() {
 }
 
 
+/**
+ * exits from the help container
+ */
 function backToMenu() {
     document.getElementById('help-div').style.display = 'none';
     document.getElementById('play-bar').style.display = 'flex';
 }
 
 
+/**
+ * allows to restart the game
+ */
 function playAgain() {
     location.reload();
 }
 
 
+/**
+ * gives the keyboard keys a function on keydown
+ */
 window.addEventListener("keydown", (e) => {
 
     if (e.key == 'ArrowRight') {
@@ -164,6 +207,10 @@ window.addEventListener("keydown", (e) => {
 });
 
 
+/**
+ * 
+ * gives the keyboard keys a function on keyup
+ */
 window.addEventListener("keyup", (e) => {
 
     if (e.key == 'ArrowRight') {
@@ -195,8 +242,10 @@ window.addEventListener("keyup", (e) => {
     }
 });
 
-//  ##### TOUCH BUTTONS  ##### //
 
+/**
+ * gives the touch buttons a function
+ */
 function touchEvents() {
     const keyboardButtons = {
         arrowUp: {
@@ -234,6 +283,10 @@ function touchEvents() {
     });
 }
 
+
+/**
+ * hide or show elements depending on the device
+ */
 function initResponsive() {
     setInterval(() => {
         if (!gameStart) { hideTouchElements();}    // No start
@@ -243,7 +296,9 @@ function initResponsive() {
 }
 
 
-
+/**
+ * check the device size
+ */
 function checkDeviceRotation() {
     let canvas = document.getElementById('canvas');
     setInterval(() => {
@@ -263,15 +318,25 @@ function checkDeviceRotation() {
 }
 
 
+/**
+ * hides touch elements when not needed
+ */
 function hideTouchElements() {
     document.getElementById('hud').style.display = 'none';
 }
 
+
+/**
+ * hides headline when not needed
+ */
 function hideHeadline() {
     document.getElementById('h1').style.display = 'none';
 }
 
 
+/**
+ * shows the touch elements
+ */
 function showTouchElements() {
     document.getElementById('hud').style.display = 'flex';
 }

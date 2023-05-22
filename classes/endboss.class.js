@@ -11,6 +11,9 @@ class Endboss extends MovableObject {
     won = false;
 
 
+    /**
+     * the exact dimensions of the endboss
+     */
     offset = {
         top: 250,
         left: 0,
@@ -82,6 +85,9 @@ class Endboss extends MovableObject {
         this.distanceOf();
     }
 
+    /**
+     * loads images in the imagecache.
+    */
     loadAllImages() {
         this.loadImages(this.IMAGES_ENDBOSS_INTRO);
         this.loadImages(this.IMAGES_ENDBOSS_FLOATING);
@@ -91,6 +97,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * returns the value of the distance between boss and character
+     */
     distanceOf() {
         setInterval(() => {
             this.distance_char_boss = this.x - world.character.x;
@@ -99,6 +108,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * the endboss moves and attacks the character 
+     */
     endbossAttack() {
         setInterval(() => {
             if (this.distance_char_boss <= 400) {
@@ -113,6 +125,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * the endboss get down and doesn't move anymore
+     */
     endbossDeadAnimation() {
         setInterval(() => {
             if (this.bossDead) {
@@ -122,7 +137,6 @@ class Endboss extends MovableObject {
                     this.y = 100;
                     this.speed = 0;
                     this.x -= this.x;
-                    clearInterval(19); // Bossinterval = 19;
                 }
             }
         }, 200)
@@ -130,6 +144,11 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * pauses the gamesound
+     * play the winsound
+     * go to the winscreen
+     */
     WinAnimation() {
         if (!this.won) {
             setTimeout(() => {
@@ -143,7 +162,9 @@ class Endboss extends MovableObject {
     }
 
 
-
+    /**
+     * animates the images of the endboss when the suitable condition is fulfilled
+     */
     animate() {
         let i = 0;
         setInterval(() => {
@@ -157,18 +178,30 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * if condition when character can see the endboss
+     * @returns the distance of endboss and character
+     */
     characterNearBoss(i) {
         return i < 7 && this.distance_char_boss <= 700;
     }
 
 
+    /**
+     * clears the interval of the endboss
+     * plays the dead animation of the endboss
+     */
     playBossDeadAnimation() {
-        clearInterval(19);
+        clearInterval(19); // boss interval
         this.playAnimation(this.IMAGES_ENDBOSS_DEAD);
         this.endbossDeadAnimation();
     }
 
 
+    /**
+     * plays the hurt animation when endboss got hit
+     * plays the hurt sound of the endboss
+     */
     playBossHurtAnimation() {
         this.playAnimation(this.IMAGES_ENDBOSS_HURT);
         setTimeout(() => {
@@ -178,6 +211,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * plays the endboss attack animation
+     * plays the attack sound of the endboss
+     */
     playBossAttackAnimation() {
         this.playAnimation(this.IMAGES_ENDBOSS_ATTACK);
         if (this.currentImage >= this.IMAGES_ENDBOSS_ATTACK.length) {
@@ -191,12 +228,19 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * plays the endboss swimming animation
+     * moves to character
+     */
     playBossFloatingAnimation() {
         this.playAnimation(this.IMAGES_ENDBOSS_FLOATING);
         this.x -= 2;
     }
 
 
+    /**
+     * plays the intro animation of the endboss
+     */
     BossIntro(i) {
         setTimeout(() => {
             i = 0;

@@ -25,6 +25,10 @@ class StatusBarBoss extends DrawableObject {
     }
     
 
+    /**
+     * updates the statusbar by thrown bubbles which hit the endboss
+     * @param {number} percentage - the percentage displays of the energy of the endboss
+     */
     setPercentageBoss(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_BOSS_HEALTH[this.resolveImageIndex()];
@@ -32,6 +36,10 @@ class StatusBarBoss extends DrawableObject {
     }
 
 
+    /**
+     * 
+     * @returns the number of the actual image to display the correct statusbar percent
+     */
     resolveImageIndex() {
         if (this.percentage == 100) {
             return 5;

@@ -47,6 +47,10 @@ class Pufferfish extends MovableObject {
         this.enemyBubbleDead();
     }
 
+
+    /**
+     * load all images of the pufferfish
+     */
     loadAllImages() {
         this.loadImages(this.IMAGES_SWIMMING);
         this.loadImages(this.IMAGES_TRANSITION);
@@ -54,6 +58,9 @@ class Pufferfish extends MovableObject {
         this.loadImages(this.IMAGES_DEAD);
     }
 
+    /**
+     * when pufferfish is dead moves out of canvas
+     */
     enemyBubbleDead() {
         setInterval(() => {
             if (!this.health) {
@@ -67,16 +74,9 @@ class Pufferfish extends MovableObject {
     }
 
 
-    enemySlapDead() {
-        if (!this.health) {
-            this.playAnimation(this.IMAGES_DEAD);
-            this.y = 30;
-            this.x = 0;
-            this.speed = 0;
-        }
-    }
-    
-
+    /**
+     * pufferfish going big when character collides
+     */
     bigAtCollision() {
         this.pufferAttack = true;
         setTimeout(() => {
@@ -86,11 +86,11 @@ class Pufferfish extends MovableObject {
     }
 
 
+    /**
+     * plays the animations depending on the condition
+     */
     animate() {
-        setInterval(() => {
-            this.moveLeft();
-        }, 1000 / 60);
-
+        setInterval(() => this.moveLeft(), 1000 / 60);
         setInterval(() => {
             if (this.transition == this.IMAGES_SWIMMING) {
                 this.playAnimation(this.IMAGES_TRANSITION);

@@ -25,6 +25,9 @@ class Sound {
     intro_sound = new Audio('./audio/underwater_normal.mp3');
 
 
+    /**
+     * pushes all audios in an array
+     */
     pushAllAudios() {
         allAudios.push(this.intro_sound);
         allAudios.push(this.ambience_sound);

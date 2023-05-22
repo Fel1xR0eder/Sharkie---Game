@@ -1,4 +1,8 @@
 let level1;
+
+/**
+ * adds all objects to the canvas
+ */
 function initLevel() {
     level1 = new Level(
         [
@@ -28,7 +32,6 @@ function initLevel() {
         new Poison(),
         new Poison()
     ], [
-        //
         new BackgroundObject('./img/3. Background/Layers/5. Water/D2.png', -719),
         new BackgroundObject('./img/3. Background/Layers/4.Fondo 2/D2.png', -719),
         new BackgroundObject('./img/3. Background/Layers/3.Fondo 1/D2.png', -719),
