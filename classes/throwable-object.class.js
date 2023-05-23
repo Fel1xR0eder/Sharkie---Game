@@ -1,7 +1,6 @@
 class ThrowableObject extends MovableObject {
 
     thrownBubble = false;
-    bubbleShoot = true;
     speedX = 0;
 
     constructor(x, y) {
@@ -20,14 +19,12 @@ class ThrowableObject extends MovableObject {
      * bubble moves in the direction of the character
      */
     throw() {
-        if (!world.character.bubbleDirection && this.bubbleShoot)  {
+        if (!world.character.bubbleDirection) {
             setInterval(() => {
-                this.bubbleShoot = false;
                 this.thrownBubble = true;
                 this.x += 15;
             }, 50);
-        } else { setInterval(() => this.x -= 15, 50);}
-
-        setTimeout(() => this.bubbleShoot = true, 3000);
+        } else { setInterval(() => this.x -= 15, 50); }
     }
+
 }

@@ -11,7 +11,8 @@ class World {
     statusBarPoison = new StatusBarPoison();
     statusBarBoss = new StatusBarBoss();
     throwableObjects = [];
-    slappableDistance = 20;
+    bubbleThrown = false;
+
 
 
 
@@ -72,12 +73,14 @@ class World {
      *  statusbar poison becomes less
      */
     bubbleAttack() {
-        if (this.keyboard.D && this.character.poison > 0) {
+        if (this.keyboard.D && this.character.poison > 0 && !this.bubbleThrown) {
+            this.bubbleThrown = true;
             setTimeout(() => {
                 let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);
                 this.throwableObjects.push(bubble);
                 this.character.poison -= 10;
             }, 500);
+            setTimeout(() => this.bubbleThrown = false, 1000);
         };
         this.statusBarPoison.setPercentagePoison(this.character.poison);
     }

@@ -68,7 +68,7 @@ class Pufferfish extends MovableObject {
                 this.speed = 0;
                 setTimeout(() => {
                     this.y = 1000;
-                }, 1000);
+                }, 500);
             };
         }, 200);
     }

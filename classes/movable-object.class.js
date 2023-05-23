@@ -114,7 +114,6 @@ class MovableObject extends DrawableObject {
         if (this.money >= 100) {
             this.money = 100;
         }
-        allAudios[9].volume = 0.3;
         allAudios[9].play();
         setTimeout(() => allAudios[9].pause(), 500);
     }

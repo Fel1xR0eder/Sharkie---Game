@@ -10,7 +10,7 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
-    bubbleShoot = true;
+    bubbleShoot = false;
 
     offset = {
         top: 100,
@@ -145,7 +145,7 @@ class Character extends MovableObject {
     }
 
     canThrowBubble() {
-        return this.world.keyboard.D && this.bubbleShoot;
+        return this.world.keyboard.D && this.bubbleShoot == false;
     }
 
 
@@ -204,6 +204,7 @@ class Character extends MovableObject {
         this.otherDirection = true;
     }
 
+    
     /**
      * 
      * @returns the condition to move the character up
@@ -332,12 +333,13 @@ class Character extends MovableObject {
      * throws the bubble and makes the bubble sound
      */
     throwBubble() {
-        if (!this.bubble) {
+        if (!this.bubble && !this.bubbleShoot) {
             this.bubble = true;
+            this.bubbleShoot = true;
             this.currentImage = 0;
-            this.bubbleShoot = false;
+            setTimeout(() => this.bubbleShoot = false, 1000); // extra viel timeout zum probieren!
+            console.log(this.bubbleShoot);
         }
         setTimeout(() => allAudios[8].play(), 500);
-        setTimeout(() => this.bubbleShoot = true, 3000);
     }
 }

@@ -85,8 +85,9 @@ class Endboss extends MovableObject {
         this.distanceOf();
     }
 
+    
     /**
-     * loads images in the imagecache.
+    * loads images in the imagecache.
     */
     loadAllImages() {
         this.loadImages(this.IMAGES_ENDBOSS_INTRO);
@@ -245,6 +246,6 @@ class Endboss extends MovableObject {
         setTimeout(() => {
             i = 0;
             this.bossDisplayed = true;
-        }, 1000);
+        }, 1500);
     }
 }
