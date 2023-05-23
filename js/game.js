@@ -168,7 +168,9 @@ function backToMenu() {
  * allows to restart the game
  */
 function playAgain() {
-    location.reload();
+    gameStart = false;
+    document.getElementById('img-element').style.display = 'none';
+    init();
 }
 
 

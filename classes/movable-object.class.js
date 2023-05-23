@@ -28,7 +28,6 @@ class MovableObject extends DrawableObject {
     ]
 
 
-
     offset = {
         top: 0,
         right: 0,
@@ -49,7 +48,11 @@ class MovableObject extends DrawableObject {
     //     return this.y < 30;
     // }
 
-
+    /**
+     * checks if the object is colliding with another object.
+     * @param {Object} mo - the object to check the collision with.
+     * @returns {boolean} - returns true when the objects are colliding.
+     */
     isColliding(mo) {
         return this.x + this.width - this.offset.right > mo.x + mo.offset.left &&
             this.y + this.height - this.offset.bottom > mo.y + mo.offset.top &&
@@ -58,6 +61,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * reduces the energy of the character when hit by an object.
+     */
     hit() {
         if (this.energy > 0) {
             this.energy -= 5;
@@ -69,7 +75,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
-
+    /**
+     * reduces the energy of the endboss when hit by a bubble.
+     */
     bossHit() {
         this.bossEnergy -= 20;
         if (this.bossEnergy <= 0) {
@@ -79,16 +87,28 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+    * checks if the MovableObject is dead
+    * @returns {boolean} true when energy is 0
+    */
     isDead() {
         return this.energy == 0;
     }
 
 
+    /**
+    * checks if the endboss is dead
+    * @returns {boolean} true when energy is 0
+    */
     bossIsDead() {
         return this.bossEnergy == 0;
     }
 
 
+    /**
+     * fills up the coin statusbar
+     * plays the coin collect sound
+     */
     collectCoin() {
         this.money += 20;
         if (this.money >= 100) {
@@ -100,6 +120,10 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * fills up the poison statusbar
+     * plays the poison collect sound
+     */
     collectPoison() {
         this.poison += 20;
         if (this.poison >= 100) {
@@ -109,9 +133,13 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * shows the winscreen after win vs endboss
+     */
     winScreen() {
         let i = 0;
         const imgElement = document.getElementById('img-element');
+        imgElement.style.display = 'unset';
         setInterval(() => {
             imgElement.src = this.IMAGES_ENDSCREEN_WIN[i];
             i = (i + 1) % this.IMAGES_ENDSCREEN_WIN.length;
@@ -120,6 +148,9 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * shows the gameover screen after failure vs endboss
+     */
     showEndScreen() {
         let i = 0;
         const imgElement = document.getElementById('img-element');
@@ -130,13 +161,27 @@ class MovableObject extends DrawableObject {
         this.restartGame();
     }
 
+
+    /**
+     * hides the elements which should not be shown
+     */
     restartGame() {
-        document.getElementById('canvas', 'credits', 'start-game', 'music-switch', 'help',
-        'fullscreen', 'left-touch-section', 'touch-section-right').style.display = 'none';
+        document.getElementById('canvas').style.display = 'none'
+        document.getElementById('credits').style.display = 'none'
+        document.getElementById('start-game').style.display = 'none'
+        document.getElementById('music-switch').style.display = 'none'
+        document.getElementById('help').style.display = 'none'
+        document.getElementById('fullscreen').style.display = 'none'
+        document.getElementById('left-touch-section').style.display = 'none'
+        document.getElementById('touch-section-right').style.display = 'none'
         document.getElementById('play-bar').style.display = 'flex';
         document.getElementById('restart').classList.remove('d-none');
     }
 
+
+    /**
+     * checks the time after a collision
+     */
     isHurt() {
         let timePassed = new Date().getTime() - this.lastHit;
         timePassed = timePassed / 1000;
@@ -144,26 +189,42 @@ class MovableObject extends DrawableObject {
     }
 
 
+    /**
+     * object moves right
+     */
     moveRight() {
         this.x += this.speed;
     }
 
 
+    /**
+     * object moves left
+     */
     moveLeft() {
         this.x -= this.speed;
     }
 
 
+    /**
+     * object moves up
+     */
     moveUp() {
         this.y -= this.speed;
     }
 
 
+    /**
+     * object moves down
+     */
     moveDown() {
         this.y += this.speed;
     }
 
 
+    /**
+     * plays animation of the array in loop
+     * @param {Array} images 
+     */
     playAnimation(images) {
         let i = this.currentImage % images.length;    // Modulu(s) =  i = 0,1,2,3,4,5,0,1,2,3,4,5, ...
         let path = images[i];

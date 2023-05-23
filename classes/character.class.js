@@ -10,6 +10,7 @@ class Character extends MovableObject {
     bubbleDirection = false;
     shock = false;
     dead = false;
+    bubbleShoot = true;
 
     offset = {
         top: 100,
@@ -139,8 +140,12 @@ class Character extends MovableObject {
         else if (this.canMoveLeft()) { this.moveLeft(); }
         else if (this.canMoveUp()) { this.moveUp(); }
         else if (this.canMoveDown()) { this.moveDown(); }
-        else if (this.world.keyboard.D) { this.throwBubble(); }
+        else if (this.canThrowBubble()) { this.throwBubble(); }
         this.world.camera_x = -this.x + 100;
+    }
+
+    canThrowBubble() {
+        return this.world.keyboard.D && this.bubbleShoot;
     }
 
 
@@ -327,12 +332,12 @@ class Character extends MovableObject {
      * throws the bubble and makes the bubble sound
      */
     throwBubble() {
-        if (this.bubble == false) {
+        if (!this.bubble) {
             this.bubble = true;
             this.currentImage = 0;
+            this.bubbleShoot = false;
         }
-        setTimeout(() => {
-            allAudios[8].play(); // Bubble
-        }, 500);
+        setTimeout(() => allAudios[8].play(), 500);
+        setTimeout(() => this.bubbleShoot = true, 3000);
     }
 }
