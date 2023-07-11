@@ -199,13 +199,13 @@ window.addEventListener("keydown", (e) => {
         keyboard.SPACE = true;
     }
 
-    if (e.key == 'd') {
-        keyboard.D = true;
-    }
+    // if (e.key == 'd') {
+    //     keyboard.D = true;
+    // }
 
-    if (e.key == 'a') {
-        keyboard.A = true;
-    }
+    // if (e.key == 'a') {
+    //     keyboard.A = true;
+    // }
 });
 
 
@@ -235,13 +235,13 @@ window.addEventListener("keyup", (e) => {
         keyboard.SPACE = false;
     }
 
-    if (e.key == 'd') {
-        keyboard.D = false;
-    }
+    // if (e.key == 'd') {
+    //     keyboard.D = false;
+    // }
 
-    if (e.key == 'a') {
-        keyboard.A = false;
-    }
+    // if (e.key == 'a') {
+    //     keyboard.A = false;
+    // }
 });
 
 
@@ -267,7 +267,7 @@ function touchEvents() {
             element: document.getElementById('touch-event-right'),
         },
         attackTouch: {
-            key: 'D',
+            key: ' ',
             element: document.getElementById('bubble-attack-touch'),
         },
     };

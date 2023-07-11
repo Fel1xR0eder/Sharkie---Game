@@ -73,7 +73,7 @@ class World {
      *  statusbar poison becomes less
      */
     bubbleAttack() {
-        if (this.keyboard.D && this.character.poison > 0 && !this.bubbleThrown) {
+        if (this.keyboard.SPACE && this.character.poison > 0 && !this.bubbleThrown) {
             this.bubbleThrown = true;
             setTimeout(() => {
                 let bubble = new ThrowableObject(this.character.x + 100, this.character.y + 100);

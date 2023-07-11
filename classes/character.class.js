@@ -145,7 +145,7 @@ class Character extends MovableObject {
     }
 
     canThrowBubble() {
-        return this.world.keyboard.D && this.bubbleShoot == false;
+        return this.world.keyboard.SPACE && this.bubbleShoot == false;
     }
 
 
@@ -337,8 +337,7 @@ class Character extends MovableObject {
             this.bubble = true;
             this.bubbleShoot = true;
             this.currentImage = 0;
-            setTimeout(() => this.bubbleShoot = false, 1000); // extra viel timeout zum probieren!
-            console.log(this.bubbleShoot);
+            setTimeout(() => this.bubbleShoot = false, 800);
         }
         setTimeout(() => allAudios[8].play(), 500);
     }
