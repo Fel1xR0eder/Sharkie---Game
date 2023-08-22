@@ -158,6 +158,7 @@ class MovableObject extends DrawableObject {
             i = (i + 1) % this.IMAGES_ENDSCREEN_FAIL.length;
         }, 700);
         this.restartGame();
+        setTimeout(() => muteAllAudios(), 1500);
     }
 
 

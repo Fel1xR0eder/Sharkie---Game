@@ -28,8 +28,8 @@ function init() {
  * Preloads the game
  */
 function initOnload() {
-    audio.pushAllAudios();
     initResponsive();
+    audio.pushAllAudios();
     touchEvents();
     stopGameOverScreen();
     checkDeviceRotation();
@@ -75,7 +75,7 @@ function changeFullscreen() {
     } else {
         document.getElementById('fullscreen').innerHTML = 'Fullscreen'
         exitFullscreen();
-        fullscreenBoo = false;
+        fullscreen = false;
     }
 }
 
@@ -100,6 +100,7 @@ function stopGameOverScreen() {
     showGameOver++;
     if (showGameOver > 1) {
         document.getElementById('img-element').style.display = 'none';
+        allAudios[11].pause();
     } else {
         document.getElementById('img-element').style.display = 'unset';
     }
@@ -128,10 +129,9 @@ function toggleMusic() {
 function muteAllAudios() {
     allAudios.forEach((audio) => {
         setInterval(() => {
-            audio.volume = 0.0;
+            audio.volume = 0;
         }, 500);
     })
-    console.log('MUTE ALL SOUNDS', audio);
 }
 
 
@@ -271,7 +271,7 @@ function touchEvents() {
             element: document.getElementById('bubble-attack-touch'),
         },
     };
-    
+
 
     function handleTouchEvent(e, button) {
         e.preventDefault();
@@ -279,7 +279,7 @@ function touchEvents() {
     }
 
     Object.values(keyboardButtons).forEach((button) => {
-        const { key, element} = button;
+        const { key, element } = button;
         element.addEventListener('touchstart', (e) => handleTouchEvent(e, button));
         element.addEventListener('touchend', (e) => handleTouchEvent(e, button));
     });
@@ -291,7 +291,7 @@ function touchEvents() {
  */
 function initResponsive() {
     setInterval(() => {
-        if (!gameStart) { hideTouchElements();}    // No start
+        if (!gameStart) { hideTouchElements(); }    // No start
         else if (gameStart && landscape) { showTouchElements(), hideHeadline(); }  // Phone start no headline
         else if (gameStart) { hideTouchElements(); } // Normal start
     }, 100);
